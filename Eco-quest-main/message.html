@@ -630,7 +630,7 @@
         }
         .confidence-bar-inner { height: 100%; background: #2e7d32; transition: width 0.6s ease; }
 
-        /* ADVANCED PROFILE STYLES */
+        /* PROFILE STYLES */
         .profile-banner {
             background: linear-gradient(135deg, #1b5e20, #2e7d32);
             color: white;
@@ -732,42 +732,36 @@
             border-radius: 12px;
         }
 
-        /* Voucher Cards */
-        .voucher-card {
-            background: white;
-            border: 1.5px solid #ffe082;
-            border-radius: 14px;
-            padding: 12px 14px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        .btn-view-qr {
-            background: #fff8e1;
-            border: 1px solid #ffe082;
-            color: #d84315;
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-size: 11px;
-            font-weight: 800;
-            cursor: pointer;
-        }
-
-        /* Leaderboard */
+        /* Leaderboard Items */
         .rank-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
             background: #ffffff;
-            border: 1px solid #c8e6c9;
+            border: 1.5px solid #c8e6c9;
             padding: 12px 14px;
-            border-radius: 12px;
-            margin-bottom: 8px;
+            border-radius: 14px;
+            margin-bottom: 10px;
+            box-shadow: var(--card-shadow);
         }
         .rank-item.top-1 { background: #fffde7; border-color: #ffe082; }
+        .rank-item.top-2 { background: #f1f8f3; border-color: #b0bec5; }
+        .rank-item.top-3 { background: #fff3e0; border-color: #ffcc80; }
 
-        /* Bottom Fixed Mobile Navigation Bar (6 Tabs) */
+        .rank-badge-num {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            color: white;
+            font-weight: 900;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* Bottom Fixed Navigation Bar */
         .bottom-nav {
             position: absolute;
             bottom: 0; left: 0; right: 0;
@@ -866,7 +860,7 @@
             </div>
             <div class="header-badges">
                 <span class="badge-pill badge-streak">🔥 6d</span>
-                <span class="badge-pill badge-rank" onclick="switchTab('profile')">👤 Profile</span>
+                <span class="badge-pill badge-rank" onclick="switchTab('ranks')">🏆 Rank #1</span>
                 <button class="toggle-wide-btn" id="toggleWideBtn" onclick="toggleWideMode()">
                     🖥️ Wide
                 </button>
@@ -897,7 +891,7 @@
                         <div style="font-size: 36px; background: white; border-radius: 50%; padding: 4px; border: 2px solid #a5d6a7;" id="homeProfileAvatar">🌱</div>
                         <div>
                             <div style="font-family: 'Outfit', sans-serif; font-size: 19px; font-weight: 800;" id="homeProfileName">Welcome back, Manisha! 🌱</div>
-                            <div style="font-size: 11px; color: var(--text-muted); font-weight: 600;" id="homeProfileSub">CSE Department &bull; 1st Year &bull; Eco Champion</div>
+                            <div style="font-size: 11px; color: var(--text-muted); font-weight: 600;" id="homeProfileSub">CSE Department &bull; 1st Year &bull; Student Rank #1</div>
                         </div>
                     </div>
                 </div>
@@ -1253,31 +1247,168 @@
                 </div>
             </section>
 
-            <!-- TAB 5: RANKS & CERTIFICATE -->
+            <!-- TAB 5: RANKS (INDIVIDUAL & DEPARTMENTAL LEADERBOARDS) -->
             <section id="tab-ranks" class="section">
                 <div style="margin-bottom: 14px;">
-                    <h3 style="font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 800;">🏆 Campus Leaderboard & Certificates</h3>
+                    <h3 style="font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 800;">🏆 Campus Leaderboards & Rankings</h3>
+                    <p style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">
+                        Compete individually and lead your department to victory!
+                    </p>
                 </div>
 
-                <div class="card">
-                    <h4 style="font-size: 14px; font-weight: 800; margin-bottom: 10px;">🏛️ Top Department Ranks</h4>
-                    <div class="rank-item top-1">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <div style="font-weight: 900; width: 24px; height: 24px; border-radius: 50%; background: #f57c00; color: white; display: flex; align-items: center; justify-content: center;">1</div>
-                            <div>
-                                <div style="font-weight: 800; font-size: 13px;">Computer Science & Eng. (CSE)</div>
-                                <div style="font-size: 10px; color: var(--text-muted);">1,420 Missions &bull; 4,850 Coins</div>
-                            </div>
-                        </div>
-                        <span class="tag-pill tag-yellow">🏆 TOP DEPT</span>
-                    </div>
+                <!-- Sub-Nav Filter Chips -->
+                <div class="sub-nav-chips">
+                    <button class="chip-btn active" onclick="switchRankCategory('students', this)">🌟 Individual Champions</button>
+                    <button class="chip-btn" onclick="switchRankCategory('depts', this)">🏛️ Department Ranks</button>
+                </div>
 
-                    <div class="rank-item">
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <div style="font-weight: 900; width: 24px; height: 24px; border-radius: 50%; background: #78909c; color: white; display: flex; align-items: center; justify-content: center;">2</div>
-                            <div>
-                                <div style="font-weight: 800; font-size: 13px;">Electronics & Comm. (ECE)</div>
-                                <div style="font-size: 10px; color: var(--text-muted);">1,180 Missions &bull; 3,920 Coins</div>
+                <!-- CATEGORY 1: INDIVIDUAL STUDENT LEADERBOARD -->
+                <div id="rank-students-view">
+                    <div class="card">
+                        <div class="card-title-row">
+                            <h4 style="font-size: 14px; font-weight: 800; color: var(--text-dark);">
+                                🌟 Student Eco Champions (Individual Ranks)
+                            </h4>
+                            <span class="tag-pill tag-green">Live Leaderboard</span>
+                        </div>
+
+                        <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px;">
+                            
+                            <!-- Rank 1: Current User -->
+                            <div class="rank-item top-1">
+                                <div style="display: flex; align-items: center; gap: 12px;">
+                                    <div class="rank-badge-num" style="background: #f57c00;">🥇</div>
+                                    <div>
+                                        <div style="font-weight: 800; font-size: 14px;" id="rankUser1Name">Manisha (You) 🌱</div>
+                                        <div style="font-size: 11px; color: var(--text-muted);" id="rankUser1Sub">CSE Dept &bull; 4 Verified Missions</div>
+                                    </div>
+                                </div>
+                                <div style="text-align: right;">
+                                    <div class="coin-counter-pill" style="font-size: 11px; padding: 2px 8px;" id="rankUser1Coins">450c</div>
+                                    <span class="tag-pill tag-yellow" style="margin-top: 2px; display: inline-block;">#1 CHAMPION</span>
+                                </div>
+                            </div>
+
+                            <!-- Rank 2: Rahul Sharma -->
+                            <div class="rank-item top-2">
+                                <div style="display: flex; align-items: center; gap: 12px;">
+                                    <div class="rank-badge-num" style="background: #78909c;">🥈</div>
+                                    <div>
+                                        <div style="font-weight: 800; font-size: 14px;">Rahul Sharma</div>
+                                        <div style="font-size: 11px; color: var(--text-muted);">ECE Dept &bull; 3 Verified Missions</div>
+                                    </div>
+                                </div>
+                                <div style="text-align: right;">
+                                    <div class="coin-counter-pill" style="font-size: 11px; padding: 2px 8px;">410c</div>
+                                    <span style="font-size: 10px; font-weight: 800; color: #546e7a;">#2 RANK</span>
+                                </div>
+                            </div>
+
+                            <!-- Rank 3: Ananya Verma -->
+                            <div class="rank-item top-3">
+                                <div style="display: flex; align-items: center; gap: 12px;">
+                                    <div class="rank-badge-num" style="background: #8d6e63;">🥉</div>
+                                    <div>
+                                        <div style="font-weight: 800; font-size: 14px;">Ananya Verma</div>
+                                        <div style="font-size: 11px; color: var(--text-muted);">CSE Dept &bull; 3 Verified Missions</div>
+                                    </div>
+                                </div>
+                                <div style="text-align: right;">
+                                    <div class="coin-counter-pill" style="font-size: 11px; padding: 2px 8px;">380c</div>
+                                    <span style="font-size: 10px; font-weight: 800; color: #6d4c41;">#3 RANK</span>
+                                </div>
+                            </div>
+
+                            <!-- Rank 4: Aarav Patel -->
+                            <div class="rank-item">
+                                <div style="display: flex; align-items: center; gap: 12px;">
+                                    <div class="rank-badge-num" style="background: var(--primary);">4</div>
+                                    <div>
+                                        <div style="font-weight: 800; font-size: 13px;">Aarav Patel</div>
+                                        <div style="font-size: 10px; color: var(--text-muted);">Mechanical &bull; 2 Verified Missions</div>
+                                    </div>
+                                </div>
+                                <div class="coin-counter-pill" style="font-size: 11px; padding: 2px 8px;">350c</div>
+                            </div>
+
+                            <!-- Rank 5: Priya Nair -->
+                            <div class="rank-item">
+                                <div style="display: flex; align-items: center; gap: 12px;">
+                                    <div class="rank-badge-num" style="background: var(--primary);">5</div>
+                                    <div>
+                                        <div style="font-weight: 800; font-size: 13px;">Priya Nair</div>
+                                        <div style="font-size: 10px; color: var(--text-muted);">Civil Dept &bull; 2 Verified Missions</div>
+                                    </div>
+                                </div>
+                                <div class="coin-counter-pill" style="font-size: 11px; padding: 2px 8px;">320c</div>
+                            </div>
+
+                            <!-- Rank 6: Vikram Singh -->
+                            <div class="rank-item">
+                                <div style="display: flex; align-items: center; gap: 12px;">
+                                    <div class="rank-badge-num" style="background: var(--primary);">6</div>
+                                    <div>
+                                        <div style="font-weight: 800; font-size: 13px;">Vikram Singh</div>
+                                        <div style="font-size: 10px; color: var(--text-muted);">ECE Dept &bull; 2 Verified Missions</div>
+                                    </div>
+                                </div>
+                                <div class="coin-counter-pill" style="font-size: 11px; padding: 2px 8px;">290c</div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CATEGORY 2: DEPARTMENTAL LEADERBOARDS -->
+                <div id="rank-depts-view" style="display: none;">
+                    <div class="card">
+                        <div class="card-title-row">
+                            <h4 style="font-size: 14px; font-weight: 800; color: var(--text-dark);">
+                                🏛️ Top Department Rankings
+                            </h4>
+                            <span class="tag-pill tag-yellow">Inter-Dept Cup</span>
+                        </div>
+
+                        <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px;">
+                            <div class="rank-item top-1">
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div style="font-weight: 900; width: 26px; height: 26px; border-radius: 50%; background: #f57c00; color: white; display: flex; align-items: center; justify-content: center;">1</div>
+                                    <div>
+                                        <div style="font-weight: 800; font-size: 13px;">Computer Science & Eng. (CSE)</div>
+                                        <div style="font-size: 10px; color: var(--text-muted);">1,420 Missions &bull; 4,850 Coins</div>
+                                    </div>
+                                </div>
+                                <span class="tag-pill tag-yellow">🏆 TOP DEPT</span>
+                            </div>
+
+                            <div class="rank-item">
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div style="font-weight: 900; width: 26px; height: 26px; border-radius: 50%; background: #78909c; color: white; display: flex; align-items: center; justify-content: center;">2</div>
+                                    <div>
+                                        <div style="font-weight: 800; font-size: 13px;">Electronics & Comm. (ECE)</div>
+                                        <div style="font-size: 10px; color: var(--text-muted);">1,180 Missions &bull; 3,920 Coins</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="rank-item">
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div style="font-weight: 900; width: 26px; height: 26px; border-radius: 50%; background: #8d6e63; color: white; display: flex; align-items: center; justify-content: center;">3</div>
+                                    <div>
+                                        <div style="font-weight: 800; font-size: 13px;">Mechanical Engineering</div>
+                                        <div style="font-size: 10px; color: var(--text-muted);">950 Missions &bull; 3,100 Coins</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="rank-item">
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div style="font-weight: 900; width: 26px; height: 26px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center;">4</div>
+                                    <div>
+                                        <div style="font-weight: 800; font-size: 13px;">Civil Engineering</div>
+                                        <div style="font-size: 10px; color: var(--text-muted);">810 Missions &bull; 2,650 Coins</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1316,7 +1447,7 @@
                     </div>
                 </div>
 
-                <!-- Avatar Selector (Expandable) -->
+                <!-- Avatar Selector -->
                 <div class="card" id="avatarPickerCard" style="display: none;">
                     <div style="font-size: 12px; font-weight: 800; color: var(--text-dark); margin-bottom: 6px;">
                         🎨 Choose Your Campus Eco Avatar:
@@ -1412,7 +1543,7 @@
                     </div>
                 </div>
 
-                <!-- Trophy Case & Badges Showcase -->
+                <!-- Badges Showcase -->
                 <div class="card">
                     <div class="card-title-row">
                         <span style="font-size: 13px; font-weight: 800; color: var(--text-dark);">🏆 Badge Showcase & Badges</span>
@@ -1601,7 +1732,9 @@
             if (amount) coins += amount;
             document.getElementById("userCoins").innerText = coins;
             document.getElementById("rewardsCoinsText").innerText = coins;
-            document.getElementById("statTotalCoins").innerText = coins + 430;
+            const totalC = coins + 430;
+            document.getElementById("statTotalCoins").innerText = totalC;
+            document.getElementById("rankUser1Coins").innerText = totalC + "c";
         }
 
         function toggleWideMode() {
@@ -1621,6 +1754,14 @@
                 if (idx !== -1) document.querySelectorAll(".nav-tab-btn")[idx].classList.add("active");
             }
             document.querySelector(".app-body").scrollTop = 0;
+        }
+
+        /* Leaderboard Category Filter Switch */
+        function switchRankCategory(cat, btn) {
+            btn.parentElement.querySelectorAll(".chip-btn").forEach(c => c.classList.remove("active"));
+            btn.classList.add("active");
+            document.getElementById("rank-students-view").style.display = cat === 'students' ? 'block' : 'none';
+            document.getElementById("rank-depts-view").style.display = cat === 'depts' ? 'block' : 'none';
         }
 
         /* Profile System Controls */
@@ -1646,8 +1787,9 @@
 
             document.getElementById("profileTitleName").innerText = name;
             document.getElementById("homeProfileName").innerText = `Welcome back, ${name}! 🌱`;
+            document.getElementById("rankUser1Name").innerText = `${name} (You) 🌱`;
             document.getElementById("profileTitleSub").innerText = `${dept} • ${year} • Level 4 Guardian`;
-            document.getElementById("homeProfileSub").innerText = `${dept} • ${year} • Eco Champion`;
+            document.getElementById("homeProfileSub").innerText = `${dept} • ${year} • Student Rank #1`;
 
             playSuccessSound();
             triggerConfetti();
