@@ -1,0 +1,1533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ECO Quest - Offline AI</title>
+
+    <!--
+        IMPORTANT:
+        These files MUST be downloaded and kept locally.
+
+        Example:
+        libs/
+        ├── tf.min.js
+        └── teachablemachine-image.min.js
+
+        DO NOT use CDN URLs if you want completely offline operation.
+    -->
+
+    <script src="./libs/tf.min.js"></script>
+    <script src="./libs/teachablemachine-image.min.js"></script>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 15px;
+            background: #eef7f1;
+            font-family: "Segoe UI", Arial, sans-serif;
+            color: #333;
+        }
+
+        .phone-frame {
+            width: 100%;
+            max-width: 420px;
+            min-height: 700px;
+            margin: auto;
+            background: white;
+            border: 7px solid #2e7d32;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,.15);
+            position: relative;
+        }
+
+        .header {
+            background: #2e7d32;
+            color: white;
+            text-align: center;
+            padding: 17px;
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .section {
+            display: none;
+            padding: 20px;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .coin-badge {
+            display: inline-block;
+            background: #fff8e1;
+            color: #e65100;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .card {
+            background: #e8f5e9;
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border-left: 5px solid #2e7d32;
+        }
+
+        button {
+            width: 100%;
+            border: none;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 10px;
+            background: #2e7d32;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1b5e20;
+        }
+
+        button:disabled {
+            background: #999;
+            cursor: not-allowed;
+        }
+
+        .quiz-btn {
+            background: #43a047;
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: space-around;
+            background: #eeeeee;
+            padding: 10px 5px;
+        }
+
+        .nav-btn {
+            width: auto;
+            margin: 0;
+            padding: 7px;
+            background: transparent;
+            color: #444;
+            font-size: 12px;
+        }
+
+        .nav-btn.active-tab {
+            color: #2e7d32;
+        }
+
+        .character-box {
+            text-align: center;
+            font-size: 42px;
+            margin: 20px 0;
+        }
+
+        @keyframes dance {
+
+            0% {
+                transform: rotate(0deg) scale(1);
+            }
+
+            25% {
+                transform: rotate(-15deg) scale(1.1);
+            }
+
+            50% {
+                transform: rotate(0deg) scale(1.2);
+            }
+
+            75% {
+                transform: rotate(15deg) scale(1.1);
+            }
+
+            100% {
+                transform: rotate(0deg) scale(1);
+            }
+
+        }
+
+        .dancing {
+            display: inline-block;
+            animation: dance .5s infinite;
+        }
+
+        .status {
+            margin-top: 12px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* =========================
+           AI VERIFICATION
+        ========================= */
+
+        .ai-title {
+            text-align: center;
+        }
+
+        .ai-icon {
+            font-size: 50px;
+        }
+
+        .upload-box {
+            background: white;
+            border: 2px dashed #66bb6a;
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 15px;
+        }
+
+        .upload-box input {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        #imagePreview {
+            width: 100%;
+            max-height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-top: 15px;
+            display: none;
+            border: 2px solid #66bb6a;
+        }
+
+        .ai-status {
+            margin-top: 15px;
+            padding: 13px;
+            border-radius: 10px;
+            display: none;
+            font-size: 14px;
+        }
+
+        .success {
+            display: block;
+            background: #dcedc8;
+            color: #33691e;
+        }
+
+        .error {
+            display: block;
+            background: #ffebee;
+            color: #b71c1c;
+        }
+
+        .loading {
+            display: block;
+            background: #fff8e1;
+            color: #795548;
+        }
+
+        .model-status {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .confidence-container {
+            margin-top: 10px;
+        }
+
+        .confidence-bar {
+            width: 100%;
+            height: 10px;
+            background: #ddd;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .confidence-fill {
+            height: 100%;
+            width: 0%;
+            background: #43a047;
+            transition: width .5s;
+        }
+
+        .rules {
+            font-size: 13px;
+            color: #555;
+        }
+
+        .rules ul {
+            padding-left: 20px;
+        }
+
+        .offline-badge {
+            display: inline-block;
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #81c784;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .result-label {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .small {
+            font-size: 12px;
+            color: #666;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="phone-frame" id="phoneContainer">
+
+    <div class="header">
+        🌱 ECO Quest
+    </div>
+
+
+    <!-- ================= HOME ================= -->
+
+    <div id="tab-home" class="section active">
+
+        <div class="coin-badge">
+            🪙 Eco-Coins:
+            <span id="coinCount">150</span>
+        </div>
+
+        <h3>Welcome, Manisha!</h3>
+
+        <div class="card">
+
+            <h4>🎮 Gamified Learning</h4>
+
+            <p>
+                Complete quizzes and real-world
+                environmental missions to earn coins.
+            </p>
+
+            <button onclick="openGame()">
+                Play Eco Quiz
+            </button>
+
+        </div>
+
+
+        <div class="card">
+
+            <h4>🏆 College Leaderboard</h4>
+
+            <p>
+                CSE Department is currently at
+                <b>Rank #1</b> 🚀
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= QUIZ ================= -->
+
+    <div id="tab-game" class="section">
+
+        <h3>🧠 Eco Knowledge Game</h3>
+
+        <div class="card">
+
+            <p>
+                <b>
+                    Q1: Which gas is primarily
+                    responsible for global warming?
+                </b>
+            </p>
+
+            <button
+                class="quiz-btn"
+                onclick="checkAnswer(false)">
+                A) Oxygen
+            </button>
+
+            <button
+                class="quiz-btn"
+                onclick="checkAnswer(true)">
+                B) Carbon Dioxide
+            </button>
+
+            <button
+                class="quiz-btn"
+                onclick="checkAnswer(false)">
+                C) Nitrogen
+            </button>
+
+
+            <div class="character-box">
+
+                <span id="teddy">
+                    🧸
+                </span>
+
+                <span id="seedling">
+                    🌱
+                </span>
+
+            </div>
+
+            <div
+                id="quizStatus"
+                class="status">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= MISSIONS ================= -->
+
+    <div id="tab-tasks" class="section">
+
+        <div class="ai-title">
+
+            <div class="ai-icon">
+                🌳
+            </div>
+
+            <h3>
+                Real-World Eco Mission
+            </h3>
+
+            <span class="offline-badge">
+                🟢 OFFLINE AI
+            </span>
+
+        </div>
+
+
+        <div class="card">
+
+            <h4>
+                🌱 Plant a Sapling
+            </h4>
+
+            <p>
+                Upload a clear photo of a plant
+                or tree.
+            </p>
+
+
+            <div class="rules">
+
+                <b>AI checks for:</b>
+
+                <ul>
+
+                    <li>🌱 Plants</li>
+
+                    <li>🌳 Trees</li>
+
+                    <li>🌿 Leaves / vegetation</li>
+
+                    <li>❌ Random objects</li>
+
+                    <li>❌ People-only photos</li>
+
+                    <li>❌ Buildings</li>
+
+                </ul>
+
+            </div>
+
+
+            <div class="upload-box">
+
+                <b>
+                    📷 Select Mission Photo
+                </b>
+
+                <input
+                    type="file"
+                    id="taskFile"
+                    accept="image/*"
+                    onchange="previewImage()"
+                >
+
+                <img
+                    id="imagePreview"
+                    alt="Mission image"
+                >
+
+            </div>
+
+
+            <button
+                id="verifyButton"
+                onclick="runAIVerification()"
+                disabled>
+
+                Select Photo
+
+            </button>
+
+
+            <div
+                id="modelStatus"
+                class="model-status">
+
+                🤖 Loading offline AI...
+
+            </div>
+
+
+            <div
+                id="aiStatus"
+                class="ai-status">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= REWARDS ================= -->
+
+    <div id="tab-rewards" class="section">
+
+        <h3>🎁 Eco Coin Rewards</h3>
+
+
+        <div class="card">
+
+            <h4>
+                Campus Canteen Discount
+            </h4>
+
+            <p class="small">
+                Get 20% off on meals.
+            </p>
+
+            <button onclick="redeemCoins(100)">
+                Redeem - 100 Coins
+            </button>
+
+        </div>
+
+
+        <div class="card">
+
+            <h4>
+                Plantable Seed Pencil
+            </h4>
+
+            <p class="small">
+                Exchange coins for eco stationery.
+            </p>
+
+            <button onclick="redeemCoins(50)">
+                Redeem - 50 Coins
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= NAV ================= -->
+
+    <div class="nav-bar">
+
+        <button
+            class="nav-btn active-tab"
+            onclick="switchTab('home', this)">
+            Home
+        </button>
+
+        <button
+            class="nav-btn"
+            onclick="switchTab('game', this)">
+            Quiz
+        </button>
+
+        <button
+            class="nav-btn"
+            onclick="switchTab('tasks', this)">
+            Missions
+        </button>
+
+        <button
+            class="nav-btn"
+            onclick="switchTab('rewards', this)">
+            Rewards
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    /* =====================================================
+       ECO QUEST OFFLINE AI
+       ===================================================== */
+
+    let model = null;
+
+    let modelLoaded = false;
+
+    let verificationRunning = false;
+
+    let currentImage = null;
+
+    let missionVerified = false;
+
+
+    /* =====================================================
+       COINS
+       ===================================================== */
+
+    let coins =
+        Number(localStorage.getItem("ecoCoins"));
+
+    if (
+        !Number.isFinite(coins)
+    ) {
+        coins = 150;
+
+        localStorage.setItem(
+            "ecoCoins",
+            coins
+        );
+    }
+
+
+    document.getElementById(
+        "coinCount"
+    ).innerText = coins;
+
+
+    function updateCoins() {
+
+        document.getElementById(
+            "coinCount"
+        ).innerText = coins;
+
+        localStorage.setItem(
+            "ecoCoins",
+            coins
+        );
+
+    }
+
+
+    function addCoins(amount) {
+
+        coins += amount;
+
+        updateCoins();
+
+    }
+
+
+    /* =====================================================
+       LOAD OFFLINE MODEL
+       ===================================================== */
+
+    async function loadOfflineAI() {
+
+        const status =
+            document.getElementById(
+                "modelStatus"
+            );
+
+
+        try {
+
+            status.innerText =
+                "🤖 Loading offline AI model...";
+
+
+            /*
+                IMPORTANT:
+
+                Your trained model must be placed here:
+
+                /ai-model/
+
+                Example:
+
+                ai-model/
+                ├── model.json
+                ├── metadata.json
+                └── weights...
+            */
+
+
+            model =
+                await tmImage.load(
+                    "./ai-model/model.json",
+                    "./ai-model/metadata.json"
+                );
+
+
+            modelLoaded =
+                true;
+
+
+            status.innerText =
+                "✅ Offline AI ready";
+
+
+        } catch (error) {
+
+            console.error(
+                "Offline AI error:",
+                error
+            );
+
+
+            modelLoaded =
+                false;
+
+
+            status.innerText =
+                "❌ Offline AI model not found";
+
+
+            showResult(
+
+                `
+                <b>AI model unavailable.</b>
+                <br><br>
+                Please make sure the
+                <b>ai-model</b> folder is present
+                with all model files.
+                `,
+
+                "error"
+
+            );
+
+        }
+
+    }
+
+
+    /* =====================================================
+       NAVIGATION
+       ===================================================== */
+
+    function switchTab(
+        tabName,
+        button
+    ) {
+
+        document
+            .querySelectorAll(".section")
+            .forEach(section => {
+
+                section.classList.remove(
+                    "active"
+                );
+
+            });
+
+
+        document
+            .querySelectorAll(".nav-btn")
+            .forEach(btn => {
+
+                btn.classList.remove(
+                    "active-tab"
+                );
+
+            });
+
+
+        document
+            .getElementById(
+                "tab-" + tabName
+            )
+            .classList.add("active");
+
+
+        button.classList.add(
+            "active-tab"
+        );
+
+    }
+
+
+    function openGame() {
+
+        const buttons =
+            document.querySelectorAll(
+                ".nav-btn"
+            );
+
+        switchTab(
+            "game",
+            buttons[1]
+        );
+
+    }
+
+
+    /* =====================================================
+       QUIZ
+       ===================================================== */
+
+    function checkAnswer(
+        correct
+    ) {
+
+        const status =
+            document.getElementById(
+                "quizStatus"
+            );
+
+        const teddy =
+            document.getElementById(
+                "teddy"
+            );
+
+        const seedling =
+            document.getElementById(
+                "seedling"
+            );
+
+
+        teddy.classList.remove(
+            "dancing"
+        );
+
+        seedling.classList.remove(
+            "dancing"
+        );
+
+
+        if (correct) {
+
+            status.style.color =
+                "#2e7d32";
+
+            status.innerText =
+                "🎉 Correct! +20 Eco-Coins";
+
+
+            teddy.classList.add(
+                "dancing"
+            );
+
+            seedling.classList.add(
+                "dancing"
+            );
+
+
+            addCoins(20);
+
+        } else {
+
+            status.style.color =
+                "#d32f2f";
+
+            status.innerText =
+                "❌ Incorrect!";
+
+
+            triggerFruitRain();
+
+        }
+
+    }
+
+
+    /* =====================================================
+       FRUIT RAIN
+       ===================================================== */
+
+    function triggerFruitRain() {
+
+        const container =
+            document.getElementById(
+                "phoneContainer"
+            );
+
+
+        const fruits = [
+            "🥭",
+            "🍎"
+        ];
+
+
+        for (
+            let i = 0;
+            i < 12;
+            i++
+        ) {
+
+            const fruit =
+                document.createElement(
+                    "div"
+                );
+
+
+            fruit.className =
+                "fruit";
+
+
+            fruit.innerText =
+                fruits[
+                    Math.floor(
+                        Math.random() *
+                        fruits.length
+                    )
+                ];
+
+
+            fruit.style.left =
+                Math.random() * 350 + "px";
+
+
+            fruit.style.animationDuration =
+                (
+                    Math.random() *
+                    1 +
+                    1
+                ) + "s";
+
+
+            container.appendChild(
+                fruit
+            );
+
+
+            setTimeout(
+                () => fruit.remove(),
+                2000
+            );
+
+        }
+
+    }
+
+
+    /* =====================================================
+       IMAGE PREVIEW
+       ===================================================== */
+
+    function previewImage() {
+
+        const input =
+            document.getElementById(
+                "taskFile"
+            );
+
+        const preview =
+            document.getElementById(
+                "imagePreview"
+            );
+
+        const button =
+            document.getElementById(
+                "verifyButton"
+            );
+
+
+        missionVerified =
+            false;
+
+
+        if (
+            !input.files ||
+            input.files.length === 0
+        ) {
+
+            preview.style.display =
+                "none";
+
+            button.disabled =
+                true;
+
+            button.innerText =
+                "Select Photo";
+
+            return;
+
+        }
+
+
+        const file =
+            input.files[0];
+
+
+        if (
+            !file.type.startsWith(
+                "image/"
+            )
+        ) {
+
+            showResult(
+                "❌ Please select an image.",
+                "error"
+            );
+
+            button.disabled =
+                true;
+
+            return;
+
+        }
+
+
+        /*
+            FileReader works offline.
+        */
+
+        const reader =
+            new FileReader();
+
+
+        reader.onload = function(event) {
+
+            preview.src =
+                event.target.result;
+
+            preview.style.display =
+                "block";
+
+
+            currentImage =
+                preview;
+
+
+            button.disabled =
+                !modelLoaded;
+
+
+            button.innerText =
+                modelLoaded
+                    ? "🤖 Verify With Offline AI"
+                    : "AI Model Loading...";
+
+        };
+
+
+        reader.readAsDataURL(file);
+
+    }
+
+
+    /* =====================================================
+       AI VERIFICATION
+       ===================================================== */
+
+    async function runAIVerification() {
+
+        if (
+            verificationRunning
+        ) {
+            return;
+        }
+
+
+        if (!modelLoaded) {
+
+            showResult(
+                "❌ Offline AI model is not ready.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        if (!currentImage) {
+
+            showResult(
+                "❌ Please select an image.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        if (
+            missionVerified
+        ) {
+
+            showResult(
+                "⚠️ This mission has already been verified.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        verificationRunning =
+            true;
+
+
+        const button =
+            document.getElementById(
+                "verifyButton"
+            );
+
+
+        button.disabled =
+            true;
+
+        button.innerText =
+            "🤖 AI Analyzing...";
+
+
+        showResult(
+            "🤖 Offline AI is analyzing the image...",
+            "loading"
+        );
+
+
+        try {
+
+            /*
+                Run prediction.
+
+                The model should contain classes
+                such as:
+
+                Plant
+                Tree
+                Vegetation
+                Other
+            */
+
+            const predictions =
+                await model.predict(
+                    currentImage
+                );
+
+
+            console.log(
+                "AI predictions:",
+                predictions
+            );
+
+
+            /*
+                Find the strongest prediction.
+            */
+
+            let bestPrediction =
+                null;
+
+
+            for (
+                const prediction
+                of predictions
+            ) {
+
+                if (
+                    !bestPrediction ||
+                    prediction.probability >
+                    bestPrediction.probability
+                ) {
+
+                    bestPrediction =
+                        prediction;
+
+                }
+
+            }
+
+
+            if (!bestPrediction) {
+
+                throw new Error(
+                    "No prediction received"
+                );
+
+            }
+
+
+            const label =
+                bestPrediction.className
+                    .toLowerCase()
+                    .trim();
+
+
+            const confidence =
+                bestPrediction.probability;
+
+
+            const percentage =
+                Math.round(
+                    confidence * 100
+                );
+
+
+            /*
+                ONLY THESE CLASSES
+                ARE ALLOWED.
+
+                This is much safer than
+                keyword matching MobileNet.
+            */
+
+            const plantClasses = [
+
+                "plant",
+                "tree",
+                "vegetation",
+                "leaf",
+                "leaves",
+                "sapling",
+                "flower",
+                "plant/tree"
+
+            ];
+
+
+            const isPlant =
+                plantClasses.includes(
+                    label
+                );
+
+
+            /*
+                High confidence required.
+            */
+
+            const minimumConfidence =
+                0.80;
+
+
+            if (
+                isPlant &&
+                confidence >=
+                minimumConfidence
+            ) {
+
+                /*
+                    =====================
+                    APPROVED
+                    =====================
+                */
+
+
+                addCoins(50);
+
+
+                missionVerified =
+                    true;
+
+
+                showResult(
+
+                    `
+                    <div class="result-label">
+                        ✅ Mission Approved
+                    </div>
+
+                    <br>
+
+                    🌱 Detected:
+                    <b>
+                        ${escapeHTML(
+                            bestPrediction.className
+                        )}
+                    </b>
+
+                    <br>
+
+                    🤖 Confidence:
+                    <b>
+                        ${percentage}%
+                    </b>
+
+                    <div class="confidence-container">
+
+                        <div class="confidence-bar">
+
+                            <div
+                                class="confidence-fill"
+                                style="
+                                width:${percentage}%;
+                                ">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <br>
+
+                    🪙
+                    <b>
+                        +50 Eco-Coins
+                    </b>
+
+                    <br><br>
+
+                    Your eco mission has been
+                    successfully verified.
+
+                    `,
+
+                    "success"
+
+                );
+
+
+                button.innerText =
+                    "✅ Mission Verified";
+
+
+            } else {
+
+                /*
+                    =====================
+                    REJECTED
+                    =====================
+                */
+
+
+                showResult(
+
+                    `
+                    <div class="result-label">
+                        ❌ Mission Rejected
+                    </div>
+
+                    <br>
+
+                    🤖 AI detected:
+                    <b>
+                        ${escapeHTML(
+                            bestPrediction.className
+                        )}
+                    </b>
+
+                    <br>
+
+                    Confidence:
+                    <b>
+                        ${percentage}%
+                    </b>
+
+                    <br><br>
+
+                    This image does not meet
+                    the plant/tree verification
+                    requirement.
+
+                    <br><br>
+
+                    🌱 Please upload a clear
+                    photo of a plant, sapling,
+                    or tree.
+
+                    `,
+
+                    "error"
+
+                );
+
+
+                button.disabled =
+                    false;
+
+                button.innerText =
+                    "🔄 Try Another Photo";
+
+            }
+
+
+        } catch (error) {
+
+            console.error(
+                "AI verification failed:",
+                error
+            );
+
+
+            showResult(
+
+                `
+                ❌ AI verification failed.
+
+                <br><br>
+
+                The application itself is still
+                running normally.
+
+                <br><br>
+
+                Please select another image
+                and try again.
+                `,
+
+                "error"
+
+            );
+
+
+            button.disabled =
+                false;
+
+            button.innerText =
+                "🔄 Try Again";
+
+        }
+
+
+        verificationRunning =
+            false;
+
+    }
+
+
+    /* =====================================================
+       RESULT MESSAGE
+       ===================================================== */
+
+    function showResult(
+        message,
+        type
+    ) {
+
+        const result =
+            document.getElementById(
+                "aiStatus"
+            );
+
+
+        result.innerHTML =
+            message;
+
+
+        result.className =
+            "ai-status";
+
+
+        if (
+            type === "success"
+        ) {
+
+            result.classList.add(
+                "success"
+            );
+
+        }
+
+        else if (
+            type === "error"
+        ) {
+
+            result.classList.add(
+                "error"
+            );
+
+        }
+
+        else {
+
+            result.classList.add(
+                "loading"
+            );
+
+        }
+
+    }
+
+
+    /* =====================================================
+       SAFE TEXT
+       ===================================================== */
+
+    function escapeHTML(
+        value
+    ) {
+
+        const element =
+            document.createElement(
+                "div"
+            );
+
+
+        element.textContent =
+            value;
+
+
+        return element.innerHTML;
+
+    }
+
+
+    /* =====================================================
+       REWARDS
+       ===================================================== */
+
+    function redeemCoins(
+        cost
+    ) {
+
+        if (
+            coins >= cost
+        ) {
+
+            coins -= cost;
+
+            updateCoins();
+
+
+            alert(
+                "🎉 Reward successfully unlocked!"
+            );
+
+        } else {
+
+            alert(
+                "❌ Not enough Eco-Coins!"
+            );
+
+        }
+
+    }
+
+
+    /* =====================================================
+       START APP
+       ===================================================== */
+
+    window.addEventListener(
+        "load",
+        () => {
+
+            loadOfflineAI();
+
+        }
+    );
+
+</script>
+
+</body>
+</html>
