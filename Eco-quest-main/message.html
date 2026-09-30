@@ -3233,18 +3233,11 @@
             /* ============================================================
                ECO QUEST MULTI-STUDENT AUTH & LEVEL PROGRESS ENGINE
                ============================================================ */
-            const LEVEL_THRESHOLDS = [
-                { level: 1, minXP: 0, maxXP: 100, title: "🌱 Novice Seedling" },
-                { level: 2, minXP: 100, maxXP: 250, title: "🌿 Green Sprout" },
-                { level: 3, minXP: 250, maxXP: 450, title: "☘️ Eco Sentinel" },
-                { level: 4, minXP: 450, maxXP: 700, title: "🌳 Campus Guardian" },
-                { level: 5, minXP: 700, maxXP: 1000, title: "👑 Eco Legend" }
-            ];
-
-            const DEFAULT_USERS = {
+                    const DEFAULT_USERS = {
                 "STU-2026-01": {
                     id: "STU-2026-01",
                     name: "Anwesh",
+                    password: "eco123",
                     dept: "CSE Dept",
                     year: "1st Year",
                     avatar: "👑",
@@ -3270,6 +3263,7 @@
                 "STU-2026-02": {
                     id: "STU-2026-02",
                     name: "Rahul",
+                    password: "eco123",
                     dept: "ECE Dept",
                     year: "2nd Year",
                     avatar: "🌳",
@@ -3291,6 +3285,7 @@
                 "STU-2026-03": {
                     id: "STU-2026-03",
                     name: "Karan",
+                    password: "eco123",
                     dept: "Mechanical Dept",
                     year: "3rd Year",
                     avatar: "☘️",
@@ -3310,7 +3305,8 @@
                 },
                 "STU-2026-04": {
                     id: "STU-2026-04",
-                    name: "Shivham",
+                    name: "Shivam",
+                    password: "eco123",
                     dept: "Civil Dept",
                     year: "4th Year",
                     avatar: "🦊",
@@ -3330,7 +3326,20 @@
                 "STU-2026-NEW": {
                     id: "STU-2026-NEW",
                     name: "Alex Green (New Student)",
+                    password: "eco123",
                     dept: "Mechanical Dept",
+                    year: "1st Year",
+                    avatar: "🌱",
+                    bio: "Just joined ECO Quest! Ready to plant my first tree 🌳",
+                    xp: 0, // Fresh ID starts at 0% Progress!
+                    coins: 0,
+                    missionsCompleted: 0,
+                    zeroWasteMeals: 0,
+                    saplingsPlanted: 0,
+                    vouchers: [],
+                    history: []
+                }
+            };t: "Mechanical Dept",
                     year: "1st Year",
                     avatar: "🌱",
                     bio: "Just joined ECO Quest! Ready to plant my first tree 🌳",
