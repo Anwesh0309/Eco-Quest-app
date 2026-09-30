@@ -1142,9 +1142,10 @@
             </div>
             <div class="header-badges">
                 <span class="badge-pill badge-streak">🔥 6d</span>
-                <button class="auth-header-btn" id="authHeaderBtn" onclick="openAuthModal()">
+                <button class="auth-header-btn" id="authHeaderBtn" onclick="toggleAuthAction()">
                     <span id="headerUserAvatar">🌱</span>
                     <span id="headerUserName">Login</span>
+                    <span id="headerAuthBadge" style="font-size: 9px; background: rgba(255,255,255,0.2); padding: 1px 5px; border-radius: 8px;">🔑 Login</span>
                 </button>
                 <button class="toggle-wide-btn" id="toggleWideBtn" onclick="toggleWideMode()">
                     🖥️ Wide
@@ -1651,16 +1652,22 @@
 
             <!-- TAB 6: ADVANCED ECO PROFILE SCREEN -->
             <section id="tab-profile" class="section">
-                <!-- Account Switcher Banner -->
+                <!-- Account Switcher & Logout Card -->
                 <div class="card" style="background: #f1f8f3; border: 1.5px solid #a5d6a7; margin-bottom: 12px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
                         <div>
-                            <div style="font-size: 12px; font-weight: 800;">🔑 Student Account Pass</div>
-                            <div style="font-size: 10px; color: var(--text-muted);">Active ID: <strong id="profileActiveIdText" style="color: var(--primary-dark);">STU-2026-01</strong></div>
+                            <div style="font-size: 13px; font-weight: 800; display: flex; align-items: center; gap: 6px;">
+                                <span>🔑 Student Account Session</span>
+                                <span class="tag-pill tag-green" id="loginStatusBadge">ACTIVE LOGGED IN</span>
+                            </div>
+                            <div style="font-size: 10px; color: var(--text-muted); margin-top: 2px;">
+                                Active Student ID: <strong id="profileActiveIdText" style="color: var(--primary-dark);">STU-2026-01</strong>
+                            </div>
                         </div>
-                        <div style="display: flex; gap: 6px;">
-                            <button class="btn-action-primary" style="padding: 5px 10px; font-size: 10px; background: #059669; width: auto;" onclick="openIdCardModal()">📱 ID Pass</button>
-                            <button class="btn-action-primary" style="padding: 5px 10px; font-size: 10px; background: #d84315; width: auto;" onclick="openAuthModal()">🔑 Switch ID</button>
+                        <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                            <button class="btn-action-primary" style="padding: 6px 12px; font-size: 11px; background: #059669; width: auto;" onclick="openIdCardModal()">📱 ID Pass</button>
+                            <button class="btn-action-primary" style="padding: 6px 12px; font-size: 11px; background: #1565c0; width: auto;" onclick="openAuthModal()">🔑 Login / Switch</button>
+                            <button class="btn-action-primary" style="padding: 6px 12px; font-size: 11px; background: #d84315; width: auto;" onclick="handleLogout()">🚪 Log Out</button>
                         </div>
                     </div>
                 </div>
@@ -2189,8 +2196,11 @@
             loadUser(currentUserId);
         }
 
+        let isLoggedOut = false;
+
         function loadUser(id) {
             if (!users[id]) return;
+            isLoggedOut = false;
             currentUserId = id;
             currentUser = users[id];
             localStorage.setItem("eco_quest_active_user_v3", id);
@@ -2203,6 +2213,35 @@
             updateUserUI();
             renderVouchers();
             showToast(`👋 Logged in as ${currentUser.name} (${currentUser.id})`);
+        }
+
+        function handleLogout() {
+            isLoggedOut = true;
+            localStorage.removeItem("eco_quest_active_user_v3");
+
+            // Header UI update
+            if (document.getElementById("headerUserName")) document.getElementById("headerUserName").innerText = "Login";
+            if (document.getElementById("headerUserAvatar")) document.getElementById("headerUserAvatar").innerText = "🔑";
+            if (document.getElementById("headerAuthBadge")) document.getElementById("headerAuthBadge").innerText = "🔑 Login";
+
+            // Profile UI update
+            if (document.getElementById("loginStatusBadge")) {
+                document.getElementById("loginStatusBadge").innerText = "LOGGED OUT";
+                document.getElementById("loginStatusBadge").className = "tag-pill tag-yellow";
+            }
+            if (document.getElementById("profileActiveIdText")) document.getElementById("profileActiveIdText").innerText = "None (Guest Mode)";
+
+            playTone(200, 0.2, 'sawtooth');
+            showToast("🚪 Logged out successfully! Click Login to track progress.", "🚪");
+            openAuthModal();
+        }
+
+        function toggleAuthAction() {
+            if (isLoggedOut) {
+                openAuthModal();
+            } else {
+                openAuthModal();
+            }
         }
 
         function saveUsersToStorage() {
@@ -2263,6 +2302,7 @@
             document.getElementById("headerUserAvatar").innerText = currentUser.avatar;
             document.getElementById("headerUserName").innerText = currentUser.name.split(" ")[0];
             document.getElementById("headerAvatarLogo").innerText = currentUser.avatar;
+            if (document.getElementById("headerAuthBadge")) document.getElementById("headerAuthBadge").innerText = "🚪 Logout";
 
             // Top Status Bar
             document.getElementById("userCoins").innerText = coins;
@@ -2288,6 +2328,10 @@
             document.getElementById("profileTitleName").innerText = currentUser.name;
             document.getElementById("profileTitleSub").innerText = `${currentUser.dept} • ${currentUser.year} • Level ${levelInfo.level}`;
             document.getElementById("profileActiveIdText").innerText = currentUser.id;
+            if (document.getElementById("loginStatusBadge")) {
+                document.getElementById("loginStatusBadge").innerText = "ACTIVE LOGGED IN";
+                document.getElementById("loginStatusBadge").className = "tag-pill tag-green";
+            }
             document.getElementById("statTotalCoins").innerText = coins;
             document.getElementById("statMissionsDone").innerText = missionsCompleted;
 
