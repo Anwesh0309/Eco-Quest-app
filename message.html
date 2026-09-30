@@ -3624,7 +3624,7 @@
                 },
                 "STU-2026-NEW": {
                     id: "STU-2026-NEW",
-                    name: "Alex Green (New Student)",
+                    name: "Eco Explorer (New Student)",
                     password: "eco123",
                     dept: "Mechanical Dept",
                     year: "1st Year",
@@ -3661,7 +3661,7 @@
                 if (stored) {
                     try {
                         users = JSON.parse(stored);
-                        if (!users["STU-2026-01"] || users["STU-2026-01"].name === "Manisha") {
+                        if (!users["STU-2026-01"] || users["STU-2026-01"].name === "Manisha" || (users["STU-2026-NEW"] && users["STU-2026-NEW"].name.includes("Alex"))) {
                             users = JSON.parse(JSON.stringify(DEFAULT_USERS));
                             localStorage.setItem("eco_quest_users_v3", JSON.stringify(users));
                         }
