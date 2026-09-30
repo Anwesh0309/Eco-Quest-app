@@ -3240,11 +3240,12 @@
         }
 
         function performNewAuthLogin() {
-            const usernameInput = (document.getElementById("authLoginUsername").value || "").trim();
+            const usernameInput = (document.getElementById("authLoginUsername") ? document.getElementById("authLoginUsername").value : "").trim();
+            const passwordInput = (document.getElementById("authLoginPassword") ? document.getElementById("authLoginPassword").value : "").trim();
+
             if (!usernameInput) {
-                const active = localStorage.getItem("eco_quest_active_user_v3") || "STU-2026-01";
-                loadUser(active);
-                switchTab('home');
+                playErrorSound();
+                showToast("⚠️ Please enter your User Name, ID, or Email to sign in.");
                 return;
             }
 
@@ -3255,48 +3256,68 @@
                 (u.email && u.email.toLowerCase() === searchKey)
             );
 
-            if (foundUser) {
-                loadUser(foundUser.id);
-            } else {
-                const freshId = "STU-2026-" + Math.floor(1000 + Math.random() * 9000);
-                users[freshId] = {
-                    id: freshId,
-                    name: usernameInput,
-                    email: usernameInput.includes("@") ? usernameInput : `${usernameInput.toLowerCase()}@eco.edu`,
-                    dept: "CSE Dept",
-                    year: "1st Year",
-                    avatar: "🌱",
-                    bio: "Ready for eco quests!",
-                    xp: 0,
-                    coins: 0,
-                    missionsCompleted: 0,
-                    zeroWasteMeals: 0,
-                    saplingsPlanted: 0,
-                    vouchers: [],
-                    history: []
-                };
-                saveUsersToStorage();
-                loadUser(freshId);
+            if (!foundUser) {
+                playErrorSound();
+                alert("❌ Invalid Account Credentials or Password!\n\nAccount does not exist. Please click 'Create' to register an account first.");
+                showToast("❌ Account not found! Please create an ID first.");
+                switchAuthView('register');
+                return;
             }
 
+            // Verify password if account has a password set
+            if (foundUser.password && passwordInput && foundUser.password !== passwordInput) {
+                playErrorSound();
+                alert("❌ Invalid Account Credentials or Password!\n\nThe password you entered is incorrect. Please check your credentials and try again.");
+                showToast("❌ Invalid password! Please try again.");
+                return;
+            }
+
+            // Log in existing account
+            loadUser(foundUser.id);
             switchTab('home');
             playSuccessSound();
         }
 
         function performNewAuthRegister() {
-            let username = (document.getElementById("authRegUsername").value || "").trim();
-            if (!username) username = "Eco Student " + Math.floor(100 + Math.random() * 900);
+            const username = (document.getElementById("authRegUsername") ? document.getElementById("authRegUsername").value : "").trim();
+            const email = (document.getElementById("authRegEmail") ? document.getElementById("authRegEmail").value : "").trim();
+            const customId = (document.getElementById("authRegId") ? document.getElementById("authRegId").value : "").trim();
+            const password = (document.getElementById("authRegPassword") ? document.getElementById("authRegPassword").value : "").trim();
 
-            const email = (document.getElementById("authRegEmail").value || "").trim() || `${username.toLowerCase().replace(/\s+/g, '')}@eco.edu`;
-            const freshId = "STU-2026-" + Math.floor(1000 + Math.random() * 9000);
+            if (!username) {
+                playErrorSound();
+                showToast("⚠️ Please enter your Name to create an account.");
+                return;
+            }
+
+            // Check if user already exists
+            const searchName = username.toLowerCase();
+            const existing = Object.values(users).find(u => 
+                u.name.toLowerCase() === searchName || 
+                (customId && u.id.toLowerCase() === customId.toLowerCase()) ||
+                (email && u.email && u.email.toLowerCase() === email.toLowerCase())
+            );
+
+            if (existing) {
+                playErrorSound();
+                alert(`⚠️ Account already exists for "${username}" (${existing.id})!\n\nPlease sign in with your credentials.`);
+                showToast("⚠️ Account already exists! Switch to Sign In.");
+                switchAuthView('login');
+                if (document.getElementById("authLoginUsername")) document.getElementById("authLoginUsername").value = existing.name;
+                return;
+            }
+
+            const freshId = customId ? customId.toUpperCase() : ("STU-2026-" + Math.floor(1000 + Math.random() * 9000));
+            const userEmail = email || `${username.toLowerCase().replace(/\s+/g, '')}@eco.edu`;
 
             users[freshId] = {
                 id: freshId,
                 name: username,
-                email: email,
+                email: userEmail,
+                password: password || "eco123",
                 dept: "CSE Dept",
                 year: "1st Year",
-                avatar: "🌱",
+                avatar: selectedRegAvatar || "🌱",
                 bio: "Fresh Eco Student! Ready for campus sustainability.",
                 xp: 0, // Fresh 0% Progress guaranteed!
                 coins: 0,
