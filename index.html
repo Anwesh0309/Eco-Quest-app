@@ -3672,8 +3672,9 @@
                     users = JSON.parse(JSON.stringify(DEFAULT_USERS));
                 }
 
+                const sessionActive = sessionStorage.getItem("eco_quest_session_active");
                 const activeId = localStorage.getItem("eco_quest_active_user_v3");
-                if (activeId && users[activeId]) {
+                if (sessionActive === "true" && activeId && users[activeId]) {
                     loadUser(activeId);
                     switchTab('home');
                 } else {
@@ -3693,6 +3694,7 @@
                 currentUserId = id;
                 currentUser = users[id];
                 localStorage.setItem("eco_quest_active_user_v3", id);
+                sessionStorage.setItem("eco_quest_session_active", "true");
 
                 coins = currentUser.coins || 0;
                 missionsCompleted = currentUser.missionsCompleted || 0;
@@ -3712,6 +3714,7 @@
             function handleLogout() {
                 isLoggedOut = true;
                 localStorage.removeItem("eco_quest_active_user_v3");
+                sessionStorage.removeItem("eco_quest_session_active");
                 currentUser = null;
                 currentUserId = null;
                 coins = 0;
