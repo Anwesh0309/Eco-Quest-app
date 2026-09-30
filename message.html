@@ -901,22 +901,147 @@
             100% { transform: translateX(100%); }
         }
 
-        /* Auth Login / Register Modal Styling */
-        .auth-modal-content {
-            background: linear-gradient(145deg, #062210, #143d1d);
-            border: 2px solid #10b981;
-            border-radius: 24px;
-            padding: 24px;
-            width: 100%;
-            max-width: 400px;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+        /* NEW AUTH SCREEN STYLING (PURPLE INTERFACE FROM SCREENSHOT) */
+        .auth-screen-card {
+            background: linear-gradient(180deg, #4d57a8 0%, #353c7a 100%);
+            min-height: 520px;
+            border-radius: var(--border-radius);
+            padding: 30px 20px;
             color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(53, 60, 122, 0.4);
             position: relative;
-            animation: modalPopIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            overflow: hidden;
         }
-        @keyframes modalPopIn {
-            from { opacity: 0; transform: scale(0.9) translateY(20px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
+
+        .auth-logo-svg {
+            width: 76px; height: 76px;
+            margin: 0 auto 24px;
+            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.25));
+        }
+
+        .auth-title-large {
+            font-family: 'Outfit', sans-serif;
+            font-size: 34px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 4px;
+            letter-spacing: -0.5px;
+        }
+
+        .auth-subtitle-text {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.75);
+            margin-bottom: 24px;
+            font-weight: 500;
+        }
+
+        .auth-form-box {
+            width: 100%;
+            max-width: 290px;
+            margin: 0 auto;
+        }
+
+        .auth-input-pill {
+            position: relative;
+            margin-bottom: 12px;
+            width: 100%;
+        }
+
+        .auth-input-pill input {
+            width: 100%;
+            padding: 13px 16px 13px 44px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.22);
+            backdrop-filter: blur(10px);
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: 600;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .auth-input-pill input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .auth-input-pill input:focus {
+            background: rgba(255, 255, 255, 0.35);
+            border-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.25);
+        }
+
+        .auth-input-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 15px;
+            opacity: 0.85;
+        }
+
+        .btn-auth-filled {
+            width: 100%;
+            padding: 13px;
+            border-radius: 30px;
+            border: none;
+            background: linear-gradient(180deg, #2a5298 0%, #1e3c72 100%);
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+            margin-top: 14px;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .btn-auth-filled:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn-auth-outline {
+            width: 100%;
+            padding: 13px;
+            border-radius: 30px;
+            border: 2px solid #ffffff;
+            background: transparent;
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 12px;
+            transition: background 0.2s ease;
+        }
+
+        .btn-auth-outline:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .auth-link-sub {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.85);
+            margin-top: 20px;
+        }
+
+        .auth-link-sub span {
+            text-decoration: underline;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .auth-guest-link {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: underline;
+            cursor: pointer;
+            margin-top: 40px;
+            display: inline-block;
         }
         .modal-close-btn {
             position: absolute;
@@ -1168,6 +1293,114 @@
                     Redeem Canteen &rarr;
                 </button>
             </div>
+
+            <!-- TAB 0: AUTHENTICATION & LOGIN/SIGNUP SCREEN (MATCHING REFERENCE SCREENSHOT) -->
+            <section id="tab-auth" class="section">
+                <div class="auth-screen-card">
+
+                    <!-- VIEW 1: LANDING WELCOME SCREEN -->
+                    <div id="authLandingView" style="display: block; width: 100%;">
+                        <div class="auth-logo-svg">
+                            <svg width="76" height="76" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="35" cy="35" r="20" fill="white" />
+                                <circle cx="65" cy="35" r="20" fill="white" />
+                                <circle cx="35" cy="65" r="20" fill="white" />
+                                <path d="M 65,45 A 20,20 0 0,1 65,85 L 45,85 A 20,20 0 0,1 45,65 Z" fill="white" />
+                            </svg>
+                        </div>
+                        <h2 style="font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 800; margin-bottom: 6px;">ECO Quest Portal</h2>
+                        <p style="font-size: 12px; color: rgba(255,255,255,0.75); margin-bottom: 30px;">Student Campus Sustainability Pass</p>
+
+                        <div class="auth-form-box">
+                            <button type="button" class="btn-auth-filled" onclick="switchAuthView('login')">Login</button>
+                            <button type="button" class="btn-auth-outline" onclick="switchAuthView('register')">Sign Up</button>
+                        </div>
+
+                        <a class="auth-guest-link" onclick="continueAsGuest()">Continue as guest</a>
+                    </div>
+
+                    <!-- VIEW 2: LOGIN SCREEN -->
+                    <div id="authLoginView" style="display: none; width: 100%;">
+                        <h1 class="auth-title-large">Welcome</h1>
+                        <p class="auth-subtitle-text">Login to your account</p>
+
+                        <div class="auth-form-box">
+                            <div class="auth-input-pill">
+                                <span class="auth-input-icon">👤</span>
+                                <input type="text" id="authLoginUsername" placeholder="username or email" />
+                            </div>
+                            <div class="auth-input-pill">
+                                <span class="auth-input-icon">🔒</span>
+                                <input type="password" id="authLoginPassword" placeholder="Password" />
+                            </div>
+
+                            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: rgba(255,255,255,0.8); margin: 6px 0 10px;">
+                                <label style="display: flex; align-items: center; gap: 4px; cursor: pointer;">
+                                    <input type="checkbox" checked /> Remember me
+                                </label>
+                                <span style="cursor: pointer; text-decoration: underline;" onclick="showToast('Password reset link sent!')">Forget Password?</span>
+                            </div>
+
+                            <button type="button" class="btn-auth-filled" onclick="performNewAuthLogin()">Login</button>
+
+                            <!-- Quick One-Click Demo Student Logins -->
+                            <div style="margin-top: 14px; border-top: 1px dashed rgba(255,255,255,0.25); padding-top: 10px; text-align: left;">
+                                <div style="font-size: 10px; font-weight: 800; color: rgba(255,255,255,0.85); margin-bottom: 6px;">⚡ Quick Demo Accounts:</div>
+                                <div style="display: flex; flex-direction: column; gap: 4px;">
+                                    <button type="button" class="quick-demo-btn" onclick="quickLoginDemo('STU-2026-01')">
+                                        <span>🌱 <strong>Manisha</strong> (STU-2026-01)</span>
+                                        <span class="demo-badge">Lvl 4 • 75%</span>
+                                    </button>
+                                    <button type="button" class="quick-demo-btn" onclick="quickLoginDemo('STU-2026-02')">
+                                        <span>🌳 <strong>Rahul Sharma</strong> (STU-2026-02)</span>
+                                        <span class="demo-badge">Lvl 3 • 62%</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <p class="auth-link-sub">
+                                Don't have an Account? <span onclick="switchAuthView('register')">Sign Up</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- VIEW 3: REGISTER SCREEN -->
+                    <div id="authRegisterView" style="display: none; width: 100%;">
+                        <h1 class="auth-title-large">Welcome</h1>
+                        <p class="auth-subtitle-text">Create your account</p>
+
+                        <div class="auth-form-box">
+                            <div class="auth-input-pill">
+                                <span class="auth-input-icon">👤</span>
+                                <input type="text" id="authRegUsername" placeholder="username" />
+                            </div>
+                            <div class="auth-input-pill">
+                                <span class="auth-input-icon">✉️</span>
+                                <input type="email" id="authRegEmail" placeholder="Email" />
+                            </div>
+                            <div class="auth-input-pill">
+                                <span class="auth-input-icon">🔒</span>
+                                <input type="password" id="authRegPassword" placeholder="Password" />
+                            </div>
+                            <div class="auth-input-pill">
+                                <span class="auth-input-icon">🔒</span>
+                                <input type="password" id="authRegConfirmPassword" placeholder="Confirm Password" />
+                            </div>
+
+                            <p style="font-size: 9px; color: rgba(255,255,255,0.65); margin: 6px 0;">
+                                By registering you are agreeing to our Terms of use and privacy policy.
+                            </p>
+
+                            <button type="button" class="btn-auth-filled" onclick="performNewAuthRegister()">Register & Start at 0%</button>
+
+                            <p class="auth-link-sub">
+                                Already have an Account? <span onclick="switchAuthView('login')">Login</span>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
 
             <!-- TAB 1: HOME -->
             <section id="tab-home" class="section active">
@@ -2485,62 +2718,56 @@
             });
         }
 
-        /* AUTH MODAL CONTROLS */
-        function openAuthModal() {
-            document.getElementById("authModal").style.display = "flex";
-        }
-        function closeAuthModal() {
-            document.getElementById("authModal").style.display = "none";
-        }
-        function switchAuthTab(tab) {
-            document.getElementById("tabLoginBtn").classList.toggle("active", tab === 'login');
-            document.getElementById("tabRegisterBtn").classList.toggle("active", tab === 'register');
-            document.getElementById("loginForm").style.display = tab === 'login' ? 'block' : 'none';
-            document.getElementById("registerForm").style.display = tab === 'register' ? 'block' : 'none';
-        }
-        function selectRegAvatar(icon, btn) {
-            selectedRegAvatar = icon;
-            document.querySelectorAll("#regAvatarGrid .avatar-mini-btn").forEach(b => b.classList.remove("active"));
-            btn.classList.add("active");
+        /* NEW PURPLE AUTH SCREEN CONTROLS (MATCHING REFERENCE SCREENSHOT) */
+        function switchAuthView(viewName) {
+            const landing = document.getElementById("authLandingView");
+            const login = document.getElementById("authLoginView");
+            const reg = document.getElementById("authRegisterView");
+            if (landing) landing.style.display = viewName === 'landing' ? 'block' : 'none';
+            if (login) login.style.display = viewName === 'login' ? 'block' : 'none';
+            if (reg) reg.style.display = viewName === 'register' ? 'block' : 'none';
         }
 
-        function quickLoginDemo(id) {
-            if (!users[id] && DEFAULT_USERS[id]) {
-                users[id] = JSON.parse(JSON.stringify(DEFAULT_USERS[id]));
-            }
-            if (users[id]) {
-                saveUsersToStorage();
-                loadUser(id);
-                closeAuthModal();
-                playSuccessSound();
-            }
+        function openAuthScreen(viewName = 'landing') {
+            switchTab('auth');
+            switchAuthView(viewName);
         }
 
-        function handleLoginSubmit(e) {
-            if (e) e.preventDefault();
-            const idInput = (document.getElementById("loginIdInput").value || "").trim();
-            let targetId = idInput.toUpperCase();
+        function continueAsGuest() {
+            loadUser("STU-2026-01");
+            switchTab('home');
+            showToast("👋 Welcome to Eco Quest Guest Mode!");
+        }
 
-            if (!idInput) {
+        function performNewAuthLogin() {
+            const usernameInput = (document.getElementById("authLoginUsername").value || "").trim();
+            if (!usernameInput) {
                 const active = localStorage.getItem("eco_quest_active_user_v3") || "STU-2026-01";
-                quickLoginDemo(active);
+                loadUser(active);
+                switchTab('home');
                 return;
             }
 
-            const foundUser = Object.values(users).find(u => u.id.toUpperCase() === targetId || u.name.toLowerCase() === idInput.toLowerCase());
-            
+            const searchKey = usernameInput.toLowerCase();
+            const foundUser = Object.values(users).find(u => 
+                u.id.toLowerCase() === searchKey || 
+                u.name.toLowerCase() === searchKey ||
+                (u.email && u.email.toLowerCase() === searchKey)
+            );
+
             if (foundUser) {
-                targetId = foundUser.id;
+                loadUser(foundUser.id);
             } else {
-                if (!targetId.startsWith("STU-")) targetId = "STU-" + targetId;
-                users[targetId] = {
-                    id: targetId,
-                    name: idInput,
+                const freshId = "STU-2026-" + Math.floor(1000 + Math.random() * 9000);
+                users[freshId] = {
+                    id: freshId,
+                    name: usernameInput,
+                    email: usernameInput.includes("@") ? usernameInput : `${usernameInput.toLowerCase()}@eco.edu`,
                     dept: "CSE Dept",
                     year: "1st Year",
                     avatar: "🌱",
                     bio: "Ready for eco quests!",
-                    xp: 0, // Fresh ID starts at 0%!
+                    xp: 0,
                     coins: 0,
                     missionsCompleted: 0,
                     zeroWasteMeals: 0,
@@ -2548,67 +2775,30 @@
                     vouchers: [],
                     history: []
                 };
+                saveUsersToStorage();
+                loadUser(freshId);
             }
 
-            saveUsersToStorage();
-            loadUser(targetId);
-            closeAuthModal();
+            switchTab('home');
             playSuccessSound();
         }
 
-        function handleRegisterSubmit(e) {
-            if (e) e.preventDefault();
-            let name = (document.getElementById("regNameInput").value || "").trim();
-            if (!name) name = "Eco Student " + Math.floor(100 + Math.random() * 900);
+        function performNewAuthRegister() {
+            let username = (document.getElementById("authRegUsername").value || "").trim();
+            if (!username) username = "Eco Student " + Math.floor(100 + Math.random() * 900);
 
-            let id = (document.getElementById("regIdInput").value || "").trim().toUpperCase();
-            if (!id || id === "STU-") {
-                id = "STU-2026-" + Math.floor(1000 + Math.random() * 9000);
-            } else if (!id.startsWith("STU-")) {
-                id = "STU-" + id;
-            }
-
-            const dept = document.getElementById("regDeptInput").value || "CSE Dept";
-            const year = document.getElementById("regYearInput").value || "1st Year";
-
-            users[id] = {
-                id: id,
-                name: name,
-                dept: dept,
-                year: year,
-                avatar: selectedRegAvatar || "🌱",
-                bio: "Fresh Eco Student! Ready for campus sustainability.",
-                xp: 0, // Fresh ID starts at 0% Progress!
-                coins: 0,
-                missionsCompleted: 0,
-                zeroWasteMeals: 0,
-                saplingsPlanted: 0,
-                vouchers: [],
-                history: []
-            };
-
-            saveUsersToStorage();
-            loadUser(id);
-            closeAuthModal();
-            playSuccessSound();
-            triggerConfetti();
-            showToast(`✨ Account Created! Fresh ID: ${id} (0% Progress)`, "✨");
-        }
-
-        function createFreshAccountQuick() {
-            const randomNum = Math.floor(1000 + Math.random() * 9000);
-            const freshId = "STU-2026-" + randomNum;
-            const depts = ["CSE Dept", "ECE Dept", "Mechanical Dept", "Civil Dept", "Biotech Dept"];
-            const randomDept = depts[Math.floor(Math.random() * depts.length)];
+            const email = (document.getElementById("authRegEmail").value || "").trim() || `${username.toLowerCase().replace(/\s+/g, '')}@eco.edu`;
+            const freshId = "STU-2026-" + Math.floor(1000 + Math.random() * 9000);
 
             users[freshId] = {
                 id: freshId,
-                name: "Eco Student " + randomNum,
-                dept: randomDept,
+                name: username,
+                email: email,
+                dept: "CSE Dept",
                 year: "1st Year",
-                avatar: selectedRegAvatar || "🌱",
+                avatar: "🌱",
                 bio: "Fresh Eco Student! Ready for campus sustainability.",
-                xp: 0, // 0% Progress
+                xp: 0, // Fresh 0% Progress guaranteed!
                 coins: 0,
                 missionsCompleted: 0,
                 zeroWasteMeals: 0,
@@ -2619,10 +2809,37 @@
 
             saveUsersToStorage();
             loadUser(freshId);
-            closeAuthModal();
+            switchTab('home');
+
             playSuccessSound();
             triggerConfetti();
-            showToast(`✨ Fresh 0% Account Created! ID: ${freshId}`, "🎉");
+            showToast(`✨ Account Created! Fresh ID: ${freshId} (0% Progress)`, "✨");
+        }
+
+        function quickLoginDemo(id) {
+            if (!users[id] && DEFAULT_USERS[id]) {
+                users[id] = JSON.parse(JSON.stringify(DEFAULT_USERS[id]));
+            }
+            if (users[id]) {
+                saveUsersToStorage();
+                loadUser(id);
+                switchTab('home');
+                playSuccessSound();
+            }
+        }
+
+        function openAuthModal() {
+            openAuthScreen('landing');
+        }
+
+        function closeAuthModal() {
+            switchTab('home');
+        }
+
+        function selectRegAvatar(icon, btn) {
+            selectedRegAvatar = icon;
+            document.querySelectorAll("#regAvatarGrid .avatar-mini-btn").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
         }
 
         /* ID CARD MODAL CONTROLS */
