@@ -1730,7 +1730,7 @@
                     <div class="stat-card">
                         <div class="stat-icon-box">🍱</div>
                         <div>
-                            <div style="font-size: 16px; font-weight: 900; color: #1565c0;">12</div>
+                            <div style="font-size: 16px; font-weight: 900; color: #1565c0;" id="statZeroWasteMeals">12</div>
                             <div style="font-size: 10px; font-weight: 700; color: var(--text-muted);">Zero-Waste Meals</div>
                         </div>
                     </div>
@@ -1738,7 +1738,7 @@
                     <div class="stat-card">
                         <div class="stat-icon-box">🌳</div>
                         <div>
-                            <div style="font-size: 16px; font-weight: 900; color: #2e7d32;">2</div>
+                            <div style="font-size: 16px; font-weight: 900; color: #2e7d32;" id="statSaplingsPlanted">2</div>
                             <div style="font-size: 10px; font-weight: 700; color: var(--text-muted);">Saplings Planted</div>
                         </div>
                     </div>
@@ -1936,14 +1936,14 @@
             <!-- REGISTER FORM -->
             <form id="registerForm" onsubmit="handleRegisterSubmit(event)" style="display: none;">
                 <div class="form-group">
-                    <label>Full Student Name</label>
-                    <input type="text" id="regNameInput" placeholder="e.g. Anwesh Kumar" required />
+                    <label>Full Student Name <span style="font-size: 10px; color: #a5d6a7;">(Optional - Auto generated if blank)</span></label>
+                    <input type="text" id="regNameInput" placeholder="e.g. Anwesh Kumar" />
                 </div>
 
                 <div style="display: flex; gap: 8px;">
                     <div class="form-group" style="flex: 1;">
-                        <label>Student ID Number</label>
-                        <input type="text" id="regIdInput" placeholder="STU-2026-99" required />
+                        <label>Student ID Number <span style="font-size: 10px; color: #a5d6a7;">(Auto-Fresh ID)</span></label>
+                        <input type="text" id="regIdInput" placeholder="Auto-generated if blank" />
                     </div>
                     <div class="form-group" style="flex: 1;">
                         <label>Academic Year</label>
@@ -1980,12 +1980,17 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" id="regPasswordInput" placeholder="••••••••" required />
+                    <label>Password <span style="font-size: 10px; color: #a5d6a7;">(Optional)</span></label>
+                    <input type="password" id="regPasswordInput" placeholder="••••••••" />
                 </div>
 
-                <button type="submit" class="btn-action-primary" style="margin-top: 10px; background: #059669;">
+                <button type="button" onclick="handleRegisterSubmit(event)" class="btn-action-primary" style="margin-top: 10px; background: #059669; font-size: 15px; font-weight: 800;">
                     ✨ Create Account & Start at 0%
+                </button>
+
+                <button type="button" onclick="createFreshAccountQuick()" class="quick-demo-btn quick-demo-new" style="margin-top: 8px; width: 100%;">
+                    <span>⚡ <strong>1-Click Instant Fresh Account</strong> (Auto ID)</span>
+                    <span class="demo-badge demo-badge-new">0% Progress</span>
                 </button>
             </form>
 
@@ -2128,6 +2133,10 @@
                 vouchers: [
                     { title: "Plantable Seed Pencil", code: "ECO-STAT-3826" },
                     { title: "Campus Canteen Discount", code: "ECO-CANT-3811" }
+                ],
+                history: [
+                    { title: "Plant a sapling in campus", time: "Yesterday", score: "AI Plant Match 96%", coins: 50 },
+                    { title: "Zero-waste canteen meal", time: "2 days ago", score: "AI Verified", coins: 40 }
                 ]
             },
             "STU-2026-02": {
@@ -2144,6 +2153,9 @@
                 saplingsPlanted: 1,
                 vouchers: [
                     { title: "Campus Canteen Discount", code: "ECO-CANT-1092" }
+                ],
+                history: [
+                    { title: "Campus Hydration Refill", time: "3 days ago", score: "AI Verified", coins: 30 }
                 ]
             },
             "STU-2026-NEW": {
@@ -2158,7 +2170,8 @@
                 missionsCompleted: 0,
                 zeroWasteMeals: 0,
                 saplingsPlanted: 0,
-                vouchers: []
+                vouchers: [],
+                history: []
             }
         };
 
@@ -2294,6 +2307,36 @@
             }
         }
 
+        function renderMissionHistory() {
+            const list = document.getElementById("missionHistoryList");
+            if (!list) return;
+            list.innerHTML = "";
+            const history = (currentUser && currentUser.history) ? currentUser.history : [];
+            
+            if (history.length === 0) {
+                list.innerHTML = `
+                    <div style="text-align: center; padding: 16px; background: #f4faf5; border-radius: 10px; border: 1.5px dashed #a5d6a7;">
+                        <div style="font-size: 24px;">🌱</div>
+                        <div style="font-size: 12px; font-weight: 800; color: var(--primary-dark); margin-top: 4px;">Fresh Student Account (0% Progress)</div>
+                        <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">No completed missions yet. Upload a plant photo above to complete your 1st eco mission!</div>
+                    </div>
+                `;
+            } else {
+                history.forEach(item => {
+                    const div = document.createElement("div");
+                    div.style.cssText = "display:flex; justify-content:space-between; align-items:center; background:#f4faf5; padding:10px; border-radius:10px; border-left:4px solid var(--primary); margin-top:6px;";
+                    div.innerHTML = `
+                        <div>
+                            <div style="font-size:12px; font-weight:800;">${item.title}</div>
+                            <div style="font-size:10px; color:var(--text-muted);">${item.time} &bull; ${item.score}</div>
+                        </div>
+                        <span class="coin-counter-pill" style="font-size:11px; padding:2px 8px;">+${item.coins}c</span>
+                    `;
+                    list.appendChild(div);
+                });
+            }
+        }
+
         function updateUserUI() {
             if (!currentUser) return;
             const levelInfo = getLevelInfo(currentUser.xp);
@@ -2334,6 +2377,8 @@
             }
             document.getElementById("statTotalCoins").innerText = coins;
             document.getElementById("statMissionsDone").innerText = missionsCompleted;
+            if (document.getElementById("statZeroWasteMeals")) document.getElementById("statZeroWasteMeals").innerText = currentUser.zeroWasteMeals || 0;
+            if (document.getElementById("statSaplingsPlanted")) document.getElementById("statSaplingsPlanted").innerText = currentUser.saplingsPlanted || 0;
 
             document.getElementById("profileLevelTitleTag").innerText = `LEVEL ${levelInfo.level}: ${levelInfo.title.toUpperCase()}`;
             document.getElementById("profileXpRatioTag").innerText = `${currentUser.xp} / ${levelInfo.maxXP} XP`;
@@ -2355,6 +2400,7 @@
             document.getElementById("idModalProgressFill").style.width = `${levelInfo.pct}%`;
 
             renderLeaderboard();
+            renderMissionHistory();
         }
 
         function renderLeaderboard() {
@@ -2428,15 +2474,21 @@
         }
 
         function handleLoginSubmit(e) {
-            e.preventDefault();
-            const idInput = document.getElementById("loginIdInput").value.trim().toUpperCase();
+            if (e) e.preventDefault();
+            const idInput = (document.getElementById("loginIdInput").value || "").trim().toUpperCase();
             let targetId = idInput;
-            
+
+            if (!idInput) {
+                createFreshAccountQuick();
+                return;
+            }
+
             const foundUser = Object.values(users).find(u => u.id.toUpperCase() === idInput || u.name.toLowerCase() === idInput.toLowerCase());
             
             if (foundUser) {
                 targetId = foundUser.id;
             } else {
+                targetId = idInput.startsWith("STU-") ? idInput : "STU-" + idInput;
                 users[targetId] = {
                     id: targetId,
                     name: idInput,
@@ -2449,43 +2501,84 @@
                     missionsCompleted: 0,
                     zeroWasteMeals: 0,
                     saplingsPlanted: 0,
-                    vouchers: []
+                    vouchers: [],
+                    history: []
                 };
             }
 
+            saveUsersToStorage();
             loadUser(targetId);
             closeAuthModal();
             playSuccessSound();
         }
 
         function handleRegisterSubmit(e) {
-            e.preventDefault();
-            const name = document.getElementById("regNameInput").value.trim();
-            let id = document.getElementById("regIdInput").value.trim().toUpperCase();
-            if (!id.startsWith("STU-")) id = "STU-" + id;
-            const dept = document.getElementById("regDeptInput").value;
-            const year = document.getElementById("regYearInput").value;
+            if (e) e.preventDefault();
+            let name = (document.getElementById("regNameInput").value || "").trim();
+            if (!name) name = "Eco Student " + Math.floor(100 + Math.random() * 900);
+
+            let id = (document.getElementById("regIdInput").value || "").trim().toUpperCase();
+            if (!id || id === "STU-") {
+                id = "STU-2026-" + Math.floor(1000 + Math.random() * 9000);
+            } else if (!id.startsWith("STU-")) {
+                id = "STU-" + id;
+            }
+
+            const dept = document.getElementById("regDeptInput").value || "CSE Dept";
+            const year = document.getElementById("regYearInput").value || "1st Year";
 
             users[id] = {
                 id: id,
                 name: name,
                 dept: dept,
                 year: year,
-                avatar: selectedRegAvatar,
-                bio: "New eco student! Ready for campus sustainability.",
+                avatar: selectedRegAvatar || "🌱",
+                bio: "Fresh Eco Student! Ready for campus sustainability.",
                 xp: 0, // Fresh ID starts at 0% Progress!
                 coins: 0,
                 missionsCompleted: 0,
                 zeroWasteMeals: 0,
                 saplingsPlanted: 0,
-                vouchers: []
+                vouchers: [],
+                history: []
             };
 
+            saveUsersToStorage();
             loadUser(id);
             closeAuthModal();
             playSuccessSound();
             triggerConfetti();
-            showToast(`✨ Account Created! Student Progress: 0%`);
+            showToast(`✨ Account Created! Fresh ID: ${id} (0% Progress)`, "✨");
+        }
+
+        function createFreshAccountQuick() {
+            const randomNum = Math.floor(1000 + Math.random() * 9000);
+            const freshId = "STU-2026-" + randomNum;
+            const depts = ["CSE Dept", "ECE Dept", "Mechanical Dept", "Civil Dept", "Biotech Dept"];
+            const randomDept = depts[Math.floor(Math.random() * depts.length)];
+
+            users[freshId] = {
+                id: freshId,
+                name: "Eco Student " + randomNum,
+                dept: randomDept,
+                year: "1st Year",
+                avatar: selectedRegAvatar || "🌱",
+                bio: "Fresh Eco Student! Ready for campus sustainability.",
+                xp: 0, // 0% Progress
+                coins: 0,
+                missionsCompleted: 0,
+                zeroWasteMeals: 0,
+                saplingsPlanted: 0,
+                vouchers: [],
+                history: []
+            };
+
+            saveUsersToStorage();
+            loadUser(freshId);
+            closeAuthModal();
+            playSuccessSound();
+            triggerConfetti();
+            showToast(`✨ Fresh 0% Account Created! ID: ${freshId}`, "🎉");
         }
 
         /* ID CARD MODAL CONTROLS */
@@ -2950,21 +3043,22 @@
                     updateCoins(50);
                     addXP(50, "Plant AI Verification");
                     missionsCompleted++;
+                    if (!currentUser.saplingsPlanted) currentUser.saplingsPlanted = 0;
+                    currentUser.saplingsPlanted++;
+                    if (!currentUser.history) currentUser.history = [];
+                    currentUser.history.unshift({
+                        title: "Plant a sapling in campus",
+                        time: "Just now",
+                        score: `AI Plant Match ${confidenceScore}%`,
+                        coins: 50
+                    });
+                    saveUsersToStorage();
+                    
                     document.getElementById("profileMissionProgress").innerText = `${missionsCompleted}/5 Missions Done`;
                     document.getElementById("statMissionsDone").innerText = missionsCompleted;
+                    if (document.getElementById("statSaplingsPlanted")) document.getElementById("statSaplingsPlanted").innerText = currentUser.saplingsPlanted;
                     btn.innerText = "✅ Verified!";
-                    
-                    const hist = document.getElementById("missionHistoryList");
-                    const item = document.createElement("div");
-                    item.style.cssText = "display:flex; justify-content:space-between; align-items:center; background:#f4faf5; padding:10px; border-radius:10px; border-left:4px solid var(--primary); margin-top:6px;";
-                    item.innerHTML = `
-                        <div>
-                            <div style="font-size:12px; font-weight:800;">Plant a sapling in campus</div>
-                            <div style="font-size:10px; color:var(--text-muted);">Just now &bull; AI Plant Match ${confidenceScore}%</div>
-                        </div>
-                        <span class="coin-counter-pill" style="font-size:11px; padding:2px 8px;">+50c</span>
-                    `;
-                    hist.prepend(item);
+                    renderMissionHistory();
 
                 } else {
                     hudBadge.innerText = "REJECTED NON-PLANT";

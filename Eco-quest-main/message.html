@@ -839,6 +839,288 @@
             pointer-events: none;
             z-index: 900;
         }
+
+        /* Auth & Login Header Button */
+        .auth-header-btn {
+            background: rgba(255, 255, 255, 0.22);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 800;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: var(--transition);
+        }
+        .auth-header-btn:hover {
+            background: rgba(255, 255, 255, 0.38);
+            transform: translateY(-1px);
+        }
+
+        /* Student Main Progress Bar Component */
+        .student-progress-wrapper {
+            margin-top: 10px;
+            background: #f4faf5;
+            border: 1px solid #c8e6c9;
+            border-radius: 14px;
+            padding: 12px;
+        }
+        .main-progress-track {
+            width: 100%;
+            height: 14px;
+            background: #e0f2f1;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .main-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #43a047 0%, #fbc02d 70%, #00e676 100%);
+            border-radius: 20px;
+            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 10px rgba(67, 160, 71, 0.4);
+            position: relative;
+        }
+        .main-progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: progressShine 2s infinite;
+        }
+        @keyframes progressShine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Auth Login / Register Modal Styling */
+        .auth-modal-content {
+            background: linear-gradient(145deg, #062210, #143d1d);
+            border: 2px solid #10b981;
+            border-radius: 24px;
+            padding: 24px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+            color: white;
+            position: relative;
+            animation: modalPopIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        @keyframes modalPopIn {
+            from { opacity: 0; transform: scale(0.9) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .modal-close-btn {
+            position: absolute;
+            top: 14px; right: 16px;
+            background: rgba(255,255,255,0.12);
+            border: none;
+            color: white;
+            font-size: 20px;
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: var(--transition);
+        }
+        .modal-close-btn:hover { background: rgba(255,255,255,0.3); }
+        .auth-header-box { text-align: center; margin-bottom: 16px; }
+        .auth-logo { font-size: 38px; margin-bottom: 4px; animation: floatLogo 3s ease-in-out infinite; }
+        .auth-tabs {
+            display: flex;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 14px;
+            padding: 4px;
+            margin-bottom: 16px;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+        .auth-tab-btn {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: #a5d6a7;
+            padding: 8px 12px;
+            font-size: 12px;
+            font-weight: 800;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .auth-tab-btn.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+        }
+        .form-group { margin-bottom: 12px; text-align: left; }
+        .form-group label {
+            display: block;
+            font-size: 11px;
+            font-weight: 800;
+            color: #a5d6a7;
+            margin-bottom: 4px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1.5px solid rgba(16, 185, 129, 0.4);
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
+            font-size: 13px;
+            font-weight: 700;
+            outline: none;
+            transition: var(--transition);
+        }
+        .form-group input:focus, .form-group select:focus {
+            border-color: #34d399;
+            background: rgba(255, 255, 255, 0.18);
+            box-shadow: 0 0 10px rgba(52, 211, 153, 0.3);
+        }
+        .form-group select option { background: #062210; color: white; }
+        .avatar-select-mini { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; }
+        .avatar-mini-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1.5px solid rgba(16, 185, 129, 0.3);
+            font-size: 20px;
+            width: 38px; height: 38px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .avatar-mini-btn.active {
+            border-color: #fbc02d;
+            background: rgba(251, 192, 45, 0.2);
+            transform: scale(1.1);
+        }
+        .quick-demo-btn {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 10px;
+            font-size: 11px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+        .quick-demo-btn:hover { background: rgba(16, 185, 129, 0.25); border-color: #34d399; }
+        .demo-badge { background: #10b981; color: white; font-weight: 800; font-size: 9px; padding: 2px 6px; border-radius: 8px; }
+        .demo-badge-new { background: #f57c00; color: white; }
+
+        /* Digital ID Passport Card Modal Styling */
+        .id-card-content {
+            background: linear-gradient(135deg, #1b5e20, #0d3b13);
+            border: 3px solid #fbc02d;
+            border-radius: 20px;
+            padding: 20px;
+            width: 100%;
+            max-width: 340px;
+            color: white;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            position: relative;
+        }
+        .id-card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            padding-bottom: 10px;
+            margin-bottom: 14px;
+            text-align: left;
+        }
+        .id-card-header h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            color: #fbc02d;
+        }
+        .id-card-header p { font-size: 10px; opacity: 0.8; }
+        .id-avatar-circle {
+            width: 70px; height: 70px;
+            background: white;
+            border-radius: 50%;
+            font-size: 38px;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 8px;
+            border: 3px solid #fbc02d;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        .id-number-tag {
+            font-family: monospace;
+            font-size: 12px;
+            font-weight: 800;
+            background: rgba(255,255,255,0.15);
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            margin: 4px 0 12px;
+            color: #fffde7;
+        }
+        .id-details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            background: rgba(0,0,0,0.25);
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 11px;
+            text-align: left;
+        }
+        .id-details-grid span { color: #a5d6a7; }
+        .barcode-strip {
+            margin-top: 14px;
+            background: white;
+            color: black;
+            padding: 6px;
+            border-radius: 8px;
+        }
+        .barcode-lines {
+            font-family: monospace;
+            font-weight: 900;
+            letter-spacing: 2px;
+            font-size: 14px;
+        }
+        .barcode-subtext { font-size: 8px; font-weight: 800; color: #555; }
+
+        /* Toast Notification */
+        .toast-notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            background: #1b5e20;
+            color: white;
+            border: 2px solid #34d399;
+            padding: 10px 18px;
+            border-radius: 24px;
+            font-size: 12px;
+            font-weight: 800;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
+            opacity: 0;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+        .toast-notification.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
@@ -860,7 +1142,11 @@
             </div>
             <div class="header-badges">
                 <span class="badge-pill badge-streak">🔥 6d</span>
-                <span class="badge-pill badge-rank" onclick="switchTab('ranks')">🏆 Rank #1</span>
+                <button class="auth-header-btn" id="authHeaderBtn" onclick="toggleAuthAction()">
+                    <span id="headerUserAvatar">🌱</span>
+                    <span id="headerUserName">Login</span>
+                    <span id="headerAuthBadge" style="font-size: 9px; background: rgba(255,255,255,0.2); padding: 1px 5px; border-radius: 8px;">🔑 Login</span>
+                </button>
                 <button class="toggle-wide-btn" id="toggleWideBtn" onclick="toggleWideMode()">
                     🖥️ Wide
                 </button>
@@ -882,16 +1168,36 @@
 
             <!-- TAB 1: HOME -->
             <section id="tab-home" class="section active">
-                <div class="card card-green-accent" onclick="switchTab('profile')" style="cursor: pointer;">
+                <!-- Logged-In Student Profile & Dynamic Progress Card -->
+                <div class="card card-green-accent" id="homeProgressCard">
                     <div class="card-title-row">
-                        <span class="tag-pill tag-green">CAMPUS ECO-PROFILE</span>
-                        <span class="tag-pill tag-green" id="profileMissionProgress">0/5 Missions Done</span>
+                        <span class="tag-pill tag-green" id="homeStudentIdTag">ID: STU-2026-01</span>
+                        <span class="tag-pill tag-yellow" id="homeStudentLevelTag">Level 4 Guardian</span>
                     </div>
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <div style="font-size: 36px; background: white; border-radius: 50%; padding: 4px; border: 2px solid #a5d6a7;" id="homeProfileAvatar">🌱</div>
-                        <div>
-                            <div style="font-family: 'Outfit', sans-serif; font-size: 19px; font-weight: 800;" id="homeProfileName">Welcome back, Manisha! 🌱</div>
-                            <div style="font-size: 11px; color: var(--text-muted); font-weight: 600;" id="homeProfileSub">CSE Department &bull; 1st Year &bull; Student Rank #1</div>
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 6px;">
+                        <div style="font-size: 36px; background: white; border-radius: 50%; padding: 4px; border: 2px solid #a5d6a7; cursor: pointer;" id="homeProfileAvatar" onclick="openIdCardModal()">🌱</div>
+                        <div style="flex: 1;">
+                            <div style="font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 800; display: flex; align-items: center; gap: 6px;">
+                                <span id="homeProfileName">Manisha</span>
+                                <span style="font-size: 10px; background: #e8f5e9; color: var(--primary-dark); padding: 2px 6px; border-radius: 10px;" id="homeStudentDeptTag">CSE Dept</span>
+                            </div>
+                            <div style="font-size: 11px; color: var(--text-muted); font-weight: 600;" id="homeProfileSub">Academic Year: 1st Year</div>
+                        </div>
+                        <button class="btn-canteen-fast" style="padding: 4px 10px; font-size: 11px;" onclick="openIdCardModal()">📱 ID Pass</button>
+                    </div>
+
+                    <!-- Dynamic Logged-In Student Progress Bar -->
+                    <div class="student-progress-wrapper">
+                        <div style="display: flex; justify-content: space-between; font-size: 11px; font-weight: 800; margin-bottom: 4px;">
+                            <span>🌱 Student Level Progress: <strong id="progressPercentText" style="color: var(--primary-dark);">75%</strong></span>
+                            <span style="color: var(--text-muted);" id="xpRatioText">450 / 600 XP</span>
+                        </div>
+                        <div class="main-progress-track">
+                            <div class="main-progress-fill" id="mainProgressBarFill" style="width: 75%;"></div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 10px; color: var(--text-muted); margin-top: 4px;">
+                            <span id="levelMinText">Level 4 (400 XP)</span>
+                            <span id="levelNextText">Next: Level 5 (600 XP)</span>
                         </div>
                     </div>
                 </div>
@@ -1272,89 +1578,8 @@
                             <span class="tag-pill tag-green">Live Leaderboard</span>
                         </div>
 
-                        <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px;">
-                            
-                            <!-- Rank 1: Current User -->
-                            <div class="rank-item top-1">
-                                <div style="display: flex; align-items: center; gap: 12px;">
-                                    <div class="rank-badge-num" style="background: #f57c00;">🥇</div>
-                                    <div>
-                                        <div style="font-weight: 800; font-size: 14px;" id="rankUser1Name">Manisha (You) 🌱</div>
-                                        <div style="font-size: 11px; color: var(--text-muted);" id="rankUser1Sub">CSE Dept &bull; 4 Verified Missions</div>
-                                    </div>
-                                </div>
-                                <div style="text-align: right;">
-                                    <div class="coin-counter-pill" style="font-size: 11px; padding: 2px 8px;" id="rankUser1Coins">450c</div>
-                                    <span class="tag-pill tag-yellow" style="margin-top: 2px; display: inline-block;">#1 CHAMPION</span>
-                                </div>
-                            </div>
-
-                            <!-- Rank 2: Rahul Sharma -->
-                            <div class="rank-item top-2">
-                                <div style="display: flex; align-items: center; gap: 12px;">
-                                    <div class="rank-badge-num" style="background: #78909c;">🥈</div>
-                                    <div>
-                                        <div style="font-weight: 800; font-size: 14px;">Rahul Sharma</div>
-                                        <div style="font-size: 11px; color: var(--text-muted);">ECE Dept &bull; 3 Verified Missions</div>
-                                    </div>
-                                </div>
-                                <div style="text-align: right;">
-                                    <div class="coin-counter-pill" style="font-size: 11px; padding: 2px 8px;">410c</div>
-                                    <span style="font-size: 10px; font-weight: 800; color: #546e7a;">#2 RANK</span>
-                                </div>
-                            </div>
-
-                            <!-- Rank 3: Ananya Verma -->
-                            <div class="rank-item top-3">
-                                <div style="display: flex; align-items: center; gap: 12px;">
-                                    <div class="rank-badge-num" style="background: #8d6e63;">🥉</div>
-                                    <div>
-                                        <div style="font-weight: 800; font-size: 14px;">Ananya Verma</div>
-                                        <div style="font-size: 11px; color: var(--text-muted);">CSE Dept &bull; 3 Verified Missions</div>
-                                    </div>
-                                </div>
-                                <div style="text-align: right;">
-                                    <div class="coin-counter-pill" style="font-size: 11px; padding: 2px 8px;">380c</div>
-                                    <span style="font-size: 10px; font-weight: 800; color: #6d4c41;">#3 RANK</span>
-                                </div>
-                            </div>
-
-                            <!-- Rank 4: Aarav Patel -->
-                            <div class="rank-item">
-                                <div style="display: flex; align-items: center; gap: 12px;">
-                                    <div class="rank-badge-num" style="background: var(--primary);">4</div>
-                                    <div>
-                                        <div style="font-weight: 800; font-size: 13px;">Aarav Patel</div>
-                                        <div style="font-size: 10px; color: var(--text-muted);">Mechanical &bull; 2 Verified Missions</div>
-                                    </div>
-                                </div>
-                                <div class="coin-counter-pill" style="font-size: 11px; padding: 2px 8px;">350c</div>
-                            </div>
-
-                            <!-- Rank 5: Priya Nair -->
-                            <div class="rank-item">
-                                <div style="display: flex; align-items: center; gap: 12px;">
-                                    <div class="rank-badge-num" style="background: var(--primary);">5</div>
-                                    <div>
-                                        <div style="font-weight: 800; font-size: 13px;">Priya Nair</div>
-                                        <div style="font-size: 10px; color: var(--text-muted);">Civil Dept &bull; 2 Verified Missions</div>
-                                    </div>
-                                </div>
-                                <div class="coin-counter-pill" style="font-size: 11px; padding: 2px 8px;">320c</div>
-                            </div>
-
-                            <!-- Rank 6: Vikram Singh -->
-                            <div class="rank-item">
-                                <div style="display: flex; align-items: center; gap: 12px;">
-                                    <div class="rank-badge-num" style="background: var(--primary);">6</div>
-                                    <div>
-                                        <div style="font-weight: 800; font-size: 13px;">Vikram Singh</div>
-                                        <div style="font-size: 10px; color: var(--text-muted);">ECE Dept &bull; 2 Verified Missions</div>
-                                    </div>
-                                </div>
-                                <div class="coin-counter-pill" style="font-size: 11px; padding: 2px 8px;">290c</div>
-                            </div>
-
+                        <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px;" id="rankStudentsList">
+                            <!-- Dynamic Leaderboard populated by renderLeaderboard() -->
                         </div>
                     </div>
                 </div>
@@ -1427,6 +1652,26 @@
 
             <!-- TAB 6: ADVANCED ECO PROFILE SCREEN -->
             <section id="tab-profile" class="section">
+                <!-- Account Switcher & Logout Card -->
+                <div class="card" style="background: #f1f8f3; border: 1.5px solid #a5d6a7; margin-bottom: 12px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                        <div>
+                            <div style="font-size: 13px; font-weight: 800; display: flex; align-items: center; gap: 6px;">
+                                <span>🔑 Student Account Session</span>
+                                <span class="tag-pill tag-green" id="loginStatusBadge">ACTIVE LOGGED IN</span>
+                            </div>
+                            <div style="font-size: 10px; color: var(--text-muted); margin-top: 2px;">
+                                Active Student ID: <strong id="profileActiveIdText" style="color: var(--primary-dark);">STU-2026-01</strong>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                            <button class="btn-action-primary" style="padding: 6px 12px; font-size: 11px; background: #059669; width: auto;" onclick="openIdCardModal()">📱 ID Pass</button>
+                            <button class="btn-action-primary" style="padding: 6px 12px; font-size: 11px; background: #1565c0; width: auto;" onclick="openAuthModal()">🔑 Login / Switch</button>
+                            <button class="btn-action-primary" style="padding: 6px 12px; font-size: 11px; background: #d84315; width: auto;" onclick="handleLogout()">🚪 Log Out</button>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Profile Header Banner -->
                 <div class="profile-banner">
                     <div class="profile-avatar-box" onclick="toggleAvatarPicker()">
@@ -1438,11 +1683,11 @@
 
                     <div style="margin-top: 12px;">
                         <div style="display: flex; justify-content: space-between; font-size: 10px; font-weight: 800; color: #fffde7;">
-                            <span>LEVEL 4: ECO GUARDIAN</span>
-                            <span>450 / 600 XP</span>
+                            <span id="profileLevelTitleTag">LEVEL 4: ECO GUARDIAN</span>
+                            <span id="profileXpRatioTag">450 / 600 XP</span>
                         </div>
                         <div class="xp-bar-outer">
-                            <div class="xp-bar-inner"></div>
+                            <div class="xp-bar-inner" id="profileXpBarInner" style="width: 75%;"></div>
                         </div>
                     </div>
                 </div>
@@ -1485,7 +1730,7 @@
                     <div class="stat-card">
                         <div class="stat-icon-box">🍱</div>
                         <div>
-                            <div style="font-size: 16px; font-weight: 900; color: #1565c0;">12</div>
+                            <div style="font-size: 16px; font-weight: 900; color: #1565c0;" id="statZeroWasteMeals">12</div>
                             <div style="font-size: 10px; font-weight: 700; color: var(--text-muted);">Zero-Waste Meals</div>
                         </div>
                     </div>
@@ -1493,7 +1738,7 @@
                     <div class="stat-card">
                         <div class="stat-icon-box">🌳</div>
                         <div>
-                            <div style="font-size: 16px; font-weight: 900; color: #2e7d32;">2</div>
+                            <div style="font-size: 16px; font-weight: 900; color: #2e7d32;" id="statSaplingsPlanted">2</div>
                             <div style="font-size: 10px; font-weight: 700; color: var(--text-muted);">Saplings Planted</div>
                         </div>
                     </div>
@@ -1635,6 +1880,169 @@
         </div>
     </div>
 
+    <!-- AUTHENTICATION LOGIN / SIGN UP MODAL -->
+    <div class="modal-overlay" id="authModal">
+        <div class="auth-modal-content">
+            <button class="modal-close-btn" onclick="closeAuthModal()">&times;</button>
+
+            <div class="auth-header-box">
+                <div class="auth-logo">🌱</div>
+                <h2 style="font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 800; color: white;">ECO Quest Portal</h2>
+                <p style="font-size: 12px; color: #a5d6a7;">Student Campus Sustainability Pass</p>
+            </div>
+
+            <!-- Auth Tabs: Login vs Register -->
+            <div class="auth-tabs">
+                <button class="auth-tab-btn active" id="tabLoginBtn" onclick="switchAuthTab('login')">🔑 Student Login</button>
+                <button class="auth-tab-btn" id="tabRegisterBtn" onclick="switchAuthTab('register')">📝 Register New ID</button>
+            </div>
+
+            <!-- LOGIN FORM -->
+            <form id="loginForm" onsubmit="handleLoginSubmit(event)" style="display: block;">
+                <div class="form-group">
+                    <label>Student ID or Email</label>
+                    <input type="text" id="loginIdInput" placeholder="e.g. STU-2026-01" required />
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPasswordInput" placeholder="••••••••" required />
+                </div>
+
+                <button type="submit" class="btn-action-primary" style="margin-top: 10px; background: var(--primary);">
+                    🚀 Login to Eco Quest
+                </button>
+
+                <!-- Quick Demo Logins -->
+                <div style="margin-top: 14px; border-top: 1px dashed rgba(255,255,255,0.2); padding-top: 10px;">
+                    <div style="font-size: 11px; font-weight: 800; color: #a5d6a7; margin-bottom: 6px;">⚡ Quick One-Click Demo Student Logins:</div>
+                    <div style="display: flex; flex-direction: column; gap: 6px;">
+                        <button type="button" class="quick-demo-btn" onclick="quickLoginDemo('STU-2026-01')">
+                            <span>🌱 <strong>Manisha</strong> (STU-2026-01)</span>
+                            <span class="demo-badge">Level 4 • 75%</span>
+                        </button>
+                        <button type="button" class="quick-demo-btn" onclick="quickLoginDemo('STU-2026-02')">
+                            <span>🌳 <strong>Rahul Sharma</strong> (STU-2026-02)</span>
+                            <span class="demo-badge">Level 3 • 62%</span>
+                        </button>
+                        <button type="button" class="quick-demo-btn quick-demo-new" onclick="quickLoginDemo('STU-2026-NEW')">
+                            <span>🆕 <strong>New Student ID</strong> (STU-2026-NEW)</span>
+                            <span class="demo-badge demo-badge-new">Level 1 • 0% Progress</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- REGISTER FORM -->
+            <form id="registerForm" onsubmit="handleRegisterSubmit(event)" style="display: none;">
+                <div class="form-group">
+                    <label>Full Student Name <span style="font-size: 10px; color: #a5d6a7;">(Optional - Auto generated if blank)</span></label>
+                    <input type="text" id="regNameInput" placeholder="e.g. Anwesh Kumar" />
+                </div>
+
+                <div style="display: flex; gap: 8px;">
+                    <div class="form-group" style="flex: 1;">
+                        <label>Student ID Number <span style="font-size: 10px; color: #a5d6a7;">(Auto-Fresh ID)</span></label>
+                        <input type="text" id="regIdInput" placeholder="Auto-generated if blank" />
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label>Academic Year</label>
+                        <select id="regYearInput">
+                            <option value="1st Year">1st Year</option>
+                            <option value="2nd Year">2nd Year</option>
+                            <option value="3rd Year">3rd Year</option>
+                            <option value="4th Year">4th Year</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Department</label>
+                    <select id="regDeptInput">
+                        <option value="CSE Dept">Computer Science & Eng. (CSE)</option>
+                        <option value="ECE Dept">Electronics & Comm. (ECE)</option>
+                        <option value="Mechanical Dept">Mechanical Engineering</option>
+                        <option value="Civil Dept">Civil Engineering</option>
+                        <option value="Biotech Dept">Biotechnology & Eco</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Choose Eco Avatar</label>
+                    <div class="avatar-select-mini" id="regAvatarGrid">
+                        <button type="button" class="avatar-mini-btn active" onclick="selectRegAvatar('🌱', this)">🌱</button>
+                        <button type="button" class="avatar-mini-btn" onclick="selectRegAvatar('🌳', this)">🌳</button>
+                        <button type="button" class="avatar-mini-btn" onclick="selectRegAvatar('🦊', this)">🦊</button>
+                        <button type="button" class="avatar-mini-btn" onclick="selectRegAvatar('🐝', this)">🐝</button>
+                        <button type="button" class="avatar-mini-btn" onclick="selectRegAvatar('🐼', this)">🐼</button>
+                        <button type="button" class="avatar-mini-btn" onclick="selectRegAvatar('🦅', this)">🦅</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Password <span style="font-size: 10px; color: #a5d6a7;">(Optional)</span></label>
+                    <input type="password" id="regPasswordInput" placeholder="••••••••" />
+                </div>
+
+                <button type="button" onclick="handleRegisterSubmit(event)" class="btn-action-primary" style="margin-top: 10px; background: #059669; font-size: 15px; font-weight: 800;">
+                    ✨ Create Account & Start at 0%
+                </button>
+
+                <button type="button" onclick="createFreshAccountQuick()" class="quick-demo-btn quick-demo-new" style="margin-top: 8px; width: 100%;">
+                    <span>⚡ <strong>1-Click Instant Fresh Account</strong> (Auto ID)</span>
+                    <span class="demo-badge demo-badge-new">0% Progress</span>
+                </button>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- DIGITAL CAMPUS ECO PASSPORT MODAL -->
+    <div class="modal-overlay" id="idCardModal">
+        <div class="id-card-content">
+            <button class="modal-close-btn" onclick="closeIdCardModal()">&times;</button>
+            <div class="id-card-header">
+                <div style="font-size: 24px;">🌱</div>
+                <div>
+                    <h3>ECO QUEST CAMPUS PASS</h3>
+                    <p>Verified Student Sustainability Identity</p>
+                </div>
+            </div>
+            <div class="id-card-body">
+                <div class="id-avatar-circle" id="idModalAvatar">🌱</div>
+                <h2 style="font-family:'Outfit', sans-serif; font-size: 20px; font-weight:800;" id="idModalName">Manisha</h2>
+                <div class="id-number-tag" id="idModalNumber">STU-2026-01</div>
+                <div class="id-details-grid">
+                    <div><span>Dept:</span> <strong id="idModalDept">CSE Dept</strong></div>
+                    <div><span>Year:</span> <strong id="idModalYear">1st Year</strong></div>
+                    <div><span>Rank:</span> <strong id="idModalRank">#1 Champion</strong></div>
+                    <div><span>Level:</span> <strong id="idModalLevel">Lvl 4 Guardian</strong></div>
+                </div>
+                <!-- Progress Bar on ID Card -->
+                <div style="margin-top: 12px; text-align: left;">
+                    <div style="display: flex; justify-content: space-between; font-size: 11px; font-weight: 800; color: #fffde7;">
+                        <span>Level Progress:</span>
+                        <span id="idModalProgressPct">75%</span>
+                    </div>
+                    <div class="main-progress-track" style="height: 10px; margin-top: 4px;">
+                        <div class="main-progress-fill" id="idModalProgressFill" style="width: 75%;"></div>
+                    </div>
+                </div>
+                <!-- Barcode simulation -->
+                <div class="barcode-strip">
+                    <div class="barcode-lines">||| | |||| | || ||| | ||| |||| | |</div>
+                    <div class="barcode-subtext">OFFICIAL VERIFIED ECO CITIZEN PASS</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Overlay -->
+    <div class="toast-notification" id="toastNotif">
+        <span id="toastIcon">⚡</span>
+        <span id="toastMessage">Welcome to ECO Quest!</span>
+    </div>
+
     <!-- Hidden Canvas for Image Analysis -->
     <canvas id="analysisCanvas" width="224" height="224" style="display: none;"></canvas>
 
@@ -1698,19 +2106,498 @@
             anim();
         }
 
-        /* App State */
-        let coins = 20;
-        let missionsCompleted = 0;
-        let selectedAvatar = "🌱";
-        let activeVouchers = [
-            { title: "Plantable Seed Pencil", code: "ECO-STAT-3826" },
-            { title: "Campus Canteen Discount", code: "ECO-CANT-3811" }
+        /* ============================================================
+           ECO QUEST MULTI-STUDENT AUTH & LEVEL PROGRESS ENGINE
+           ============================================================ */
+        const LEVEL_THRESHOLDS = [
+            { level: 1, minXP: 0, maxXP: 100, title: "🌱 Novice Seedling" },
+            { level: 2, minXP: 100, maxXP: 250, title: "🌿 Green Sprout" },
+            { level: 3, minXP: 250, maxXP: 450, title: "☘️ Eco Sentinel" },
+            { level: 4, minXP: 450, maxXP: 700, title: "🌳 Campus Guardian" },
+            { level: 5, minXP: 700, maxXP: 1000, title: "👑 Eco Legend" }
         ];
+
+        const DEFAULT_USERS = {
+            "STU-2026-01": {
+                id: "STU-2026-01",
+                name: "Manisha",
+                dept: "CSE Dept",
+                year: "1st Year",
+                avatar: "🌱",
+                bio: "Striving for a zero-waste campus life! 🌱",
+                xp: 525,
+                coins: 450,
+                missionsCompleted: 4,
+                zeroWasteMeals: 12,
+                saplingsPlanted: 2,
+                vouchers: [
+                    { title: "Plantable Seed Pencil", code: "ECO-STAT-3826" },
+                    { title: "Campus Canteen Discount", code: "ECO-CANT-3811" }
+                ],
+                history: [
+                    { title: "Plant a sapling in campus", time: "Yesterday", score: "AI Plant Match 96%", coins: 50 },
+                    { title: "Zero-waste canteen meal", time: "2 days ago", score: "AI Verified", coins: 40 }
+                ]
+            },
+            "STU-2026-02": {
+                id: "STU-2026-02",
+                name: "Rahul Sharma",
+                dept: "ECE Dept",
+                year: "2nd Year",
+                avatar: "🌳",
+                bio: "Planting trees and recycling electronics! 🔋",
+                xp: 374,
+                coins: 120,
+                missionsCompleted: 3,
+                zeroWasteMeals: 8,
+                saplingsPlanted: 1,
+                vouchers: [
+                    { title: "Campus Canteen Discount", code: "ECO-CANT-1092" }
+                ],
+                history: [
+                    { title: "Campus Hydration Refill", time: "3 days ago", score: "AI Verified", coins: 30 }
+                ]
+            },
+            "STU-2026-NEW": {
+                id: "STU-2026-NEW",
+                name: "Alex Green (New Student)",
+                dept: "Mechanical Dept",
+                year: "1st Year",
+                avatar: "🦊",
+                bio: "Just joined ECO Quest! Ready to plant my first tree 🌳",
+                xp: 0, // Fresh ID starts at 0% Progress!
+                coins: 0,
+                missionsCompleted: 0,
+                zeroWasteMeals: 0,
+                saplingsPlanted: 0,
+                vouchers: [],
+                history: []
+            }
+        };
+
+        let users = {};
+        let currentUserId = "STU-2026-01";
+        let currentUser = null;
+        let selectedRegAvatar = "🌱";
+
+        /* App State */
+        let coins = 450;
+        let missionsCompleted = 4;
+        let selectedAvatar = "🌱";
+        let activeVouchers = [];
 
         let modelLoaded = false;
         let model = null;
         let currentImageElement = null;
         let webcamStream = null;
+
+        function initUserSystem() {
+            const stored = localStorage.getItem("eco_quest_users_v3");
+            if (stored) {
+                try { users = JSON.parse(stored); } catch(e) { users = JSON.parse(JSON.stringify(DEFAULT_USERS)); }
+            } else {
+                users = JSON.parse(JSON.stringify(DEFAULT_USERS));
+            }
+
+            const activeId = localStorage.getItem("eco_quest_active_user_v3");
+            if (activeId && users[activeId]) {
+                currentUserId = activeId;
+            } else {
+                currentUserId = "STU-2026-01";
+            }
+
+            loadUser(currentUserId);
+        }
+
+        let isLoggedOut = false;
+
+        function loadUser(id) {
+            if (!users[id]) return;
+            isLoggedOut = false;
+            currentUserId = id;
+            currentUser = users[id];
+            localStorage.setItem("eco_quest_active_user_v3", id);
+
+            coins = currentUser.coins || 0;
+            missionsCompleted = currentUser.missionsCompleted || 0;
+            selectedAvatar = currentUser.avatar || "🌱";
+            activeVouchers = currentUser.vouchers || [];
+
+            updateUserUI();
+            renderVouchers();
+            showToast(`👋 Logged in as ${currentUser.name} (${currentUser.id})`);
+        }
+
+        function handleLogout() {
+            isLoggedOut = true;
+            localStorage.removeItem("eco_quest_active_user_v3");
+
+            // Header UI update
+            if (document.getElementById("headerUserName")) document.getElementById("headerUserName").innerText = "Login";
+            if (document.getElementById("headerUserAvatar")) document.getElementById("headerUserAvatar").innerText = "🔑";
+            if (document.getElementById("headerAuthBadge")) document.getElementById("headerAuthBadge").innerText = "🔑 Login";
+
+            // Profile UI update
+            if (document.getElementById("loginStatusBadge")) {
+                document.getElementById("loginStatusBadge").innerText = "LOGGED OUT";
+                document.getElementById("loginStatusBadge").className = "tag-pill tag-yellow";
+            }
+            if (document.getElementById("profileActiveIdText")) document.getElementById("profileActiveIdText").innerText = "None (Guest Mode)";
+
+            playTone(200, 0.2, 'sawtooth');
+            showToast("🚪 Logged out successfully! Click Login to track progress.", "🚪");
+            openAuthModal();
+        }
+
+        function toggleAuthAction() {
+            if (isLoggedOut) {
+                openAuthModal();
+            } else {
+                openAuthModal();
+            }
+        }
+
+        function saveUsersToStorage() {
+            if (currentUser) {
+                currentUser.coins = coins;
+                currentUser.missionsCompleted = missionsCompleted;
+                currentUser.avatar = selectedAvatar;
+                currentUser.vouchers = activeVouchers;
+                users[currentUserId] = currentUser;
+            }
+            localStorage.setItem("eco_quest_users_v3", JSON.stringify(users));
+        }
+
+        function getLevelInfo(xp) {
+            for (let i = LEVEL_THRESHOLDS.length - 1; i >= 0; i--) {
+                if (xp >= LEVEL_THRESHOLDS[i].minXP) {
+                    const thresh = LEVEL_THRESHOLDS[i];
+                    const range = thresh.maxXP - thresh.minXP;
+                    const progressInLevel = xp - thresh.minXP;
+                    const pct = Math.min(100, Math.round((progressInLevel / range) * 100));
+                    return {
+                        level: thresh.level,
+                        title: thresh.title,
+                        minXP: thresh.minXP,
+                        maxXP: thresh.maxXP,
+                        pct: pct
+                    };
+                }
+            }
+            return { level: 1, title: "🌱 Novice Seedling", minXP: 0, maxXP: 100, pct: 0 };
+        }
+
+        function addXP(amount, source) {
+            if (!currentUser) return;
+            const oldLevelInfo = getLevelInfo(currentUser.xp);
+            currentUser.xp += amount;
+            const newLevelInfo = getLevelInfo(currentUser.xp);
+
+            saveUsersToStorage();
+            updateUserUI();
+
+            showToast(`⚡ +${amount} XP (${source})`);
+
+            if (newLevelInfo.level > oldLevelInfo.level) {
+                playSuccessSound();
+                triggerConfetti();
+                setTimeout(() => {
+                    showToast(`🎉 LEVEL UP! Reached Level ${newLevelInfo.level} ${newLevelInfo.title}!`);
+                }, 500);
+            }
+        }
+
+        function renderMissionHistory() {
+            const list = document.getElementById("missionHistoryList");
+            if (!list) return;
+            list.innerHTML = "";
+            const history = (currentUser && currentUser.history) ? currentUser.history : [];
+            
+            if (history.length === 0) {
+                list.innerHTML = `
+                    <div style="text-align: center; padding: 16px; background: #f4faf5; border-radius: 10px; border: 1.5px dashed #a5d6a7;">
+                        <div style="font-size: 24px;">🌱</div>
+                        <div style="font-size: 12px; font-weight: 800; color: var(--primary-dark); margin-top: 4px;">Fresh Student Account (0% Progress)</div>
+                        <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">No completed missions yet. Upload a plant photo above to complete your 1st eco mission!</div>
+                    </div>
+                `;
+            } else {
+                history.forEach(item => {
+                    const div = document.createElement("div");
+                    div.style.cssText = "display:flex; justify-content:space-between; align-items:center; background:#f4faf5; padding:10px; border-radius:10px; border-left:4px solid var(--primary); margin-top:6px;";
+                    div.innerHTML = `
+                        <div>
+                            <div style="font-size:12px; font-weight:800;">${item.title}</div>
+                            <div style="font-size:10px; color:var(--text-muted);">${item.time} &bull; ${item.score}</div>
+                        </div>
+                        <span class="coin-counter-pill" style="font-size:11px; padding:2px 8px;">+${item.coins}c</span>
+                    `;
+                    list.appendChild(div);
+                });
+            }
+        }
+
+        function updateUserUI() {
+            if (!currentUser) return;
+            const levelInfo = getLevelInfo(currentUser.xp);
+
+            // Header elements
+            document.getElementById("headerUserAvatar").innerText = currentUser.avatar;
+            document.getElementById("headerUserName").innerText = currentUser.name.split(" ")[0];
+            document.getElementById("headerAvatarLogo").innerText = currentUser.avatar;
+            if (document.getElementById("headerAuthBadge")) document.getElementById("headerAuthBadge").innerText = "🚪 Logout";
+
+            // Top Status Bar
+            document.getElementById("userCoins").innerText = coins;
+            document.getElementById("rewardsCoinsText").innerText = coins;
+
+            // Home Card & Progress Bar
+            document.getElementById("homeStudentIdTag").innerText = `ID: ${currentUser.id}`;
+            document.getElementById("homeStudentLevelTag").innerText = `Lvl ${levelInfo.level} ${levelInfo.title.split(' ')[1] || ''}`;
+            document.getElementById("homeProfileAvatar").innerText = currentUser.avatar;
+            document.getElementById("homeProfileName").innerText = currentUser.name;
+            document.getElementById("homeStudentDeptTag").innerText = currentUser.dept;
+            document.getElementById("homeProfileSub").innerText = `Academic Year: ${currentUser.year}`;
+
+            document.getElementById("progressPercentText").innerText = `${levelInfo.pct}%`;
+            document.getElementById("xpRatioText").innerText = `${currentUser.xp} / ${levelInfo.maxXP} XP`;
+            document.getElementById("mainProgressBarFill").style.width = `${levelInfo.pct}%`;
+            document.getElementById("levelMinText").innerText = `Level ${levelInfo.level} (${levelInfo.minXP} XP)`;
+            document.getElementById("levelNextText").innerText = levelInfo.maxXP >= 1000 ? `MAX LEVEL` : `Next: Lvl ${levelInfo.level + 1} (${levelInfo.maxXP} XP)`;
+            document.getElementById("profileMissionProgress").innerText = `${missionsCompleted}/5 Missions Done`;
+
+            // Profile Screen
+            document.getElementById("profileAvatarDisplay").innerText = currentUser.avatar;
+            document.getElementById("profileTitleName").innerText = currentUser.name;
+            document.getElementById("profileTitleSub").innerText = `${currentUser.dept} • ${currentUser.year} • Level ${levelInfo.level}`;
+            document.getElementById("profileActiveIdText").innerText = currentUser.id;
+            if (document.getElementById("loginStatusBadge")) {
+                document.getElementById("loginStatusBadge").innerText = "ACTIVE LOGGED IN";
+                document.getElementById("loginStatusBadge").className = "tag-pill tag-green";
+            }
+            document.getElementById("statTotalCoins").innerText = coins;
+            document.getElementById("statMissionsDone").innerText = missionsCompleted;
+            if (document.getElementById("statZeroWasteMeals")) document.getElementById("statZeroWasteMeals").innerText = currentUser.zeroWasteMeals || 0;
+            if (document.getElementById("statSaplingsPlanted")) document.getElementById("statSaplingsPlanted").innerText = currentUser.saplingsPlanted || 0;
+
+            document.getElementById("profileLevelTitleTag").innerText = `LEVEL ${levelInfo.level}: ${levelInfo.title.toUpperCase()}`;
+            document.getElementById("profileXpRatioTag").innerText = `${currentUser.xp} / ${levelInfo.maxXP} XP`;
+            document.getElementById("profileXpBarInner").style.width = `${levelInfo.pct}%`;
+
+            if (document.getElementById("editProfileName")) document.getElementById("editProfileName").value = currentUser.name;
+            if (document.getElementById("editProfileDept")) document.getElementById("editProfileDept").value = currentUser.dept;
+            if (document.getElementById("editProfileYear")) document.getElementById("editProfileYear").value = currentUser.year;
+            if (document.getElementById("editProfileBio")) document.getElementById("editProfileBio").value = currentUser.bio || "";
+
+            // Digital ID Modal
+            document.getElementById("idModalAvatar").innerText = currentUser.avatar;
+            document.getElementById("idModalName").innerText = currentUser.name;
+            document.getElementById("idModalNumber").innerText = currentUser.id;
+            document.getElementById("idModalDept").innerText = currentUser.dept;
+            document.getElementById("idModalYear").innerText = currentUser.year;
+            document.getElementById("idModalLevel").innerText = `Lvl ${levelInfo.level}`;
+            document.getElementById("idModalProgressPct").innerText = `${levelInfo.pct}%`;
+            document.getElementById("idModalProgressFill").style.width = `${levelInfo.pct}%`;
+
+            renderLeaderboard();
+            renderMissionHistory();
+        }
+
+        function renderLeaderboard() {
+            const listContainer = document.getElementById("rankStudentsList");
+            if (!listContainer) return;
+
+            const sortedUsers = Object.values(users).sort((a, b) => b.xp - a.xp);
+            listContainer.innerHTML = "";
+
+            sortedUsers.forEach((u, index) => {
+                const levelInfo = getLevelInfo(u.xp);
+                const isCurrent = (u.id === currentUserId);
+                const rankNum = index + 1;
+
+                let rankClass = "rank-item";
+                let badgeBg = "var(--primary)";
+                let badgeIcon = rankNum;
+
+                if (rankNum === 1) { rankClass += " top-1"; badgeBg = "#f57c00"; badgeIcon = "🥇"; }
+                else if (rankNum === 2) { rankClass += " top-2"; badgeBg = "#78909c"; badgeIcon = "🥈"; }
+                else if (rankNum === 3) { rankClass += " top-3"; badgeBg = "#8d6e63"; badgeIcon = "🥉"; }
+
+                const item = document.createElement("div");
+                item.className = rankClass;
+                item.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div class="rank-badge-num" style="background: ${badgeBg};">${badgeIcon}</div>
+                        <div>
+                            <div style="font-weight: 800; font-size: 14px;">${u.avatar} ${u.name} ${isCurrent ? '<span style="color:var(--primary-dark); font-size:11px;">(You)</span>' : ''}</div>
+                            <div style="font-size: 11px; color: var(--text-muted);">${u.dept} &bull; Level ${levelInfo.level} (${levelInfo.pct}% Progress)</div>
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div class="coin-counter-pill" style="font-size: 11px; padding: 2px 8px;">${u.coins}c</div>
+                        <span class="tag-pill tag-green" style="margin-top: 2px; display: inline-block;">${u.xp} XP</span>
+                    </div>
+                `;
+                listContainer.appendChild(item);
+
+                if (isCurrent) {
+                    document.getElementById("idModalRank").innerText = `#${rankNum} Rank`;
+                }
+            });
+        }
+
+        /* AUTH MODAL CONTROLS */
+        function openAuthModal() {
+            document.getElementById("authModal").style.display = "flex";
+        }
+        function closeAuthModal() {
+            document.getElementById("authModal").style.display = "none";
+        }
+        function switchAuthTab(tab) {
+            document.getElementById("tabLoginBtn").classList.toggle("active", tab === 'login');
+            document.getElementById("tabRegisterBtn").classList.toggle("active", tab === 'register');
+            document.getElementById("loginForm").style.display = tab === 'login' ? 'block' : 'none';
+            document.getElementById("registerForm").style.display = tab === 'register' ? 'block' : 'none';
+        }
+        function selectRegAvatar(icon, btn) {
+            selectedRegAvatar = icon;
+            document.querySelectorAll("#regAvatarGrid .avatar-mini-btn").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+        }
+
+        function quickLoginDemo(id) {
+            if (users[id]) {
+                loadUser(id);
+                closeAuthModal();
+                playSuccessSound();
+            }
+        }
+
+        function handleLoginSubmit(e) {
+            if (e) e.preventDefault();
+            const idInput = (document.getElementById("loginIdInput").value || "").trim().toUpperCase();
+            let targetId = idInput;
+
+            if (!idInput) {
+                createFreshAccountQuick();
+                return;
+            }
+
+            const foundUser = Object.values(users).find(u => u.id.toUpperCase() === idInput || u.name.toLowerCase() === idInput.toLowerCase());
+            
+            if (foundUser) {
+                targetId = foundUser.id;
+            } else {
+                targetId = idInput.startsWith("STU-") ? idInput : "STU-" + idInput;
+                users[targetId] = {
+                    id: targetId,
+                    name: idInput,
+                    dept: "CSE Dept",
+                    year: "1st Year",
+                    avatar: "🌱",
+                    bio: "Ready for eco quests!",
+                    xp: 0, // Fresh ID starts at 0%!
+                    coins: 0,
+                    missionsCompleted: 0,
+                    zeroWasteMeals: 0,
+                    saplingsPlanted: 0,
+                    vouchers: [],
+                    history: []
+                };
+            }
+
+            saveUsersToStorage();
+            loadUser(targetId);
+            closeAuthModal();
+            playSuccessSound();
+        }
+
+        function handleRegisterSubmit(e) {
+            if (e) e.preventDefault();
+            let name = (document.getElementById("regNameInput").value || "").trim();
+            if (!name) name = "Eco Student " + Math.floor(100 + Math.random() * 900);
+
+            let id = (document.getElementById("regIdInput").value || "").trim().toUpperCase();
+            if (!id || id === "STU-") {
+                id = "STU-2026-" + Math.floor(1000 + Math.random() * 9000);
+            } else if (!id.startsWith("STU-")) {
+                id = "STU-" + id;
+            }
+
+            const dept = document.getElementById("regDeptInput").value || "CSE Dept";
+            const year = document.getElementById("regYearInput").value || "1st Year";
+
+            users[id] = {
+                id: id,
+                name: name,
+                dept: dept,
+                year: year,
+                avatar: selectedRegAvatar || "🌱",
+                bio: "Fresh Eco Student! Ready for campus sustainability.",
+                xp: 0, // Fresh ID starts at 0% Progress!
+                coins: 0,
+                missionsCompleted: 0,
+                zeroWasteMeals: 0,
+                saplingsPlanted: 0,
+                vouchers: [],
+                history: []
+            };
+
+            saveUsersToStorage();
+            loadUser(id);
+            closeAuthModal();
+            playSuccessSound();
+            triggerConfetti();
+            showToast(`✨ Account Created! Fresh ID: ${id} (0% Progress)`, "✨");
+        }
+
+        function createFreshAccountQuick() {
+            const randomNum = Math.floor(1000 + Math.random() * 9000);
+            const freshId = "STU-2026-" + randomNum;
+            const depts = ["CSE Dept", "ECE Dept", "Mechanical Dept", "Civil Dept", "Biotech Dept"];
+            const randomDept = depts[Math.floor(Math.random() * depts.length)];
+
+            users[freshId] = {
+                id: freshId,
+                name: "Eco Student " + randomNum,
+                dept: randomDept,
+                year: "1st Year",
+                avatar: selectedRegAvatar || "🌱",
+                bio: "Fresh Eco Student! Ready for campus sustainability.",
+                xp: 0, // 0% Progress
+                coins: 0,
+                missionsCompleted: 0,
+                zeroWasteMeals: 0,
+                saplingsPlanted: 0,
+                vouchers: [],
+                history: []
+            };
+
+            saveUsersToStorage();
+            loadUser(freshId);
+            closeAuthModal();
+            playSuccessSound();
+            triggerConfetti();
+            showToast(`✨ Fresh 0% Account Created! ID: ${freshId}`, "🎉");
+        }
+
+        /* ID CARD MODAL CONTROLS */
+        function openIdCardModal() {
+            document.getElementById("idCardModal").style.display = "flex";
+            playCoinSound();
+        }
+        function closeIdCardModal() {
+            document.getElementById("idCardModal").style.display = "none";
+        }
+
+        /* TOAST SYSTEM */
+        function showToast(msg, icon = "⚡") {
+            const toast = document.getElementById("toastNotif");
+            document.getElementById("toastIcon").innerText = icon;
+            document.getElementById("toastMessage").innerText = msg;
+            toast.classList.add("show");
+            setTimeout(() => toast.classList.remove("show"), 3200);
+        }
 
         /* Offline AI Loader */
         async function loadOfflineAI() {
@@ -1729,12 +2616,14 @@
         window.addEventListener("load", loadOfflineAI);
 
         function updateCoins(amount) {
-            if (amount) coins += amount;
+            if (amount) {
+                coins += amount;
+                if (currentUser) currentUser.coins = coins;
+            }
             document.getElementById("userCoins").innerText = coins;
             document.getElementById("rewardsCoinsText").innerText = coins;
-            const totalC = coins + 430;
-            document.getElementById("statTotalCoins").innerText = totalC;
-            document.getElementById("rankUser1Coins").innerText = totalC + "c";
+            document.getElementById("statTotalCoins").innerText = coins;
+            saveUsersToStorage();
         }
 
         function toggleWideMode() {
@@ -1777,24 +2666,32 @@
             document.getElementById("profileAvatarDisplay").innerText = icon;
             document.getElementById("homeProfileAvatar").innerText = icon;
             document.getElementById("headerAvatarLogo").innerText = icon;
+            saveProfileDetails();
             playCoinSound();
         }
 
         function saveProfileDetails() {
-            const name = document.getElementById("editProfileName").value.trim() || "Manisha";
+            if (!currentUser) return;
+            const name = document.getElementById("editProfileName").value.trim() || currentUser.name;
             const dept = document.getElementById("editProfileDept").value;
             const year = document.getElementById("editProfileYear").value;
+            const bio = document.getElementById("editProfileBio").value.trim();
 
-            document.getElementById("profileTitleName").innerText = name;
-            document.getElementById("homeProfileName").innerText = `Welcome back, ${name}! 🌱`;
-            document.getElementById("rankUser1Name").innerText = `${name} (You) 🌱`;
-            document.getElementById("profileTitleSub").innerText = `${dept} • ${year} • Level 4 Guardian`;
-            document.getElementById("homeProfileSub").innerText = `${dept} • ${year} • Student Rank #1`;
+            currentUser.name = name;
+            currentUser.dept = dept;
+            currentUser.year = year;
+            currentUser.bio = bio;
+
+            saveUsersToStorage();
+            updateUserUI();
 
             playSuccessSound();
-            triggerConfetti();
-            alert("🎉 Profile successfully updated!");
+            showToast("🎉 Profile updated!");
         }
+
+        window.addEventListener("DOMContentLoaded", () => {
+            initUserSystem();
+        });
 
         /* Game Modes */
         function switchGameMode(mode, btn) {
@@ -1846,12 +2743,13 @@
 
             if (selectedIdx === currentQ.correct) {
                 msg.style.color = "#2e7d32";
-                msg.innerText = "🎉 Correct! +20 Eco-Coins";
+                msg.innerText = "🎉 Correct! +20 Eco-Coins & +20 XP";
                 teddy.classList.add("dancing");
                 seedling.classList.add("dancing");
                 playCoinSound();
                 triggerConfetti();
                 updateCoins(20);
+                addXP(20, "Eco Quiz Correct");
             } else {
                 msg.style.color = "#e53935";
                 msg.innerText = "❌ Incorrect! Try next question.";
@@ -1896,8 +2794,8 @@
             const cur = sortItems[currentSortIdx];
             const fb = document.getElementById("sortGameFeedback");
             if (type === cur.type) {
-                fb.style.color = "#2e7d32"; fb.innerText = "✅ Correct Bin! +10 Eco-Coins";
-                playCoinSound(); updateCoins(10);
+                fb.style.color = "#2e7d32"; fb.innerText = "✅ Correct Bin! +10 Coins & +15 XP";
+                playCoinSound(); updateCoins(10); addXP(15, "Waste Sort Rush");
             } else {
                 fb.style.color = "#e53935"; fb.innerText = "❌ Wrong Bin!";
                 playErrorSound();
@@ -1914,8 +2812,8 @@
             const val = document.getElementById("scrambleInput").value.trim().toUpperCase();
             const fb = document.getElementById("scrambleFeedback");
             if (val === "ECOSYSTEM") {
-                fb.style.color = "#2e7d32"; fb.innerText = "🎉 Correct! +15 Eco-Coins";
-                playCoinSound(); updateCoins(15);
+                fb.style.color = "#2e7d32"; fb.innerText = "🎉 Correct! +15 Coins & +15 XP";
+                playCoinSound(); updateCoins(15); addXP(15, "Word Scramble");
             } else {
                 fb.style.color = "#e53935"; fb.innerText = "❌ Try again!";
                 playErrorSound();
@@ -1930,8 +2828,8 @@
             const timer = setInterval(() => {
                 if (score >= 5) {
                     clearInterval(timer);
-                    arena.innerHTML = `<div style="font-weight:800; color:#2e7d32;">🎉 Challenge Passed! +20 Coins</div>`;
-                    playSuccessSound(); updateCoins(20);
+                    arena.innerHTML = `<div style="font-weight:800; color:#2e7d32;">🎉 Challenge Passed! +20 Coins & +20 XP</div>`;
+                    playSuccessSound(); updateCoins(20); addXP(20, "Reflex Rush");
                     return;
                 }
                 const target = document.createElement("div");
@@ -2143,22 +3041,24 @@
                     playSuccessSound();
                     triggerConfetti();
                     updateCoins(50);
+                    addXP(50, "Plant AI Verification");
                     missionsCompleted++;
+                    if (!currentUser.saplingsPlanted) currentUser.saplingsPlanted = 0;
+                    currentUser.saplingsPlanted++;
+                    if (!currentUser.history) currentUser.history = [];
+                    currentUser.history.unshift({
+                        title: "Plant a sapling in campus",
+                        time: "Just now",
+                        score: `AI Plant Match ${confidenceScore}%`,
+                        coins: 50
+                    });
+                    saveUsersToStorage();
+                    
                     document.getElementById("profileMissionProgress").innerText = `${missionsCompleted}/5 Missions Done`;
                     document.getElementById("statMissionsDone").innerText = missionsCompleted;
+                    if (document.getElementById("statSaplingsPlanted")) document.getElementById("statSaplingsPlanted").innerText = currentUser.saplingsPlanted;
                     btn.innerText = "✅ Verified!";
-                    
-                    const hist = document.getElementById("missionHistoryList");
-                    const item = document.createElement("div");
-                    item.style.cssText = "display:flex; justify-content:space-between; align-items:center; background:#f4faf5; padding:10px; border-radius:10px; border-left:4px solid var(--primary); margin-top:6px;";
-                    item.innerHTML = `
-                        <div>
-                            <div style="font-size:12px; font-weight:800;">Plant a sapling in campus</div>
-                            <div style="font-size:10px; color:var(--text-muted);">Just now &bull; AI Plant Match ${confidenceScore}%</div>
-                        </div>
-                        <span class="coin-counter-pill" style="font-size:11px; padding:2px 8px;">+50c</span>
-                    `;
-                    hist.prepend(item);
+                    renderMissionHistory();
 
                 } else {
                     hudBadge.innerText = "REJECTED NON-PLANT";
