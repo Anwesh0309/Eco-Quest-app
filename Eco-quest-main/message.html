@@ -1139,8 +1139,15 @@
         }
 
         @keyframes fadeInAppModal {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .app-modal-card {
@@ -2157,7 +2164,9 @@
                             <div class="ss-pill-group" style="position: relative;">
                                 <input type="password" class="ss-pill-input" id="authLoginPassword"
                                     placeholder="Password" style="padding-right: 44px;" />
-                                <button type="button" class="pass-toggle-btn" onclick="togglePasswordVisibility('authLoginPassword', this)" title="Show/Hide Password">👁️</button>
+                                <button type="button" class="pass-toggle-btn"
+                                    onclick="togglePasswordVisibility('authLoginPassword', this)"
+                                    title="Show/Hide Password">👁️</button>
                             </div>
 
                             <button type="submit" class="ss-btn-submit">Sign In</button>
@@ -2180,9 +2189,9 @@
                                     <span>Anwesh</span>
                                 </button>
                                 <button type="button" class="demo-chip-btn" onclick="quickLoginDemo('STU-2026-02')"
-                                    title="Demo Account: Rahul (ECE Dept)">
+                                    title="Demo Account: Geetika (ECE Dept)">
                                     <span class="chip-emoji">🌳</span>
-                                    <span>Rahul</span>
+                                    <span>Geetika</span>
                                 </button>
                                 <button type="button" class="demo-chip-btn" onclick="quickLoginDemo('STU-2026-03')"
                                     title="Demo Account: Karan (Mechanical)">
@@ -2190,18 +2199,18 @@
                                     <span>Karan</span>
                                 </button>
                                 <button type="button" class="demo-chip-btn" onclick="quickLoginDemo('STU-2026-04')"
-                                    title="Demo Account: Shivam (Civil Dept)">
+                                    title="Demo Account: Shivani (Civil Dept)">
                                     <span class="chip-emoji">🦊</span>
-                                    <span>Shivam</span>
+                                    <span>Shivani</span>
                                 </button>
                                 <button type="button" class="demo-chip-btn" onclick="quickLoginDemo('STU-2026-05')"
-                                    title="Demo Account: Arun (Biotech Dept)">
+                                    title="Demo Account: Nikhil (Biotech Dept)">
                                     <span class="chip-emoji">🐝</span>
-                                    <span>Arun</span>
+                                    <span>Nikhil</span>
                                 </button>
                                 <button type="button" class="demo-chip-btn" onclick="quickLoginDemo('STU-2026-06')"
                                     title="Demo Account: Manisha (Biotech Dept)">
-                                    <span class="chip-emoji">🐼</span>
+                                    <span class="chip-emoji">🐈</span>
                                     <span>Manisha</span>
                                 </button>
                                 <button type="button" class="demo-chip-btn fresh" onclick="createFreshAccountQuick()"
@@ -2229,22 +2238,28 @@
                         <div class="ss-signup-top-accent"></div>
                         <div class="ss-side-wave-line"></div>
 
-                        <form onsubmit="performNewAuthRegister(event); return false;" class="ss-auth-body" style="padding-top: 36px;">
+                        <form onsubmit="performNewAuthRegister(event); return false;" class="ss-auth-body"
+                            style="padding-top: 36px;">
                             <h1 class="ss-auth-heading-signup">Sign Up</h1>
 
                             <div class="ss-pill-group">
-                                <input type="text" class="ss-pill-input" id="authRegUsername" placeholder="Name / Display Name" />
+                                <input type="text" class="ss-pill-input" id="authRegUsername"
+                                    placeholder="Name / Display Name" />
                             </div>
                             <div class="ss-pill-group">
-                                <input type="email" class="ss-pill-input" id="authRegEmail" placeholder="Email Address (any email)" />
+                                <input type="email" class="ss-pill-input" id="authRegEmail"
+                                    placeholder="Email Address (any email)" />
                             </div>
                             <div class="ss-pill-group">
-                                <input type="text" class="ss-pill-input" id="authRegId" placeholder="Create Username / ID" />
+                                <input type="text" class="ss-pill-input" id="authRegId"
+                                    placeholder="Create Username / ID" />
                             </div>
                             <div class="ss-pill-group" style="position: relative;">
                                 <input type="password" class="ss-pill-input" id="authRegPassword"
                                     placeholder="Create Password" style="padding-right: 44px;" />
-                                <button type="button" class="pass-toggle-btn" onclick="togglePasswordVisibility('authRegPassword', this)" title="Show/Hide Password">👁️</button>
+                                <button type="button" class="pass-toggle-btn"
+                                    onclick="togglePasswordVisibility('authRegPassword', this)"
+                                    title="Show/Hide Password">👁️</button>
                             </div>
 
                             <!-- Year and Dept Pill Selectors -->
@@ -3358,622 +3373,622 @@
         <canvas id="analysisCanvas" width="224" height="224" style="display: none;"></canvas>
     </div>
 
-        <!-- Application Logic -->
-        <script>
-            /* Audio Synthesizer */
-            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            function playTone(freq, duration, type = 'sine') {
-                try {
-                    const osc = audioCtx.createOscillator();
-                    const gain = audioCtx.createGain();
-                    osc.type = type;
-                    osc.frequency.value = freq;
-                    osc.connect(gain);
-                    gain.connect(audioCtx.destination);
-                    osc.start();
-                    gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + duration);
-                    osc.stop(audioCtx.currentTime + duration);
-                } catch (e) { }
+    <!-- Application Logic -->
+    <script>
+        /* Audio Synthesizer */
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        function playTone(freq, duration, type = 'sine') {
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = type;
+                osc.frequency.value = freq;
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + duration);
+                osc.stop(audioCtx.currentTime + duration);
+            } catch (e) { }
+        }
+        function playCoinSound() { playTone(880, 0.1); setTimeout(() => playTone(1760, 0.2), 100); }
+        function playSuccessSound() { playTone(523, 0.1); setTimeout(() => playTone(659, 0.1), 100); setTimeout(() => playTone(784, 0.2), 200); }
+        function playErrorSound() { playTone(180, 0.25, 'sawtooth'); }
+
+        /* App Layout Custom Dialog System (Replaces Browser Alerts & Confirms) */
+        function showAppAlert(title, message, icon = "⚠️", onConfirm = null) {
+            const overlay = document.getElementById("appCustomModalOverlay");
+            const titleEl = document.getElementById("appModalTitle");
+            const msgEl = document.getElementById("appModalMessage");
+            const iconEl = document.getElementById("appModalIcon");
+            const footerEl = document.getElementById("appModalFooter");
+
+            if (!overlay) {
+                showToast(`${icon} ${title}: ${message}`);
+                if (onConfirm) onConfirm();
+                return;
             }
-            function playCoinSound() { playTone(880, 0.1); setTimeout(() => playTone(1760, 0.2), 100); }
-            function playSuccessSound() { playTone(523, 0.1); setTimeout(() => playTone(659, 0.1), 100); setTimeout(() => playTone(784, 0.2), 200); }
-            function playErrorSound() { playTone(180, 0.25, 'sawtooth'); }
 
-            /* App Layout Custom Dialog System (Replaces Browser Alerts & Confirms) */
-            function showAppAlert(title, message, icon = "⚠️", onConfirm = null) {
-                const overlay = document.getElementById("appCustomModalOverlay");
-                const titleEl = document.getElementById("appModalTitle");
-                const msgEl = document.getElementById("appModalMessage");
-                const iconEl = document.getElementById("appModalIcon");
-                const footerEl = document.getElementById("appModalFooter");
+            if (titleEl) titleEl.innerText = title;
+            if (msgEl) msgEl.innerText = message;
+            if (iconEl) iconEl.innerText = icon;
 
-                if (!overlay) {
-                    showToast(`${icon} ${title}: ${message}`);
-                    if (onConfirm) onConfirm();
-                    return;
-                }
-
-                if (titleEl) titleEl.innerText = title;
-                if (msgEl) msgEl.innerText = message;
-                if (iconEl) iconEl.innerText = icon;
-
-                if (footerEl) {
-                    footerEl.innerHTML = `
+            if (footerEl) {
+                footerEl.innerHTML = `
                         <button class="app-modal-btn primary" onclick="closeAppModal(true)">Got it</button>
                     `;
-                }
-
-                overlay.onConfirmCallback = onConfirm;
-                overlay.onCancelCallback = null;
-                overlay.style.display = "flex";
             }
 
-            function showAppConfirm(title, message, onConfirm, onCancel = null) {
-                const overlay = document.getElementById("appCustomModalOverlay");
-                const titleEl = document.getElementById("appModalTitle");
-                const msgEl = document.getElementById("appModalMessage");
-                const iconEl = document.getElementById("appModalIcon");
-                const footerEl = document.getElementById("appModalFooter");
+            overlay.onConfirmCallback = onConfirm;
+            overlay.onCancelCallback = null;
+            overlay.style.display = "flex";
+        }
 
-                if (!overlay) {
-                    if (confirm(`${title}\n\n${message}`)) {
-                        if (onConfirm) onConfirm();
-                    } else {
-                        if (onCancel) onCancel();
-                    }
-                    return;
+        function showAppConfirm(title, message, onConfirm, onCancel = null) {
+            const overlay = document.getElementById("appCustomModalOverlay");
+            const titleEl = document.getElementById("appModalTitle");
+            const msgEl = document.getElementById("appModalMessage");
+            const iconEl = document.getElementById("appModalIcon");
+            const footerEl = document.getElementById("appModalFooter");
+
+            if (!overlay) {
+                if (confirm(`${title}\n\n${message}`)) {
+                    if (onConfirm) onConfirm();
+                } else {
+                    if (onCancel) onCancel();
                 }
+                return;
+            }
 
-                if (titleEl) titleEl.innerText = title;
-                if (msgEl) msgEl.innerText = message;
-                if (iconEl) iconEl.innerText = "❓";
+            if (titleEl) titleEl.innerText = title;
+            if (msgEl) msgEl.innerText = message;
+            if (iconEl) iconEl.innerText = "❓";
 
-                if (footerEl) {
-                    footerEl.innerHTML = `
+            if (footerEl) {
+                footerEl.innerHTML = `
                         <button class="app-modal-btn secondary" onclick="closeAppModal(false)">Cancel</button>
                         <button class="app-modal-btn primary" onclick="closeAppModal(true)">Confirm</button>
                     `;
-                }
-
-                overlay.onConfirmCallback = onConfirm;
-                overlay.onCancelCallback = onCancel;
-                overlay.style.display = "flex";
             }
 
-            function closeAppModal(isConfirmed = false) {
-                const overlay = document.getElementById("appCustomModalOverlay");
-                if (!overlay) return;
-                overlay.style.display = "none";
-                const cb = isConfirmed ? overlay.onConfirmCallback : overlay.onCancelCallback;
-                if (typeof cb === 'function') {
-                    cb();
-                }
+            overlay.onConfirmCallback = onConfirm;
+            overlay.onCancelCallback = onCancel;
+            overlay.style.display = "flex";
+        }
+
+        function closeAppModal(isConfirmed = false) {
+            const overlay = document.getElementById("appCustomModalOverlay");
+            if (!overlay) return;
+            overlay.style.display = "none";
+            const cb = isConfirmed ? overlay.onConfirmCallback : overlay.onCancelCallback;
+            if (typeof cb === 'function') {
+                cb();
             }
+        }
 
-            /* Confetti System */
-            function triggerConfetti() {
-                const canvas = document.getElementById("particleCanvas");
-                const ctx = canvas.getContext("2d");
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-                const particles = [];
-                const colors = ["#2e7d32", "#43a047", "#fbc02d", "#ff9800", "#ffffff"];
-                for (let i = 0; i < 60; i++) {
-                    particles.push({
-                        x: canvas.width / 2,
-                        y: canvas.height / 2,
-                        vx: (Math.random() - 0.5) * 12,
-                        vy: (Math.random() - 0.7) * 12,
-                        size: Math.random() * 8 + 4,
-                        color: colors[Math.floor(Math.random() * colors.length)],
-                        life: 1
-                    });
-                }
-                function anim() {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    let alive = false;
-                    particles.forEach(p => {
-                        p.x += p.vx; p.y += p.vy; p.vy += 0.2; p.life -= 0.02;
-                        if (p.life > 0) {
-                            alive = true;
-                            ctx.globalAlpha = p.life;
-                            ctx.fillStyle = p.color;
-                            ctx.beginPath();
-                            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                            ctx.fill();
-                        }
-                    });
-                    if (alive) requestAnimationFrame(anim);
-                    else ctx.clearRect(0, 0, canvas.width, canvas.height);
-                }
-                anim();
+        /* Confetti System */
+        function triggerConfetti() {
+            const canvas = document.getElementById("particleCanvas");
+            const ctx = canvas.getContext("2d");
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            const particles = [];
+            const colors = ["#2e7d32", "#43a047", "#fbc02d", "#ff9800", "#ffffff"];
+            for (let i = 0; i < 60; i++) {
+                particles.push({
+                    x: canvas.width / 2,
+                    y: canvas.height / 2,
+                    vx: (Math.random() - 0.5) * 12,
+                    vy: (Math.random() - 0.7) * 12,
+                    size: Math.random() * 8 + 4,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    life: 1
+                });
             }
-
-            /* ============================================================
-               ECO QUEST MULTI-STUDENT AUTH & LEVEL PROGRESS ENGINE
-               ============================================================ */
-                    const DEFAULT_USERS = {
-                "STU-2026-01": {
-                    id: "STU-2026-01",
-                    name: "Anwesh",
-                    password: "eco123",
-                    dept: "CSE Dept",
-                    year: "1st Year",
-                    avatar: "👑",
-                    bio: "Striving for a zero-waste campus life! 🌱",
-                    xp: 525,
-                    coins: 450,
-                    missionsCompleted: 4,
-                    zeroWasteMeals: 12,
-                    saplingsPlanted: 2,
-                    vouchers: [
-                        { title: "Plantable Seed Pencil", code: "ECO-STAT-3826" },
-                        { title: "Campus Canteen Discount", code: "ECO-CANT-3811" },
-                        { title: "Campus Canteen Discount", code: "ECO-CANT-3322" },
-                        { title: "Plantable Seed Pencil", code: "ECO-STAT-5078" }
-                    ],
-                    history: [
-                        { title: "Plant a sapling in campus", time: "Yesterday", score: "AI Plant Match 96%", coins: 50 },
-                        { title: "Zero-waste canteen meal", time: "2 days ago", score: "AI Verified", coins: 40 },
-                        { title: "Campus Hydration Refill", time: "3 days ago", score: "AI Verified", coins: 30 },
-                        { title: "E-Waste Drop-off", time: "4 days ago", score: "Recycling Verified", coins: 60 }
-                    ]
-                },
-                "STU-2026-02": {
-                    id: "STU-2026-02",
-                    name: "Rahul",
-                    password: "eco123",
-                    dept: "ECE Dept",
-                    year: "2nd Year",
-                    avatar: "🌳",
-                    bio: "Planting trees and recycling electronics! 🔋",
-                    xp: 374,
-                    coins: 120,
-                    missionsCompleted: 3,
-                    zeroWasteMeals: 8,
-                    saplingsPlanted: 1,
-                    vouchers: [
-                        { title: "Campus Canteen Discount", code: "ECO-CANT-1092" }
-                    ],
-                    history: [
-                        { title: "Campus Hydration Refill", time: "3 days ago", score: "AI Verified", coins: 30 },
-                        { title: "Zero-waste canteen meal", time: "5 days ago", score: "AI Verified", coins: 40 },
-                        { title: "Solar Light Installation", time: "1 week ago", score: "Volunteered", coins: 50 }
-                    ]
-                },
-                "STU-2026-03": {
-                    id: "STU-2026-03",
-                    name: "Karan",
-                    password: "eco123",
-                    dept: "Mechanical Dept",
-                    year: "3rd Year",
-                    avatar: "☘️",
-                    bio: "Solar energy research & campus bike sharing advocate! 🚲",
-                    xp: 220,
-                    coins: 110,
-                    missionsCompleted: 3,
-                    zeroWasteMeals: 6,
-                    saplingsPlanted: 2,
-                    vouchers: [
-                        { title: "Organic Bamboo Toothbrush", code: "ECO-BAMB-7741" }
-                    ],
-                    history: [
-                        { title: "Solar Light Installation", time: "2 days ago", score: "Volunteered", coins: 50 },
-                        { title: "Campus Hydration Refill", time: "5 days ago", score: "AI Verified", coins: 30 }
-                    ]
-                },
-                "STU-2026-04": {
-                    id: "STU-2026-04",
-                    name: "Shivam",
-                    password: "eco123",
-                    dept: "Civil Dept",
-                    year: "4th Year",
-                    avatar: "🦊",
-                    bio: "Sustainable building design & rainwater harvesting lead! 💧",
-                    xp: 140,
-                    coins: 75,
-                    missionsCompleted: 2,
-                    zeroWasteMeals: 4,
-                    saplingsPlanted: 1,
-                    vouchers: [
-                        { title: "Campus Canteen Discount", code: "ECO-CANT-4412" }
-                    ],
-                    history: [
-                        { title: "Rainwater Audit", time: "4 days ago", score: "Verified", coins: 50 }
-                    ]
-                },
-                "STU-2026-05": {
-                    id: "STU-2026-05",
-                    name: "Arun",
-                    password: "eco123",
-                    dept: "Biotech Dept",
-                    year: "2nd Year",
-                    avatar: "🐝",
-                    bio: "Biodiversity lead & eco-composting specialist! 🐝",
-                    xp: 310,
-                    coins: 150,
-                    missionsCompleted: 3,
-                    zeroWasteMeals: 5,
-                    saplingsPlanted: 3,
-                    vouchers: [
-                        { title: "Plantable Seed Pencil", code: "ECO-STAT-9912" }
-                    ],
-                    history: [
-                        { title: "Campus Bio-Compost Setup", time: "2 days ago", score: "AI Verified", coins: 50 }
-                    ]
-                },
-                "STU-2026-06": {
-                    id: "STU-2026-06",
-                    name: "Manisha",
-                    password: "eco123",
-                    dept: "Biotech Dept",
-                    year: "3rd Year",
-                    avatar: "🐼",
-                    bio: "Wildlife conservation & zero-single-use plastic advocate! 🐼",
-                    xp: 410,
-                    coins: 210,
-                    missionsCompleted: 4,
-                    zeroWasteMeals: 7,
-                    saplingsPlanted: 2,
-                    vouchers: [
-                        { title: "Organic Bamboo Toothbrush", code: "ECO-BAMB-3912" }
-                    ],
-                    history: [
-                        { title: "Single-Use Plastic Audit", time: "1 day ago", score: "AI Verified", coins: 60 }
-                    ]
-                },
-                "STU-2026-NEW": {
-                    id: "STU-2026-NEW",
-                    name: "Alex Green (New Student)",
-                    password: "eco123",
-                    dept: "Mechanical Dept",
-                    year: "1st Year",
-                    avatar: "🌱",
-                    bio: "Just joined ECO Quest! Ready to plant my first tree 🌳",
-                    xp: 0, // Fresh ID starts at 0% Progress!
-                    coins: 0,
-                    missionsCompleted: 0,
-                    zeroWasteMeals: 0,
-                    saplingsPlanted: 0,
-                    vouchers: [],
-                    history: []
-                }
-            };
-
-            let users = {};
-            let currentUserId = "STU-2026-01";
-            let currentUser = null;
-            let selectedRegAvatar = "🌱";
-
-            /* App State */
-            let coins = 450;
-            let missionsCompleted = 4;
-            let selectedAvatar = "🌱";
-            let activeVouchers = [];
-
-            let modelLoaded = false;
-            let model = null;
-            let currentImageElement = null;
-            let webcamStream = null;
-
-            function initUserSystem() {
-                const stored = localStorage.getItem("eco_quest_users_v3");
-                if (stored) {
-                    try {
-                        users = JSON.parse(stored);
-                        if (!users["STU-2026-01"] || users["STU-2026-01"].name === "Manisha") {
-                            users = JSON.parse(JSON.stringify(DEFAULT_USERS));
-                            localStorage.setItem("eco_quest_users_v3", JSON.stringify(users));
-                        }
-                    } catch (e) {
-                        users = JSON.parse(JSON.stringify(DEFAULT_USERS));
+            function anim() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                let alive = false;
+                particles.forEach(p => {
+                    p.x += p.vx; p.y += p.vy; p.vy += 0.2; p.life -= 0.02;
+                    if (p.life > 0) {
+                        alive = true;
+                        ctx.globalAlpha = p.life;
+                        ctx.fillStyle = p.color;
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                        ctx.fill();
                     }
-                } else {
+                });
+                if (alive) requestAnimationFrame(anim);
+                else ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+            anim();
+        }
+
+        /* ============================================================
+           ECO QUEST MULTI-STUDENT AUTH & LEVEL PROGRESS ENGINE
+           ============================================================ */
+        const DEFAULT_USERS = {
+            "STU-2026-01": {
+                id: "STU-2026-01",
+                name: "Anwesh",
+                password: "eco123",
+                dept: "CSE Dept",
+                year: "1st Year",
+                avatar: "👑",
+                bio: "Striving for a zero-waste campus life! 🌱",
+                xp: 525,
+                coins: 450,
+                missionsCompleted: 4,
+                zeroWasteMeals: 12,
+                saplingsPlanted: 2,
+                vouchers: [
+                    { title: "Plantable Seed Pencil", code: "ECO-STAT-3826" },
+                    { title: "Campus Canteen Discount", code: "ECO-CANT-3811" },
+                    { title: "Campus Canteen Discount", code: "ECO-CANT-3322" },
+                    { title: "Plantable Seed Pencil", code: "ECO-STAT-5078" }
+                ],
+                history: [
+                    { title: "Plant a sapling in campus", time: "Yesterday", score: "AI Plant Match 96%", coins: 50 },
+                    { title: "Zero-waste canteen meal", time: "2 days ago", score: "AI Verified", coins: 40 },
+                    { title: "Campus Hydration Refill", time: "3 days ago", score: "AI Verified", coins: 30 },
+                    { title: "E-Waste Drop-off", time: "4 days ago", score: "Recycling Verified", coins: 60 }
+                ]
+            },
+            "STU-2026-02": {
+                id: "STU-2026-02",
+                name: "Geetika",
+                password: "eco123",
+                dept: "ECE Dept",
+                year: "2nd Year",
+                avatar: "🌳",
+                bio: "Planting trees and recycling electronics! 🔋",
+                xp: 374,
+                coins: 120,
+                missionsCompleted: 3,
+                zeroWasteMeals: 8,
+                saplingsPlanted: 1,
+                vouchers: [
+                    { title: "Campus Canteen Discount", code: "ECO-CANT-1092" }
+                ],
+                history: [
+                    { title: "Campus Hydration Refill", time: "3 days ago", score: "AI Verified", coins: 30 },
+                    { title: "Zero-waste canteen meal", time: "5 days ago", score: "AI Verified", coins: 40 },
+                    { title: "Solar Light Installation", time: "1 week ago", score: "Volunteered", coins: 50 }
+                ]
+            },
+            "STU-2026-03": {
+                id: "STU-2026-03",
+                name: "Karan",
+                password: "eco123",
+                dept: "Mechanical Dept",
+                year: "3rd Year",
+                avatar: "☘️",
+                bio: "Solar energy research & campus bike sharing advocate! 🚲",
+                xp: 220,
+                coins: 110,
+                missionsCompleted: 3,
+                zeroWasteMeals: 6,
+                saplingsPlanted: 2,
+                vouchers: [
+                    { title: "Organic Bamboo Toothbrush", code: "ECO-BAMB-7741" }
+                ],
+                history: [
+                    { title: "Solar Light Installation", time: "2 days ago", score: "Volunteered", coins: 50 },
+                    { title: "Campus Hydration Refill", time: "5 days ago", score: "AI Verified", coins: 30 }
+                ]
+            },
+            "STU-2026-04": {
+                id: "STU-2026-04",
+                name: "Shivani",
+                password: "eco123",
+                dept: "Civil Dept",
+                year: "4th Year",
+                avatar: "🦊",
+                bio: "Sustainable building design & rainwater harvesting lead! 💧",
+                xp: 140,
+                coins: 75,
+                missionsCompleted: 2,
+                zeroWasteMeals: 4,
+                saplingsPlanted: 1,
+                vouchers: [
+                    { title: "Campus Canteen Discount", code: "ECO-CANT-4412" }
+                ],
+                history: [
+                    { title: "Rainwater Audit", time: "4 days ago", score: "Verified", coins: 50 }
+                ]
+            },
+            "STU-2026-05": {
+                id: "STU-2026-05",
+                name: "Nikhil",
+                password: "eco123",
+                dept: "Biotech Dept",
+                year: "2nd Year",
+                avatar: "🐝",
+                bio: "Biodiversity lead & eco-composting specialist! 🐝",
+                xp: 310,
+                coins: 150,
+                missionsCompleted: 3,
+                zeroWasteMeals: 5,
+                saplingsPlanted: 3,
+                vouchers: [
+                    { title: "Plantable Seed Pencil", code: "ECO-STAT-9912" }
+                ],
+                history: [
+                    { title: "Campus Bio-Compost Setup", time: "2 days ago", score: "AI Verified", coins: 50 }
+                ]
+            },
+            "STU-2026-06": {
+                id: "STU-2026-06",
+                name: "Manisha",
+                password: "eco123",
+                dept: "Biotech Dept",
+                year: "3rd Year",
+                avatar: "🐼",
+                bio: "Wildlife conservation & zero-single-use plastic advocate! 🐼",
+                xp: 410,
+                coins: 210,
+                missionsCompleted: 4,
+                zeroWasteMeals: 7,
+                saplingsPlanted: 2,
+                vouchers: [
+                    { title: "Organic Bamboo Toothbrush", code: "ECO-BAMB-3912" }
+                ],
+                history: [
+                    { title: "Single-Use Plastic Audit", time: "1 day ago", score: "AI Verified", coins: 60 }
+                ]
+            },
+            "STU-2026-NEW": {
+                id: "STU-2026-NEW",
+                name: "Alex Green (New Student)",
+                password: "eco123",
+                dept: "Mechanical Dept",
+                year: "1st Year",
+                avatar: "🌱",
+                bio: "Just joined ECO Quest! Ready to plant my first tree 🌳",
+                xp: 0, // Fresh ID starts at 0% Progress!
+                coins: 0,
+                missionsCompleted: 0,
+                zeroWasteMeals: 0,
+                saplingsPlanted: 0,
+                vouchers: [],
+                history: []
+            }
+        };
+
+        let users = {};
+        let currentUserId = "STU-2026-01";
+        let currentUser = null;
+        let selectedRegAvatar = "🌱";
+
+        /* App State */
+        let coins = 450;
+        let missionsCompleted = 4;
+        let selectedAvatar = "🌱";
+        let activeVouchers = [];
+
+        let modelLoaded = false;
+        let model = null;
+        let currentImageElement = null;
+        let webcamStream = null;
+
+        function initUserSystem() {
+            const stored = localStorage.getItem("eco_quest_users_v3");
+            if (stored) {
+                try {
+                    users = JSON.parse(stored);
+                    if (!users["STU-2026-01"] || users["STU-2026-01"].name === "Manisha") {
+                        users = JSON.parse(JSON.stringify(DEFAULT_USERS));
+                        localStorage.setItem("eco_quest_users_v3", JSON.stringify(users));
+                    }
+                } catch (e) {
                     users = JSON.parse(JSON.stringify(DEFAULT_USERS));
                 }
-
-                // Whenever user enters the app, always start with the Login page only!
-                openAuthModal();
+            } else {
+                users = JSON.parse(JSON.stringify(DEFAULT_USERS));
             }
 
-            let isLoggedOut = false;
+            // Whenever user enters the app, always start with the Login page only!
+            openAuthModal();
+        }
 
-            function loadUser(id) {
-                if (!users[id]) {
-                    if (DEFAULT_USERS[id]) {
-                        users[id] = JSON.parse(JSON.stringify(DEFAULT_USERS[id]));
-                    } else return;
+        let isLoggedOut = false;
+
+        function loadUser(id) {
+            if (!users[id]) {
+                if (DEFAULT_USERS[id]) {
+                    users[id] = JSON.parse(JSON.stringify(DEFAULT_USERS[id]));
+                } else return;
+            }
+            isLoggedOut = false;
+            currentUserId = id;
+            currentUser = users[id];
+            localStorage.setItem("eco_quest_active_user_v3", id);
+
+            coins = currentUser.coins || 0;
+            missionsCompleted = currentUser.missionsCompleted || 0;
+            selectedAvatar = currentUser.avatar || "🌱";
+            activeVouchers = currentUser.vouchers || [];
+            if (!currentUser.history) currentUser.history = [];
+            if (!currentUser.zeroWasteMeals) currentUser.zeroWasteMeals = 0;
+            if (!currentUser.saplingsPlanted) currentUser.saplingsPlanted = 0;
+
+            updateUserUI();
+            renderVouchers();
+            renderLeaderboard();
+            renderMissionHistory();
+            showToast(`👋 Logged in as ${currentUser.name} (${currentUser.id})`);
+        }
+
+        function handleLogout() {
+            isLoggedOut = true;
+            localStorage.removeItem("eco_quest_active_user_v3");
+            currentUser = null;
+            currentUserId = null;
+            coins = 0;
+            missionsCompleted = 0;
+            activeVouchers = [];
+
+            // Header UI update
+            if (document.getElementById("headerUserName")) document.getElementById("headerUserName").innerText = "Login";
+            if (document.getElementById("headerUserAvatar")) document.getElementById("headerUserAvatar").innerText = "🔑";
+            if (document.getElementById("headerAuthBadge")) document.getElementById("headerAuthBadge").innerText = "🔑 Login";
+
+            // Top Status Bar & Wallet
+            if (document.getElementById("userCoins")) document.getElementById("userCoins").innerText = "0";
+            if (document.getElementById("rewardsCoinsText")) document.getElementById("rewardsCoinsText").innerText = "0";
+
+            // Home Card UI update
+            if (document.getElementById("homeProfileName")) document.getElementById("homeProfileName").innerText = "Logged Out (Guest)";
+            if (document.getElementById("homeStudentIdTag")) document.getElementById("homeStudentIdTag").innerText = "ID: Guest";
+            if (document.getElementById("homeStudentLevelTag")) document.getElementById("homeStudentLevelTag").innerText = "Lvl 0 Guest";
+            if (document.getElementById("progressPercentText")) document.getElementById("progressPercentText").innerText = "0%";
+            if (document.getElementById("xpRatioText")) document.getElementById("xpRatioText").innerText = "0 / 100 XP";
+            if (document.getElementById("mainProgressBarFill")) document.getElementById("mainProgressBarFill").style.width = "0%";
+
+            // Profile UI update
+            if (document.getElementById("loginStatusBadge")) {
+                document.getElementById("loginStatusBadge").innerText = "LOGGED OUT";
+                document.getElementById("loginStatusBadge").className = "tag-pill tag-yellow";
+            }
+            if (document.getElementById("profileActiveIdText")) document.getElementById("profileActiveIdText").innerText = "None (Logged Out)";
+            if (document.getElementById("profileTitleName")) document.getElementById("profileTitleName").innerText = "Logged Out";
+            if (document.getElementById("profileTitleSub")) document.getElementById("profileTitleSub").innerText = "Guest Mode • Please Login";
+            if (document.getElementById("profileAvatarDisplay")) document.getElementById("profileAvatarDisplay").innerText = "🔑";
+            if (document.getElementById("statTotalCoins")) document.getElementById("statTotalCoins").innerText = "0";
+            if (document.getElementById("statMissionsDone")) document.getElementById("statMissionsDone").innerText = "0";
+            if (document.getElementById("statZeroWasteMeals")) document.getElementById("statZeroWasteMeals").innerText = "0";
+            if (document.getElementById("statSaplingsPlanted")) document.getElementById("statSaplingsPlanted").innerText = "0";
+
+            renderMissionHistory();
+            renderVouchers();
+            renderLeaderboard();
+
+            playTone(200, 0.2, 'sawtooth');
+            showToast("🚪 Logged out successfully!", "🚪");
+            openAuthModal();
+        }
+
+        function toggleAuthAction() {
+            openAuthModal();
+        }
+
+        function saveUsersToStorage() {
+            if (currentUser) {
+                currentUser.coins = coins;
+                currentUser.missionsCompleted = missionsCompleted;
+                currentUser.avatar = selectedAvatar;
+                currentUser.vouchers = activeVouchers;
+                users[currentUserId] = currentUser;
+            }
+            localStorage.setItem("eco_quest_users_v3", JSON.stringify(users));
+        }
+
+        function resetCurrentUserProgress() {
+            if (!currentUser) {
+                showToast("⚠️ No active user logged in to reset.");
+                return;
+            }
+
+            showAppConfirm(
+                "Reset Account Progress",
+                `Are you sure you want to RESET all progress for ${currentUser.name} (${currentUser.id})?\n\nThis will reset your XP to 0 (Level 1 Novice), Eco-Coins to 0, cleared missions to 0, active vouchers to 0, and clear your mission history.`,
+                () => {
+                    currentUser.xp = 0;
+                    currentUser.coins = 0;
+                    currentUser.missionsCompleted = 0;
+                    currentUser.zeroWasteMeals = 0;
+                    currentUser.saplingsPlanted = 0;
+                    currentUser.vouchers = [];
+                    currentUser.history = [];
+
+                    coins = 0;
+                    missionsCompleted = 0;
+                    activeVouchers = [];
+
+                    saveUsersToStorage();
+                    updateUserUI();
+                    renderVouchers();
+                    renderLeaderboard();
+                    renderMissionHistory();
+
+                    playTone(300, 0.3, 'triangle');
+                    showToast(`🔄 Progress reset for ${currentUser.name}! Level 1 (0% Progress)`, "🔄");
                 }
-                isLoggedOut = false;
-                currentUserId = id;
-                currentUser = users[id];
-                localStorage.setItem("eco_quest_active_user_v3", id);
+            );
+        }
 
-                coins = currentUser.coins || 0;
-                missionsCompleted = currentUser.missionsCompleted || 0;
-                selectedAvatar = currentUser.avatar || "🌱";
-                activeVouchers = currentUser.vouchers || [];
-                if (!currentUser.history) currentUser.history = [];
-                if (!currentUser.zeroWasteMeals) currentUser.zeroWasteMeals = 0;
-                if (!currentUser.saplingsPlanted) currentUser.saplingsPlanted = 0;
-
-                updateUserUI();
-                renderVouchers();
-                renderLeaderboard();
-                renderMissionHistory();
-                showToast(`👋 Logged in as ${currentUser.name} (${currentUser.id})`);
-            }
-
-            function handleLogout() {
-                isLoggedOut = true;
-                localStorage.removeItem("eco_quest_active_user_v3");
-                currentUser = null;
-                currentUserId = null;
-                coins = 0;
-                missionsCompleted = 0;
-                activeVouchers = [];
-
-                // Header UI update
-                if (document.getElementById("headerUserName")) document.getElementById("headerUserName").innerText = "Login";
-                if (document.getElementById("headerUserAvatar")) document.getElementById("headerUserAvatar").innerText = "🔑";
-                if (document.getElementById("headerAuthBadge")) document.getElementById("headerAuthBadge").innerText = "🔑 Login";
-
-                // Top Status Bar & Wallet
-                if (document.getElementById("userCoins")) document.getElementById("userCoins").innerText = "0";
-                if (document.getElementById("rewardsCoinsText")) document.getElementById("rewardsCoinsText").innerText = "0";
-
-                // Home Card UI update
-                if (document.getElementById("homeProfileName")) document.getElementById("homeProfileName").innerText = "Logged Out (Guest)";
-                if (document.getElementById("homeStudentIdTag")) document.getElementById("homeStudentIdTag").innerText = "ID: Guest";
-                if (document.getElementById("homeStudentLevelTag")) document.getElementById("homeStudentLevelTag").innerText = "Lvl 0 Guest";
-                if (document.getElementById("progressPercentText")) document.getElementById("progressPercentText").innerText = "0%";
-                if (document.getElementById("xpRatioText")) document.getElementById("xpRatioText").innerText = "0 / 100 XP";
-                if (document.getElementById("mainProgressBarFill")) document.getElementById("mainProgressBarFill").style.width = "0%";
-
-                // Profile UI update
-                if (document.getElementById("loginStatusBadge")) {
-                    document.getElementById("loginStatusBadge").innerText = "LOGGED OUT";
-                    document.getElementById("loginStatusBadge").className = "tag-pill tag-yellow";
-                }
-                if (document.getElementById("profileActiveIdText")) document.getElementById("profileActiveIdText").innerText = "None (Logged Out)";
-                if (document.getElementById("profileTitleName")) document.getElementById("profileTitleName").innerText = "Logged Out";
-                if (document.getElementById("profileTitleSub")) document.getElementById("profileTitleSub").innerText = "Guest Mode • Please Login";
-                if (document.getElementById("profileAvatarDisplay")) document.getElementById("profileAvatarDisplay").innerText = "🔑";
-                if (document.getElementById("statTotalCoins")) document.getElementById("statTotalCoins").innerText = "0";
-                if (document.getElementById("statMissionsDone")) document.getElementById("statMissionsDone").innerText = "0";
-                if (document.getElementById("statZeroWasteMeals")) document.getElementById("statZeroWasteMeals").innerText = "0";
-                if (document.getElementById("statSaplingsPlanted")) document.getElementById("statSaplingsPlanted").innerText = "0";
-
-                renderMissionHistory();
-                renderVouchers();
-                renderLeaderboard();
-
-                playTone(200, 0.2, 'sawtooth');
-                showToast("🚪 Logged out successfully!", "🚪");
-                openAuthModal();
-            }
-
-            function toggleAuthAction() {
-                openAuthModal();
-            }
-
-            function saveUsersToStorage() {
-                if (currentUser) {
-                    currentUser.coins = coins;
-                    currentUser.missionsCompleted = missionsCompleted;
-                    currentUser.avatar = selectedAvatar;
-                    currentUser.vouchers = activeVouchers;
-                    users[currentUserId] = currentUser;
-                }
-                localStorage.setItem("eco_quest_users_v3", JSON.stringify(users));
-            }
-
-            function resetCurrentUserProgress() {
-                if (!currentUser) {
-                    showToast("⚠️ No active user logged in to reset.");
-                    return;
-                }
-
-                showAppConfirm(
-                    "Reset Account Progress",
-                    `Are you sure you want to RESET all progress for ${currentUser.name} (${currentUser.id})?\n\nThis will reset your XP to 0 (Level 1 Novice), Eco-Coins to 0, cleared missions to 0, active vouchers to 0, and clear your mission history.`,
-                    () => {
-                        currentUser.xp = 0;
-                        currentUser.coins = 0;
-                        currentUser.missionsCompleted = 0;
-                        currentUser.zeroWasteMeals = 0;
-                        currentUser.saplingsPlanted = 0;
-                        currentUser.vouchers = [];
-                        currentUser.history = [];
-
-                        coins = 0;
-                        missionsCompleted = 0;
-                        activeVouchers = [];
-
-                        saveUsersToStorage();
-                        updateUserUI();
-                        renderVouchers();
-                        renderLeaderboard();
-                        renderMissionHistory();
-
-                        playTone(300, 0.3, 'triangle');
-                        showToast(`🔄 Progress reset for ${currentUser.name}! Level 1 (0% Progress)`, "🔄");
-                    }
-                );
-            }
-
-            function getLevelInfo(xp) {
-                for (let i = LEVEL_THRESHOLDS.length - 1; i >= 0; i--) {
-                    if (xp >= LEVEL_THRESHOLDS[i].minXP) {
-                        const thresh = LEVEL_THRESHOLDS[i];
-                        const range = thresh.maxXP - thresh.minXP;
-                        const progressInLevel = xp - thresh.minXP;
-                        const pct = Math.min(100, Math.round((progressInLevel / range) * 100));
-                        return {
-                            level: thresh.level,
-                            title: thresh.title,
-                            minXP: thresh.minXP,
-                            maxXP: thresh.maxXP,
-                            pct: pct
-                        };
-                    }
-                }
-                return { level: 1, title: "🌱 Novice Seedling", minXP: 0, maxXP: 100, pct: 0 };
-            }
-
-            function addXP(amount, source) {
-                if (!currentUser) return;
-                const oldLevelInfo = getLevelInfo(currentUser.xp);
-                currentUser.xp += amount;
-                const newLevelInfo = getLevelInfo(currentUser.xp);
-
-                saveUsersToStorage();
-                updateUserUI();
-
-                showToast(`⚡ +${amount} XP (${source})`);
-
-                if (newLevelInfo.level > oldLevelInfo.level) {
-                    playSuccessSound();
-                    triggerConfetti();
-                    setTimeout(() => {
-                        showToast(`🎉 LEVEL UP! Reached Level ${newLevelInfo.level} ${newLevelInfo.title}!`);
-                    }, 500);
+        function getLevelInfo(xp) {
+            for (let i = LEVEL_THRESHOLDS.length - 1; i >= 0; i--) {
+                if (xp >= LEVEL_THRESHOLDS[i].minXP) {
+                    const thresh = LEVEL_THRESHOLDS[i];
+                    const range = thresh.maxXP - thresh.minXP;
+                    const progressInLevel = xp - thresh.minXP;
+                    const pct = Math.min(100, Math.round((progressInLevel / range) * 100));
+                    return {
+                        level: thresh.level,
+                        title: thresh.title,
+                        minXP: thresh.minXP,
+                        maxXP: thresh.maxXP,
+                        pct: pct
+                    };
                 }
             }
+            return { level: 1, title: "🌱 Novice Seedling", minXP: 0, maxXP: 100, pct: 0 };
+        }
 
-            function renderMissionHistory() {
-                const list = document.getElementById("missionHistoryList");
-                if (!list) return;
-                list.innerHTML = "";
+        function addXP(amount, source) {
+            if (!currentUser) return;
+            const oldLevelInfo = getLevelInfo(currentUser.xp);
+            currentUser.xp += amount;
+            const newLevelInfo = getLevelInfo(currentUser.xp);
 
-                if (isLoggedOut || !currentUser) {
-                    list.innerHTML = `
+            saveUsersToStorage();
+            updateUserUI();
+
+            showToast(`⚡ +${amount} XP (${source})`);
+
+            if (newLevelInfo.level > oldLevelInfo.level) {
+                playSuccessSound();
+                triggerConfetti();
+                setTimeout(() => {
+                    showToast(`🎉 LEVEL UP! Reached Level ${newLevelInfo.level} ${newLevelInfo.title}!`);
+                }, 500);
+            }
+        }
+
+        function renderMissionHistory() {
+            const list = document.getElementById("missionHistoryList");
+            if (!list) return;
+            list.innerHTML = "";
+
+            if (isLoggedOut || !currentUser) {
+                list.innerHTML = `
                     <div style="text-align: center; padding: 16px; background: #fffde7; border-radius: 10px; border: 1.5px dashed #ffe082;">
                         <div style="font-size: 24px;">🔑</div>
                         <div style="font-size: 12px; font-weight: 800; color: #d84315; margin-top: 4px;">Currently Logged Out</div>
                         <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Click Login in the top header or profile tab to track your student progress!</div>
                     </div>
                 `;
-                    return;
-                }
+                return;
+            }
 
-                const history = currentUser.history ? currentUser.history : [];
+            const history = currentUser.history ? currentUser.history : [];
 
-                if (history.length === 0) {
-                    list.innerHTML = `
+            if (history.length === 0) {
+                list.innerHTML = `
                     <div style="text-align: center; padding: 16px; background: #f4faf5; border-radius: 10px; border: 1.5px dashed #a5d6a7;">
                         <div style="font-size: 24px;">🌱</div>
                         <div style="font-size: 12px; font-weight: 800; color: var(--primary-dark); margin-top: 4px;">Fresh Student Account (0% Progress)</div>
                         <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">No completed missions yet. Upload a plant photo above to complete your 1st eco mission!</div>
                     </div>
                 `;
-                } else {
-                    history.forEach(item => {
-                        const div = document.createElement("div");
-                        div.style.cssText = "display:flex; justify-content:space-between; align-items:center; background:#f4faf5; padding:10px; border-radius:10px; border-left:4px solid var(--primary); margin-top:6px;";
-                        div.innerHTML = `
+            } else {
+                history.forEach(item => {
+                    const div = document.createElement("div");
+                    div.style.cssText = "display:flex; justify-content:space-between; align-items:center; background:#f4faf5; padding:10px; border-radius:10px; border-left:4px solid var(--primary); margin-top:6px;";
+                    div.innerHTML = `
                         <div>
                             <div style="font-size:12px; font-weight:800;">${item.title}</div>
                             <div style="font-size:10px; color:var(--text-muted);">${item.time} &bull; ${item.score}</div>
                         </div>
                         <span class="coin-counter-pill" style="font-size:11px; padding:2px 8px;">+${item.coins}c</span>
                     `;
-                        list.appendChild(div);
-                    });
-                }
+                    list.appendChild(div);
+                });
+            }
+        }
+
+        function updateUserUI() {
+            if (!currentUser) return;
+            const levelInfo = getLevelInfo(currentUser.xp);
+
+            // Header elements
+            document.getElementById("headerUserAvatar").innerText = currentUser.avatar;
+            document.getElementById("headerUserName").innerText = currentUser.name.split(" ")[0];
+            document.getElementById("headerAvatarLogo").innerText = currentUser.avatar;
+            if (document.getElementById("headerAuthBadge")) document.getElementById("headerAuthBadge").innerText = "🔑 Switch";
+
+            // Top Status Bar
+            document.getElementById("userCoins").innerText = coins;
+            document.getElementById("rewardsCoinsText").innerText = coins;
+
+            // Home Card & Progress Bar
+            document.getElementById("homeStudentIdTag").innerText = `ID: ${currentUser.id}`;
+            document.getElementById("homeStudentLevelTag").innerText = `Lvl ${levelInfo.level} ${levelInfo.title.split(' ')[1] || ''}`;
+            document.getElementById("homeProfileAvatar").innerText = currentUser.avatar;
+            document.getElementById("homeProfileName").innerText = currentUser.name;
+            document.getElementById("homeStudentDeptTag").innerText = currentUser.dept;
+            document.getElementById("homeProfileSub").innerText = `Academic Year: ${currentUser.year}`;
+
+            document.getElementById("progressPercentText").innerText = `${levelInfo.pct}%`;
+            document.getElementById("xpRatioText").innerText = `${currentUser.xp} / ${levelInfo.maxXP} XP`;
+            document.getElementById("mainProgressBarFill").style.width = `${levelInfo.pct}%`;
+            document.getElementById("levelMinText").innerText = `Level ${levelInfo.level} (${levelInfo.minXP} XP)`;
+            document.getElementById("levelNextText").innerText = levelInfo.maxXP >= 1000 ? `MAX LEVEL` : `Next: Lvl ${levelInfo.level + 1} (${levelInfo.maxXP} XP)`;
+            if (document.getElementById("profileMissionProgress")) {
+                document.getElementById("profileMissionProgress").innerText = `${missionsCompleted}/5 Missions Done`;
             }
 
-            function updateUserUI() {
-                if (!currentUser) return;
-                const levelInfo = getLevelInfo(currentUser.xp);
-
-                // Header elements
-                document.getElementById("headerUserAvatar").innerText = currentUser.avatar;
-                document.getElementById("headerUserName").innerText = currentUser.name.split(" ")[0];
-                document.getElementById("headerAvatarLogo").innerText = currentUser.avatar;
-                if (document.getElementById("headerAuthBadge")) document.getElementById("headerAuthBadge").innerText = "🔑 Switch";
-
-                // Top Status Bar
-                document.getElementById("userCoins").innerText = coins;
-                document.getElementById("rewardsCoinsText").innerText = coins;
-
-                // Home Card & Progress Bar
-                document.getElementById("homeStudentIdTag").innerText = `ID: ${currentUser.id}`;
-                document.getElementById("homeStudentLevelTag").innerText = `Lvl ${levelInfo.level} ${levelInfo.title.split(' ')[1] || ''}`;
-                document.getElementById("homeProfileAvatar").innerText = currentUser.avatar;
-                document.getElementById("homeProfileName").innerText = currentUser.name;
-                document.getElementById("homeStudentDeptTag").innerText = currentUser.dept;
-                document.getElementById("homeProfileSub").innerText = `Academic Year: ${currentUser.year}`;
-
-                document.getElementById("progressPercentText").innerText = `${levelInfo.pct}%`;
-                document.getElementById("xpRatioText").innerText = `${currentUser.xp} / ${levelInfo.maxXP} XP`;
-                document.getElementById("mainProgressBarFill").style.width = `${levelInfo.pct}%`;
-                document.getElementById("levelMinText").innerText = `Level ${levelInfo.level} (${levelInfo.minXP} XP)`;
-                document.getElementById("levelNextText").innerText = levelInfo.maxXP >= 1000 ? `MAX LEVEL` : `Next: Lvl ${levelInfo.level + 1} (${levelInfo.maxXP} XP)`;
-                if (document.getElementById("profileMissionProgress")) {
-                    document.getElementById("profileMissionProgress").innerText = `${missionsCompleted}/5 Missions Done`;
-                }
-
-                // Profile Screen
-                document.getElementById("profileAvatarDisplay").innerText = currentUser.avatar;
-                document.getElementById("profileTitleName").innerText = currentUser.name;
-                document.getElementById("profileTitleSub").innerText = `${currentUser.dept} • ${currentUser.year} • Level ${levelInfo.level}`;
-                document.getElementById("profileActiveIdText").innerText = currentUser.id;
-                if (document.getElementById("loginStatusBadge")) {
-                    document.getElementById("loginStatusBadge").innerText = "ACTIVE LOGGED IN";
-                    document.getElementById("loginStatusBadge").className = "tag-pill tag-green";
-                }
-                document.getElementById("statTotalCoins").innerText = coins;
-                document.getElementById("statMissionsDone").innerText = missionsCompleted;
-                if (document.getElementById("statZeroWasteMeals")) document.getElementById("statZeroWasteMeals").innerText = currentUser.zeroWasteMeals || 0;
-                if (document.getElementById("statSaplingsPlanted")) document.getElementById("statSaplingsPlanted").innerText = currentUser.saplingsPlanted || 0;
-
-                document.getElementById("profileLevelTitleTag").innerText = `LEVEL ${levelInfo.level}: ${levelInfo.title.toUpperCase()}`;
-                document.getElementById("profileXpRatioTag").innerText = `${currentUser.xp} / ${levelInfo.maxXP} XP`;
-                document.getElementById("profileXpBarInner").style.width = `${levelInfo.pct}%`;
-
-                if (document.getElementById("editProfileName")) document.getElementById("editProfileName").value = currentUser.name;
-                if (document.getElementById("editProfileDept")) document.getElementById("editProfileDept").value = currentUser.dept;
-                if (document.getElementById("editProfileYear")) document.getElementById("editProfileYear").value = currentUser.year;
-                if (document.getElementById("editProfileBio")) document.getElementById("editProfileBio").value = currentUser.bio || "";
-
-                // Digital ID Modal
-                document.getElementById("idModalAvatar").innerText = currentUser.avatar;
-                document.getElementById("idModalName").innerText = currentUser.name;
-                document.getElementById("idModalNumber").innerText = currentUser.id;
-                document.getElementById("idModalDept").innerText = currentUser.dept;
-                document.getElementById("idModalYear").innerText = currentUser.year;
-                document.getElementById("idModalLevel").innerText = `Lvl ${levelInfo.level}`;
-                document.getElementById("idModalProgressPct").innerText = `${levelInfo.pct}%`;
-                document.getElementById("idModalProgressFill").style.width = `${levelInfo.pct}%`;
-
-                renderLeaderboard();
-                renderMissionHistory();
+            // Profile Screen
+            document.getElementById("profileAvatarDisplay").innerText = currentUser.avatar;
+            document.getElementById("profileTitleName").innerText = currentUser.name;
+            document.getElementById("profileTitleSub").innerText = `${currentUser.dept} • ${currentUser.year} • Level ${levelInfo.level}`;
+            document.getElementById("profileActiveIdText").innerText = currentUser.id;
+            if (document.getElementById("loginStatusBadge")) {
+                document.getElementById("loginStatusBadge").innerText = "ACTIVE LOGGED IN";
+                document.getElementById("loginStatusBadge").className = "tag-pill tag-green";
             }
+            document.getElementById("statTotalCoins").innerText = coins;
+            document.getElementById("statMissionsDone").innerText = missionsCompleted;
+            if (document.getElementById("statZeroWasteMeals")) document.getElementById("statZeroWasteMeals").innerText = currentUser.zeroWasteMeals || 0;
+            if (document.getElementById("statSaplingsPlanted")) document.getElementById("statSaplingsPlanted").innerText = currentUser.saplingsPlanted || 0;
 
-            function renderLeaderboard() {
-                const listContainer = document.getElementById("rankStudentsList");
-                if (!listContainer) return;
+            document.getElementById("profileLevelTitleTag").innerText = `LEVEL ${levelInfo.level}: ${levelInfo.title.toUpperCase()}`;
+            document.getElementById("profileXpRatioTag").innerText = `${currentUser.xp} / ${levelInfo.maxXP} XP`;
+            document.getElementById("profileXpBarInner").style.width = `${levelInfo.pct}%`;
 
-                const sortedUsers = Object.values(users).sort((a, b) => b.xp - a.xp);
-                listContainer.innerHTML = "";
+            if (document.getElementById("editProfileName")) document.getElementById("editProfileName").value = currentUser.name;
+            if (document.getElementById("editProfileDept")) document.getElementById("editProfileDept").value = currentUser.dept;
+            if (document.getElementById("editProfileYear")) document.getElementById("editProfileYear").value = currentUser.year;
+            if (document.getElementById("editProfileBio")) document.getElementById("editProfileBio").value = currentUser.bio || "";
 
-                sortedUsers.forEach((u, index) => {
-                    const levelInfo = getLevelInfo(u.xp);
-                    const isCurrent = (u.id === currentUserId);
-                    const rankNum = index + 1;
+            // Digital ID Modal
+            document.getElementById("idModalAvatar").innerText = currentUser.avatar;
+            document.getElementById("idModalName").innerText = currentUser.name;
+            document.getElementById("idModalNumber").innerText = currentUser.id;
+            document.getElementById("idModalDept").innerText = currentUser.dept;
+            document.getElementById("idModalYear").innerText = currentUser.year;
+            document.getElementById("idModalLevel").innerText = `Lvl ${levelInfo.level}`;
+            document.getElementById("idModalProgressPct").innerText = `${levelInfo.pct}%`;
+            document.getElementById("idModalProgressFill").style.width = `${levelInfo.pct}%`;
 
-                    let rankClass = "rank-item";
-                    let badgeBg = "var(--primary)";
-                    let badgeIcon = rankNum;
+            renderLeaderboard();
+            renderMissionHistory();
+        }
 
-                    if (rankNum === 1) { rankClass += " top-1"; badgeBg = "#f57c00"; badgeIcon = "🥇"; }
-                    else if (rankNum === 2) { rankClass += " top-2"; badgeBg = "#78909c"; badgeIcon = "🥈"; }
-                    else if (rankNum === 3) { rankClass += " top-3"; badgeBg = "#8d6e63"; badgeIcon = "🥉"; }
+        function renderLeaderboard() {
+            const listContainer = document.getElementById("rankStudentsList");
+            if (!listContainer) return;
 
-                    const item = document.createElement("div");
-                    item.className = rankClass;
-                    item.innerHTML = `
+            const sortedUsers = Object.values(users).sort((a, b) => b.xp - a.xp);
+            listContainer.innerHTML = "";
+
+            sortedUsers.forEach((u, index) => {
+                const levelInfo = getLevelInfo(u.xp);
+                const isCurrent = (u.id === currentUserId);
+                const rankNum = index + 1;
+
+                let rankClass = "rank-item";
+                let badgeBg = "var(--primary)";
+                let badgeIcon = rankNum;
+
+                if (rankNum === 1) { rankClass += " top-1"; badgeBg = "#f57c00"; badgeIcon = "🥇"; }
+                else if (rankNum === 2) { rankClass += " top-2"; badgeBg = "#78909c"; badgeIcon = "🥈"; }
+                else if (rankNum === 3) { rankClass += " top-3"; badgeBg = "#8d6e63"; badgeIcon = "🥉"; }
+
+                const item = document.createElement("div");
+                item.className = rankClass;
+                item.innerHTML = `
                     <div style="display: flex; align-items: center; gap: 12px;">
                         <div class="rank-badge-num" style="background: ${badgeBg};">${badgeIcon}</div>
                         <div>
@@ -3986,133 +4001,65 @@
                         <span class="tag-pill tag-green" style="margin-top: 2px; display: inline-block;">${u.xp} XP</span>
                     </div>
                 `;
-                    listContainer.appendChild(item);
+                listContainer.appendChild(item);
 
-                    if (isCurrent) {
-                        setElText("idModalRank", `#${rankNum} Rank`);
-                    }
-                });
+                if (isCurrent) {
+                    setElText("idModalRank", `#${rankNum} Rank`);
+                }
+            });
+        }
+
+        /* AUTH & LOGIN/REGISTER CONTROLS */
+        function switchAuthTab(tabName) {
+            const loginBtn = document.getElementById("tabLoginBtn");
+            const regBtn = document.getElementById("tabRegisterBtn");
+            const loginForm = document.getElementById("loginForm");
+            const regForm = document.getElementById("registerForm");
+
+            if (tabName === 'login') {
+                if (loginBtn) loginBtn.classList.add("active");
+                if (regBtn) regBtn.classList.remove("active");
+                if (loginForm) loginForm.style.display = "block";
+                if (regForm) regForm.style.display = "none";
+            } else {
+                if (regBtn) regBtn.classList.add("active");
+                if (loginBtn) loginBtn.classList.remove("active");
+                if (regForm) regForm.style.display = "block";
+                if (loginForm) loginForm.style.display = "none";
             }
+        }
 
-            /* AUTH & LOGIN/REGISTER CONTROLS */
-            function switchAuthTab(tabName) {
-                const loginBtn = document.getElementById("tabLoginBtn");
-                const regBtn = document.getElementById("tabRegisterBtn");
-                const loginForm = document.getElementById("loginForm");
-                const regForm = document.getElementById("registerForm");
+        function handleLoginSubmit(e) {
+            if (e && e.preventDefault) e.preventDefault();
+            const inputVal = (document.getElementById("loginIdInput") ? document.getElementById("loginIdInput").value : "").trim() ||
+                (document.getElementById("authLoginUsername") ? document.getElementById("authLoginUsername").value : "").trim();
 
-                if (tabName === 'login') {
-                    if (loginBtn) loginBtn.classList.add("active");
-                    if (regBtn) regBtn.classList.remove("active");
-                    if (loginForm) loginForm.style.display = "block";
-                    if (regForm) regForm.style.display = "none";
-                } else {
-                    if (regBtn) regBtn.classList.add("active");
-                    if (loginBtn) loginBtn.classList.remove("active");
-                    if (regForm) regForm.style.display = "block";
-                    if (loginForm) loginForm.style.display = "none";
-                }
-            }
-
-            function handleLoginSubmit(e) {
-                if (e && e.preventDefault) e.preventDefault();
-                const inputVal = (document.getElementById("loginIdInput") ? document.getElementById("loginIdInput").value : "").trim() ||
-                    (document.getElementById("authLoginUsername") ? document.getElementById("authLoginUsername").value : "").trim();
-
-                if (!inputVal) {
-                    const active = localStorage.getItem("eco_quest_active_user_v3") || "STU-2026-01";
-                    loadUser(active);
-                    closeAuthModal();
-                    return;
-                }
-
-                const searchKey = inputVal.toLowerCase();
-                const foundUser = Object.values(users).find(u =>
-                    u.id.toLowerCase() === searchKey ||
-                    u.name.toLowerCase() === searchKey ||
-                    (u.email && u.email.toLowerCase() === searchKey)
-                );
-
-                if (foundUser) {
-                    loadUser(foundUser.id);
-                } else {
-                    const freshId = inputVal.toUpperCase().startsWith("STU-") ? inputVal.toUpperCase() : ("STU-2026-" + Math.floor(1000 + Math.random() * 9000));
-                    users[freshId] = {
-                        id: freshId,
-                        name: inputVal,
-                        email: `${inputVal.toLowerCase().replace(/\s+/g, '')}@eco.edu`,
-                        dept: "CSE Dept",
-                        year: "1st Year",
-                        avatar: "🌱",
-                        bio: "Ready for eco quests!",
-                        xp: 0,
-                        coins: 0,
-                        missionsCompleted: 0,
-                        zeroWasteMeals: 0,
-                        saplingsPlanted: 0,
-                        vouchers: [],
-                        history: []
-                    };
-                    saveUsersToStorage();
-                    loadUser(freshId);
-                }
-
+            if (!inputVal) {
+                const active = localStorage.getItem("eco_quest_active_user_v3") || "STU-2026-01";
+                loadUser(active);
                 closeAuthModal();
-                playSuccessSound();
+                return;
             }
 
-            function handleRegisterSubmit(e) {
-                if (e && e.preventDefault) e.preventDefault();
-                let name = (document.getElementById("regNameInput") ? document.getElementById("regNameInput").value : "").trim() ||
-                    (document.getElementById("authRegUsername") ? document.getElementById("authRegUsername").value : "").trim();
-                if (!name) name = "Eco Student " + Math.floor(100 + Math.random() * 900);
+            const searchKey = inputVal.toLowerCase();
+            const foundUser = Object.values(users).find(u =>
+                u.id.toLowerCase() === searchKey ||
+                u.name.toLowerCase() === searchKey ||
+                (u.email && u.email.toLowerCase() === searchKey)
+            );
 
-                let customId = (document.getElementById("regIdInput") ? document.getElementById("regIdInput").value : "").trim();
-                const year = document.getElementById("regYearInput") ? document.getElementById("regYearInput").value : "1st Year";
-                const dept = document.getElementById("regDeptInput") ? document.getElementById("regDeptInput").value : "CSE Dept";
-                const avatar = selectedRegAvatar || "🌱";
-
-                const freshId = customId ? customId.toUpperCase() : ("STU-2026-" + Math.floor(1000 + Math.random() * 9000));
-
+            if (foundUser) {
+                loadUser(foundUser.id);
+            } else {
+                const freshId = inputVal.toUpperCase().startsWith("STU-") ? inputVal.toUpperCase() : ("STU-2026-" + Math.floor(1000 + Math.random() * 9000));
                 users[freshId] = {
                     id: freshId,
-                    name: name,
-                    email: `${name.toLowerCase().replace(/\s+/g, '')}@eco.edu`,
-                    dept: dept,
-                    year: year,
-                    avatar: avatar,
-                    bio: "Fresh Eco Student! Ready for campus sustainability.",
-                    xp: 0, // Fresh 0% Progress guaranteed!
-                    coins: 0,
-                    missionsCompleted: 0,
-                    zeroWasteMeals: 0,
-                    saplingsPlanted: 0,
-                    vouchers: [],
-                    history: []
-                };
-
-                saveUsersToStorage();
-                loadUser(freshId);
-                closeAuthModal();
-
-                playSuccessSound();
-                triggerConfetti();
-                showToast(`✨ Account Created! ID: ${freshId} (0% Progress)`, "✨");
-            }
-
-            function createFreshAccountQuick() {
-                const freshId = "STU-2026-" + Math.floor(1000 + Math.random() * 9000);
-                const freshNames = ["Eco Scholar", "Green Explorer", "Earth Defender", "Campus Lead", "Eco Warrior"];
-                const randomName = freshNames[Math.floor(Math.random() * freshNames.length)] + " " + Math.floor(10 + Math.random() * 90);
-
-                users[freshId] = {
-                    id: freshId,
-                    name: randomName,
-                    email: `${randomName.toLowerCase().replace(/\s+/g, '')}@eco.edu`,
+                    name: inputVal,
+                    email: `${inputVal.toLowerCase().replace(/\s+/g, '')}@eco.edu`,
                     dept: "CSE Dept",
                     year: "1st Year",
                     avatar: "🌱",
-                    bio: "Fresh 1-Click Eco Student Account",
+                    bio: "Ready for eco quests!",
                     xp: 0,
                     coins: 0,
                     missionsCompleted: 0,
@@ -4121,827 +4068,895 @@
                     vouchers: [],
                     history: []
                 };
-
                 saveUsersToStorage();
                 loadUser(freshId);
-                closeAuthModal();
-
-                playSuccessSound();
-                triggerConfetti();
-                showToast(`⚡ Instant Account Created! ID: ${freshId}`, "⚡");
             }
 
-            function switchAuthView(viewName) {
-                const landing = document.getElementById("authLandingView");
-                const login = document.getElementById("authLoginView");
-                const reg = document.getElementById("authRegisterView");
-                if (landing) landing.style.display = viewName === 'landing' ? 'block' : 'none';
-                if (login) login.style.display = viewName === 'login' ? 'block' : 'none';
-                if (reg) reg.style.display = viewName === 'register' ? 'block' : 'none';
+            closeAuthModal();
+            playSuccessSound();
+        }
+
+        function handleRegisterSubmit(e) {
+            if (e && e.preventDefault) e.preventDefault();
+            let name = (document.getElementById("regNameInput") ? document.getElementById("regNameInput").value : "").trim() ||
+                (document.getElementById("authRegUsername") ? document.getElementById("authRegUsername").value : "").trim();
+            if (!name) name = "Eco Student " + Math.floor(100 + Math.random() * 900);
+
+            let customId = (document.getElementById("regIdInput") ? document.getElementById("regIdInput").value : "").trim();
+            const year = document.getElementById("regYearInput") ? document.getElementById("regYearInput").value : "1st Year";
+            const dept = document.getElementById("regDeptInput") ? document.getElementById("regDeptInput").value : "CSE Dept";
+            const avatar = selectedRegAvatar || "🌱";
+
+            const freshId = customId ? customId.toUpperCase() : ("STU-2026-" + Math.floor(1000 + Math.random() * 9000));
+
+            users[freshId] = {
+                id: freshId,
+                name: name,
+                email: `${name.toLowerCase().replace(/\s+/g, '')}@eco.edu`,
+                dept: dept,
+                year: year,
+                avatar: avatar,
+                bio: "Fresh Eco Student! Ready for campus sustainability.",
+                xp: 0, // Fresh 0% Progress guaranteed!
+                coins: 0,
+                missionsCompleted: 0,
+                zeroWasteMeals: 0,
+                saplingsPlanted: 0,
+                vouchers: [],
+                history: []
+            };
+
+            saveUsersToStorage();
+            loadUser(freshId);
+            closeAuthModal();
+
+            playSuccessSound();
+            triggerConfetti();
+            showToast(`✨ Account Created! ID: ${freshId} (0% Progress)`, "✨");
+        }
+
+        function createFreshAccountQuick() {
+            const freshId = "STU-2026-" + Math.floor(1000 + Math.random() * 9000);
+            const freshNames = ["Eco Scholar", "Green Explorer", "Earth Defender", "Campus Lead", "Eco Warrior"];
+            const randomName = freshNames[Math.floor(Math.random() * freshNames.length)] + " " + Math.floor(10 + Math.random() * 90);
+
+            users[freshId] = {
+                id: freshId,
+                name: randomName,
+                email: `${randomName.toLowerCase().replace(/\s+/g, '')}@eco.edu`,
+                dept: "CSE Dept",
+                year: "1st Year",
+                avatar: "🌱",
+                bio: "Fresh 1-Click Eco Student Account",
+                xp: 0,
+                coins: 0,
+                missionsCompleted: 0,
+                zeroWasteMeals: 0,
+                saplingsPlanted: 0,
+                vouchers: [],
+                history: []
+            };
+
+            saveUsersToStorage();
+            loadUser(freshId);
+            closeAuthModal();
+
+            playSuccessSound();
+            triggerConfetti();
+            showToast(`⚡ Instant Account Created! ID: ${freshId}`, "⚡");
+        }
+
+        function switchAuthView(viewName) {
+            const landing = document.getElementById("authLandingView");
+            const login = document.getElementById("authLoginView");
+            const reg = document.getElementById("authRegisterView");
+            if (landing) landing.style.display = viewName === 'landing' ? 'block' : 'none';
+            if (login) login.style.display = viewName === 'login' ? 'block' : 'none';
+            if (reg) reg.style.display = viewName === 'register' ? 'block' : 'none';
+            const bottomNavEl = document.querySelector(".bottom-nav");
+            if (bottomNavEl) bottomNavEl.style.display = "none";
+        }
+
+        function openAuthScreen(viewName = 'landing') {
+            switchTab('auth');
+            switchAuthView(viewName);
+        }
+
+        function continueAsGuest(e) {
+            if (e && e.preventDefault) e.preventDefault();
+            if (e && e.stopPropagation) e.stopPropagation();
+
+            const demoIds = ["STU-2026-01", "STU-2026-02", "STU-2026-03", "STU-2026-04", "STU-2026-05", "STU-2026-06"];
+            const randomId = demoIds[Math.floor(Math.random() * demoIds.length)];
+
+            if (!users[randomId] && DEFAULT_USERS[randomId]) {
+                users[randomId] = JSON.parse(JSON.stringify(DEFAULT_USERS[randomId]));
+            }
+
+            const chosenUser = users[randomId] || DEFAULT_USERS["STU-2026-01"];
+            saveUsersToStorage();
+            loadUser(chosenUser.id);
+            switchTab('home');
+            playSuccessSound();
+            showToast(`🚀 Guest Mode: Logged in as ${chosenUser.name} (${chosenUser.id})`, "🚀");
+        }
+
+        function togglePasswordVisibility(inputId, toggleBtn) {
+            const input = document.getElementById(inputId);
+            if (!input) return;
+            if (input.type === "password") {
+                input.type = "text";
+                if (toggleBtn) toggleBtn.innerText = "🙈";
+            } else {
+                input.type = "password";
+                if (toggleBtn) toggleBtn.innerText = "👁️";
+            }
+        }
+
+        function performNewAuthLogin(e) {
+            if (e && e.preventDefault) e.preventDefault();
+            const usernameInput = (document.getElementById("authLoginUsername") ? document.getElementById("authLoginUsername").value : "").trim();
+            const passwordInput = (document.getElementById("authLoginPassword") ? document.getElementById("authLoginPassword").value : "").trim();
+
+            if (!usernameInput) {
+                continueAsGuest(e);
+                return false;
+            }
+
+            const searchKey = usernameInput.toLowerCase();
+            const foundUser = Object.values(users).find(u => {
+                const uId = (u.id || "").toLowerCase();
+                const uCustomId = (u.customId || "").toLowerCase();
+                const uName = (u.name || "").toLowerCase();
+                const uEmail = (u.email || "").toLowerCase();
+                const uIdNoPrefix = uId.replace(/^stu-2026-/, "");
+
+                return (
+                    uId === searchKey ||
+                    uCustomId === searchKey ||
+                    uIdNoPrefix === searchKey ||
+                    uName === searchKey ||
+                    uEmail === searchKey
+                );
+            });
+
+            if (foundUser) {
+                if (passwordInput) {
+                    foundUser.password = passwordInput;
+                }
+                saveUsersToStorage();
+                loadUser(foundUser.id);
+                switchTab('home');
+                playSuccessSound();
+                showToast(`🎉 Welcome back, ${foundUser.name}!`);
+                return false;
+            }
+
+            // Create account instantly with entered username and password!
+            const isEmail = usernameInput.includes("@");
+            const name = isEmail ? usernameInput.split('@')[0] : usernameInput;
+            const freshId = usernameInput.toUpperCase().startsWith("STU-") ? usernameInput.toUpperCase() : ("STU-2026-" + Math.floor(1000 + Math.random() * 9000));
+
+            users[freshId] = {
+                id: freshId,
+                customId: usernameInput,
+                name: name,
+                email: isEmail ? usernameInput : `${name.toLowerCase().replace(/[^a-z0-9]/g, '')}@eco.edu`,
+                password: passwordInput || "1234",
+                dept: "CSE Dept",
+                year: "1st Year",
+                avatar: "🌱",
+                bio: "Fresh Eco Student! Ready for campus sustainability.",
+                xp: 0,
+                coins: 0,
+                missionsCompleted: 0,
+                zeroWasteMeals: 0,
+                saplingsPlanted: 0,
+                vouchers: [],
+                history: []
+            };
+
+            saveUsersToStorage();
+            loadUser(freshId);
+            switchTab('home');
+            playSuccessSound();
+            showToast(`✨ Welcome ${name}! Logged in as ${freshId}`);
+            return false;
+        }
+
+        function performNewAuthRegister(e) {
+            if (e && e.preventDefault) e.preventDefault();
+            const username = (document.getElementById("authRegUsername") ? document.getElementById("authRegUsername").value : "").trim();
+            const email = (document.getElementById("authRegEmail") ? document.getElementById("authRegEmail").value : "").trim();
+            const customId = (document.getElementById("authRegId") ? document.getElementById("authRegId").value : "").trim();
+            const password = (document.getElementById("authRegPassword") ? document.getElementById("authRegPassword").value : "").trim();
+
+            const inputName = username || customId || (email ? email.split('@')[0] : "");
+            if (!inputName) {
+                createFreshAccountQuick();
+                return false;
+            }
+
+            const effectiveName = inputName;
+            const freshId = customId ? customId.toUpperCase() : ("STU-2026-" + Math.floor(1000 + Math.random() * 9000));
+            const userEmail = email || `${effectiveName.toLowerCase().replace(/[^a-z0-9]/g, '')}@eco.edu`;
+
+            users[freshId] = {
+                id: freshId,
+                customId: customId || freshId,
+                name: effectiveName,
+                email: userEmail,
+                password: password || "1234",
+                dept: (document.getElementById("regDeptInput") ? document.getElementById("regDeptInput").value : "CSE Dept"),
+                year: (document.getElementById("regYearInput") ? document.getElementById("regYearInput").value : "1st Year"),
+                avatar: selectedRegAvatar || "🌱",
+                bio: "Fresh Eco Student! Ready for campus sustainability.",
+                xp: 0,
+                coins: 0,
+                missionsCompleted: 0,
+                zeroWasteMeals: 0,
+                saplingsPlanted: 0,
+                vouchers: [],
+                history: []
+            };
+
+            saveUsersToStorage();
+            loadUser(freshId);
+            switchTab('home');
+
+            playSuccessSound();
+            triggerConfetti();
+            showToast(`✨ Account Created! Welcome ${effectiveName} (${freshId})`, "✨");
+            return false;
+        }
+
+        function quickLoginDemo(id) {
+            if (id === 'STU-2026-NEW') {
+                createFreshAccountQuick();
+                return;
+            }
+            if (!users[id] && DEFAULT_USERS[id]) {
+                users[id] = JSON.parse(JSON.stringify(DEFAULT_USERS[id]));
+            }
+            if (users[id]) {
+                saveUsersToStorage();
+                loadUser(id);
+                closeAuthModal();
+                switchTab('home');
+                playSuccessSound();
+            } else {
+                createFreshAccountQuick();
+            }
+        }
+
+        function openAuthModal() {
+            switchTab('auth');
+            switchAuthView('login');
+        }
+
+        function closeAuthModal() {
+            switchTab('home');
+        }
+
+        function toggleAuthAction() {
+            switchTab('auth');
+            switchAuthView('login');
+        }
+
+        function selectRegAvatar(icon, btn) {
+            selectedRegAvatar = icon;
+            document.querySelectorAll("#regAvatarGrid .avatar-mini-btn").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+        }
+
+        /* ID CARD FULL-VIEW UI CONTROLS */
+        function openIdCardModal() {
+            if (!currentUser) {
+                showToast("🔑 Please login to view your ID Pass.");
+                switchTab('auth');
+                return;
+            }
+            const levelInfo = getLevelInfo(currentUser.xp);
+            const sortedUsers = Object.values(users).sort((a, b) => b.xp - a.xp);
+            const userRank = sortedUsers.findIndex(u => u.id === currentUser.id) + 1;
+
+            const name = currentUser.name;
+            const id = currentUser.id;
+            const avatar = currentUser.avatar;
+            const dept = currentUser.dept;
+            const year = currentUser.year;
+            const rankStr = `#${userRank || 1} Rank`;
+            const lvlStr = `Lvl ${levelInfo.level} ${levelInfo.title.split(' ')[1] || ''}`;
+            const pctStr = `${levelInfo.pct}%`;
+
+            if (document.getElementById("idUIName")) document.getElementById("idUIName").innerText = name;
+            if (document.getElementById("idUINumber")) document.getElementById("idUINumber").innerText = id;
+            if (document.getElementById("idUIAvatar")) document.getElementById("idUIAvatar").innerText = avatar;
+            if (document.getElementById("idUIDept")) document.getElementById("idUIDept").innerText = dept;
+            if (document.getElementById("idUIYear")) document.getElementById("idUIYear").innerText = year;
+            if (document.getElementById("idUIRank")) document.getElementById("idUIRank").innerText = rankStr;
+            if (document.getElementById("idUILevel")) document.getElementById("idUILevel").innerText = lvlStr;
+            if (document.getElementById("idUIProgressPct")) document.getElementById("idUIProgressPct").innerText = pctStr;
+            if (document.getElementById("idUIProgressFill")) document.getElementById("idUIProgressFill").style.width = pctStr;
+
+            switchTab('idcard');
+            playSuccessSound();
+        }
+
+        function closeIdCardModal() {
+            switchTab('home');
+        }
+
+        /* TOAST SYSTEM */
+        function showToast(msg, icon = "⚡") {
+            const toast = document.getElementById("toastNotif");
+            document.getElementById("toastIcon").innerText = icon;
+            document.getElementById("toastMessage").innerText = msg;
+            toast.classList.add("show");
+            setTimeout(() => toast.classList.remove("show"), 3200);
+        }
+
+        /* Offline AI Loader */
+        async function loadOfflineAI() {
+            const indicator = document.getElementById("aiModelIndicator");
+            try {
+                if (typeof tmImage !== 'undefined') {
+                    model = await tmImage.load("./ai-model/model.json", "./ai-model/metadata.json");
+                    modelLoaded = true;
+                    if (indicator) indicator.innerText = "✅ Teachable Machine Plant AI Ready";
+                }
+            } catch (e) {
+                modelLoaded = true;
+                if (indicator) indicator.innerText = "✅ Strict Plant & Tree AI Verifier Active";
+            }
+        }
+        window.addEventListener("load", loadOfflineAI);
+
+        function updateCoins(amount) {
+            if (amount) {
+                coins += amount;
+                if (currentUser) currentUser.coins = coins;
+            }
+            document.getElementById("userCoins").innerText = coins;
+            document.getElementById("rewardsCoinsText").innerText = coins;
+            document.getElementById("statTotalCoins").innerText = coins;
+            saveUsersToStorage();
+        }
+
+        function toggleWideMode() {
+            const container = document.getElementById("phoneContainer");
+            const btn = document.getElementById("toggleWideBtn");
+            container.classList.toggle("wide-mode");
+            btn.innerHTML = container.classList.contains("wide-mode") ? "📱 Phone" : "🖥️ Wide";
+        }
+
+        function switchTab(tabId, navBtn) {
+            document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+            const targetSec = document.getElementById("tab-" + tabId);
+            if (targetSec) targetSec.classList.add("active");
+
+            const headerEl = document.querySelector(".header");
+            const topBarEl = document.querySelector(".top-status-bar");
+            const bottomNavEl = document.querySelector(".bottom-nav");
+
+            if (tabId === 'auth') {
+                if (headerEl) headerEl.style.display = "none";
+                if (topBarEl) topBarEl.style.display = "none";
+                if (bottomNavEl) bottomNavEl.style.display = "none";
+            } else {
+                if (headerEl) headerEl.style.display = "flex";
+                if (topBarEl) topBarEl.style.display = "flex";
+                if (bottomNavEl) bottomNavEl.style.display = "flex";
+            }
+
+            document.querySelectorAll(".nav-tab-btn").forEach(b => b.classList.remove("active"));
+            if (navBtn) navBtn.classList.add("active");
+            else {
+                const idx = ["home", "games", "missions", "rewards", "ranks", "profile"].indexOf(tabId);
+                if (idx !== -1) {
+                    const btns = document.querySelectorAll(".nav-tab-btn");
+                    if (btns[idx]) btns[idx].classList.add("active");
+                }
+            }
+            const appBody = document.querySelector(".app-body");
+            if (appBody) appBody.scrollTop = 0;
+        }
+
+        /* Leaderboard Category Filter Switch */
+        function switchRankCategory(cat, btn) {
+            btn.parentElement.querySelectorAll(".chip-btn").forEach(c => c.classList.remove("active"));
+            btn.classList.add("active");
+            document.getElementById("rank-students-view").style.display = cat === 'students' ? 'block' : 'none';
+            document.getElementById("rank-depts-view").style.display = cat === 'depts' ? 'block' : 'none';
+        }
+
+        /* Profile System Controls */
+        function toggleAvatarPicker() {
+            const card = document.getElementById("avatarPickerCard");
+            card.style.display = card.style.display === "none" ? "block" : "none";
+        }
+
+        function selectAvatar(icon, btn) {
+            selectedAvatar = icon;
+            document.querySelectorAll(".avatar-option-btn").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            document.getElementById("profileAvatarDisplay").innerText = icon;
+            document.getElementById("homeProfileAvatar").innerText = icon;
+            document.getElementById("headerAvatarLogo").innerText = icon;
+            saveProfileDetails();
+            playCoinSound();
+        }
+
+        function saveProfileDetails() {
+            if (!currentUser) return;
+            const name = document.getElementById("editProfileName").value.trim() || currentUser.name;
+            const dept = document.getElementById("editProfileDept").value;
+            const year = document.getElementById("editProfileYear").value;
+            const bio = document.getElementById("editProfileBio").value.trim();
+
+            currentUser.name = name;
+            currentUser.dept = dept;
+            currentUser.year = year;
+            currentUser.bio = bio;
+
+            saveUsersToStorage();
+            updateUserUI();
+
+            playSuccessSound();
+            showToast("🎉 Profile updated!");
+        }
+
+        window.addEventListener("DOMContentLoaded", () => {
+            initUserSystem();
+            const activeSection = document.querySelector(".section.active");
+            if (activeSection && activeSection.id === "tab-auth") {
                 const bottomNavEl = document.querySelector(".bottom-nav");
                 if (bottomNavEl) bottomNavEl.style.display = "none";
             }
+        });
 
-            function openAuthScreen(viewName = 'landing') {
-                switchTab('auth');
-                switchAuthView(viewName);
-            }
+        /* Game Modes */
+        function switchGameMode(mode, btn) {
+            btn.parentElement.querySelectorAll(".chip-btn").forEach(c => c.classList.remove("active"));
+            btn.classList.add("active");
+            document.getElementById("game-quiz-view").style.display = mode === 'quiz' ? 'block' : 'none';
+            document.getElementById("game-sort-view").style.display = mode === 'sort' ? 'block' : 'none';
+            document.getElementById("game-scramble-view").style.display = mode === 'scramble' ? 'block' : 'none';
+            document.getElementById("game-reflex-view").style.display = mode === 'reflex' ? 'block' : 'none';
+        }
 
-            function continueAsGuest(e) {
-                if (e && e.preventDefault) e.preventDefault();
-                if (e && e.stopPropagation) e.stopPropagation();
+        /* Quiz Logic */
+        const quizQuestions = [
+            { q: "Q1: How much energy does recycling a single aluminum soda can save compared to manufacturing a new one?", options: ["A) Around 25%", "B) Around 50%", "C) Around 75%", "D) Around 95%"], correct: 3 },
+            { q: "Q2: Which campus waste item goes into the organic compost bin?", options: ["A) Plastic wrapper", "B) Banana peel", "C) Soda can", "D) Styrofoam cup"], correct: 1 },
+            { q: "Q3: What percentage of greenhouse emissions can be reduced by solar/wind energy?", options: ["A) Over 60%", "B) 10%", "C) 25%", "D) 5%"], correct: 0 }
+        ];
+        let currentQuizIdx = 0;
 
-                const demoIds = ["STU-2026-01", "STU-2026-02", "STU-2026-03", "STU-2026-04", "STU-2026-05", "STU-2026-06"];
-                const randomId = demoIds[Math.floor(Math.random() * demoIds.length)];
+        function loadQuestion() {
+            const q = quizQuestions[currentQuizIdx];
+            document.getElementById("quizCounterText").innerText = `Question ${currentQuizIdx + 1} of ${quizQuestions.length}`;
+            document.getElementById("quizQuestionText").innerText = q.q;
+            document.getElementById("quizStatusMessage").innerText = "";
+            const grid = document.getElementById("quizOptionsGrid");
+            grid.innerHTML = "";
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement("button");
+                btn.className = "option-btn";
+                btn.onclick = () => checkAnswer(idx);
+                btn.innerHTML = `<span class="option-key">${["A", "B", "C", "D"][idx]}</span> <span>${opt}</span>`;
+                grid.appendChild(btn);
+            });
+        }
+        loadQuestion();
 
-                if (!users[randomId] && DEFAULT_USERS[randomId]) {
-                    users[randomId] = JSON.parse(JSON.stringify(DEFAULT_USERS[randomId]));
-                }
+        function checkAnswer(selectedIdx) {
+            const currentQ = quizQuestions[currentQuizIdx];
+            const btns = document.querySelectorAll("#quizOptionsGrid .option-btn");
+            const teddy = document.getElementById("teddyChar");
+            const seedling = document.getElementById("seedlingChar");
+            const msg = document.getElementById("quizStatusMessage");
 
-                const chosenUser = users[randomId] || DEFAULT_USERS["STU-2026-01"];
-                saveUsersToStorage();
-                loadUser(chosenUser.id);
-                switchTab('home');
-                playSuccessSound();
-                showToast(`🚀 Guest Mode: Logged in as ${chosenUser.name} (${chosenUser.id})`, "🚀");
-            }
-
-            function togglePasswordVisibility(inputId, toggleBtn) {
-                const input = document.getElementById(inputId);
-                if (!input) return;
-                if (input.type === "password") {
-                    input.type = "text";
-                    if (toggleBtn) toggleBtn.innerText = "🙈";
-                } else {
-                    input.type = "password";
-                    if (toggleBtn) toggleBtn.innerText = "👁️";
-                }
-            }
-
-            function performNewAuthLogin(e) {
-                if (e && e.preventDefault) e.preventDefault();
-                const usernameInput = (document.getElementById("authLoginUsername") ? document.getElementById("authLoginUsername").value : "").trim();
-                const passwordInput = (document.getElementById("authLoginPassword") ? document.getElementById("authLoginPassword").value : "").trim();
-
-                if (!usernameInput) {
-                    continueAsGuest(e);
-                    return false;
-                }
-
-                const searchKey = usernameInput.toLowerCase();
-                const foundUser = Object.values(users).find(u => {
-                    const uId = (u.id || "").toLowerCase();
-                    const uCustomId = (u.customId || "").toLowerCase();
-                    const uName = (u.name || "").toLowerCase();
-                    const uEmail = (u.email || "").toLowerCase();
-                    const uIdNoPrefix = uId.replace(/^stu-2026-/, "");
-
-                    return (
-                        uId === searchKey ||
-                        uCustomId === searchKey ||
-                        uIdNoPrefix === searchKey ||
-                        uName === searchKey ||
-                        uEmail === searchKey
-                    );
-                });
-
-                if (foundUser) {
-                    if (passwordInput) {
-                        foundUser.password = passwordInput;
-                    }
-                    saveUsersToStorage();
-                    loadUser(foundUser.id);
-                    switchTab('home');
-                    playSuccessSound();
-                    showToast(`🎉 Welcome back, ${foundUser.name}!`);
-                    return false;
-                }
-
-                // Create account instantly with entered username and password!
-                const isEmail = usernameInput.includes("@");
-                const name = isEmail ? usernameInput.split('@')[0] : usernameInput;
-                const freshId = usernameInput.toUpperCase().startsWith("STU-") ? usernameInput.toUpperCase() : ("STU-2026-" + Math.floor(1000 + Math.random() * 9000));
-
-                users[freshId] = {
-                    id: freshId,
-                    customId: usernameInput,
-                    name: name,
-                    email: isEmail ? usernameInput : `${name.toLowerCase().replace(/[^a-z0-9]/g, '')}@eco.edu`,
-                    password: passwordInput || "1234",
-                    dept: "CSE Dept",
-                    year: "1st Year",
-                    avatar: "🌱",
-                    bio: "Fresh Eco Student! Ready for campus sustainability.",
-                    xp: 0,
-                    coins: 0,
-                    missionsCompleted: 0,
-                    zeroWasteMeals: 0,
-                    saplingsPlanted: 0,
-                    vouchers: [],
-                    history: []
-                };
-
-                saveUsersToStorage();
-                loadUser(freshId);
-                switchTab('home');
-                playSuccessSound();
-                showToast(`✨ Welcome ${name}! Logged in as ${freshId}`);
-                return false;
-            }
-
-            function performNewAuthRegister(e) {
-                if (e && e.preventDefault) e.preventDefault();
-                const username = (document.getElementById("authRegUsername") ? document.getElementById("authRegUsername").value : "").trim();
-                const email = (document.getElementById("authRegEmail") ? document.getElementById("authRegEmail").value : "").trim();
-                const customId = (document.getElementById("authRegId") ? document.getElementById("authRegId").value : "").trim();
-                const password = (document.getElementById("authRegPassword") ? document.getElementById("authRegPassword").value : "").trim();
-
-                const inputName = username || customId || (email ? email.split('@')[0] : "");
-                if (!inputName) {
-                    createFreshAccountQuick();
-                    return false;
-                }
-
-                const effectiveName = inputName;
-                const freshId = customId ? customId.toUpperCase() : ("STU-2026-" + Math.floor(1000 + Math.random() * 9000));
-                const userEmail = email || `${effectiveName.toLowerCase().replace(/[^a-z0-9]/g, '')}@eco.edu`;
-
-                users[freshId] = {
-                    id: freshId,
-                    customId: customId || freshId,
-                    name: effectiveName,
-                    email: userEmail,
-                    password: password || "1234",
-                    dept: (document.getElementById("regDeptInput") ? document.getElementById("regDeptInput").value : "CSE Dept"),
-                    year: (document.getElementById("regYearInput") ? document.getElementById("regYearInput").value : "1st Year"),
-                    avatar: selectedRegAvatar || "🌱",
-                    bio: "Fresh Eco Student! Ready for campus sustainability.",
-                    xp: 0,
-                    coins: 0,
-                    missionsCompleted: 0,
-                    zeroWasteMeals: 0,
-                    saplingsPlanted: 0,
-                    vouchers: [],
-                    history: []
-                };
-
-                saveUsersToStorage();
-                loadUser(freshId);
-                switchTab('home');
-
-                playSuccessSound();
-                triggerConfetti();
-                showToast(`✨ Account Created! Welcome ${effectiveName} (${freshId})`, "✨");
-                return false;
-            }
-
-            function quickLoginDemo(id) {
-                if (id === 'STU-2026-NEW') {
-                    createFreshAccountQuick();
-                    return;
-                }
-                if (!users[id] && DEFAULT_USERS[id]) {
-                    users[id] = JSON.parse(JSON.stringify(DEFAULT_USERS[id]));
-                }
-                if (users[id]) {
-                    saveUsersToStorage();
-                    loadUser(id);
-                    closeAuthModal();
-                    switchTab('home');
-                    playSuccessSound();
-                } else {
-                    createFreshAccountQuick();
-                }
-            }
-
-            function openAuthModal() {
-                switchTab('auth');
-                switchAuthView('login');
-            }
-
-            function closeAuthModal() {
-                switchTab('home');
-            }
-
-            function toggleAuthAction() {
-                switchTab('auth');
-                switchAuthView('login');
-            }
-
-            function selectRegAvatar(icon, btn) {
-                selectedRegAvatar = icon;
-                document.querySelectorAll("#regAvatarGrid .avatar-mini-btn").forEach(b => b.classList.remove("active"));
-                btn.classList.add("active");
-            }
-
-            /* ID CARD FULL-VIEW UI CONTROLS */
-            function openIdCardModal() {
-                if (!currentUser) {
-                    showToast("🔑 Please login to view your ID Pass.");
-                    switchTab('auth');
-                    return;
-                }
-                const levelInfo = getLevelInfo(currentUser.xp);
-                const sortedUsers = Object.values(users).sort((a, b) => b.xp - a.xp);
-                const userRank = sortedUsers.findIndex(u => u.id === currentUser.id) + 1;
-
-                const name = currentUser.name;
-                const id = currentUser.id;
-                const avatar = currentUser.avatar;
-                const dept = currentUser.dept;
-                const year = currentUser.year;
-                const rankStr = `#${userRank || 1} Rank`;
-                const lvlStr = `Lvl ${levelInfo.level} ${levelInfo.title.split(' ')[1] || ''}`;
-                const pctStr = `${levelInfo.pct}%`;
-
-                if (document.getElementById("idUIName")) document.getElementById("idUIName").innerText = name;
-                if (document.getElementById("idUINumber")) document.getElementById("idUINumber").innerText = id;
-                if (document.getElementById("idUIAvatar")) document.getElementById("idUIAvatar").innerText = avatar;
-                if (document.getElementById("idUIDept")) document.getElementById("idUIDept").innerText = dept;
-                if (document.getElementById("idUIYear")) document.getElementById("idUIYear").innerText = year;
-                if (document.getElementById("idUIRank")) document.getElementById("idUIRank").innerText = rankStr;
-                if (document.getElementById("idUILevel")) document.getElementById("idUILevel").innerText = lvlStr;
-                if (document.getElementById("idUIProgressPct")) document.getElementById("idUIProgressPct").innerText = pctStr;
-                if (document.getElementById("idUIProgressFill")) document.getElementById("idUIProgressFill").style.width = pctStr;
-
-                switchTab('idcard');
-                playSuccessSound();
-            }
-
-            function closeIdCardModal() {
-                switchTab('home');
-            }
-
-            /* TOAST SYSTEM */
-            function showToast(msg, icon = "⚡") {
-                const toast = document.getElementById("toastNotif");
-                document.getElementById("toastIcon").innerText = icon;
-                document.getElementById("toastMessage").innerText = msg;
-                toast.classList.add("show");
-                setTimeout(() => toast.classList.remove("show"), 3200);
-            }
-
-            /* Offline AI Loader */
-            async function loadOfflineAI() {
-                const indicator = document.getElementById("aiModelIndicator");
-                try {
-                    if (typeof tmImage !== 'undefined') {
-                        model = await tmImage.load("./ai-model/model.json", "./ai-model/metadata.json");
-                        modelLoaded = true;
-                        if (indicator) indicator.innerText = "✅ Teachable Machine Plant AI Ready";
-                    }
-                } catch (e) {
-                    modelLoaded = true;
-                    if (indicator) indicator.innerText = "✅ Strict Plant & Tree AI Verifier Active";
-                }
-            }
-            window.addEventListener("load", loadOfflineAI);
-
-            function updateCoins(amount) {
-                if (amount) {
-                    coins += amount;
-                    if (currentUser) currentUser.coins = coins;
-                }
-                document.getElementById("userCoins").innerText = coins;
-                document.getElementById("rewardsCoinsText").innerText = coins;
-                document.getElementById("statTotalCoins").innerText = coins;
-                saveUsersToStorage();
-            }
-
-            function toggleWideMode() {
-                const container = document.getElementById("phoneContainer");
-                const btn = document.getElementById("toggleWideBtn");
-                container.classList.toggle("wide-mode");
-                btn.innerHTML = container.classList.contains("wide-mode") ? "📱 Phone" : "🖥️ Wide";
-            }
-
-            function switchTab(tabId, navBtn) {
-                document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
-                const targetSec = document.getElementById("tab-" + tabId);
-                if (targetSec) targetSec.classList.add("active");
-
-                const headerEl = document.querySelector(".header");
-                const topBarEl = document.querySelector(".top-status-bar");
-                const bottomNavEl = document.querySelector(".bottom-nav");
-
-                if (tabId === 'auth') {
-                    if (headerEl) headerEl.style.display = "none";
-                    if (topBarEl) topBarEl.style.display = "none";
-                    if (bottomNavEl) bottomNavEl.style.display = "none";
-                } else {
-                    if (headerEl) headerEl.style.display = "flex";
-                    if (topBarEl) topBarEl.style.display = "flex";
-                    if (bottomNavEl) bottomNavEl.style.display = "flex";
-                }
-
-                document.querySelectorAll(".nav-tab-btn").forEach(b => b.classList.remove("active"));
-                if (navBtn) navBtn.classList.add("active");
-                else {
-                    const idx = ["home", "games", "missions", "rewards", "ranks", "profile"].indexOf(tabId);
-                    if (idx !== -1) {
-                        const btns = document.querySelectorAll(".nav-tab-btn");
-                        if (btns[idx]) btns[idx].classList.add("active");
-                    }
-                }
-                const appBody = document.querySelector(".app-body");
-                if (appBody) appBody.scrollTop = 0;
-            }
-
-            /* Leaderboard Category Filter Switch */
-            function switchRankCategory(cat, btn) {
-                btn.parentElement.querySelectorAll(".chip-btn").forEach(c => c.classList.remove("active"));
-                btn.classList.add("active");
-                document.getElementById("rank-students-view").style.display = cat === 'students' ? 'block' : 'none';
-                document.getElementById("rank-depts-view").style.display = cat === 'depts' ? 'block' : 'none';
-            }
-
-            /* Profile System Controls */
-            function toggleAvatarPicker() {
-                const card = document.getElementById("avatarPickerCard");
-                card.style.display = card.style.display === "none" ? "block" : "none";
-            }
-
-            function selectAvatar(icon, btn) {
-                selectedAvatar = icon;
-                document.querySelectorAll(".avatar-option-btn").forEach(b => b.classList.remove("active"));
-                btn.classList.add("active");
-                document.getElementById("profileAvatarDisplay").innerText = icon;
-                document.getElementById("homeProfileAvatar").innerText = icon;
-                document.getElementById("headerAvatarLogo").innerText = icon;
-                saveProfileDetails();
-                playCoinSound();
-            }
-
-            function saveProfileDetails() {
-                if (!currentUser) return;
-                const name = document.getElementById("editProfileName").value.trim() || currentUser.name;
-                const dept = document.getElementById("editProfileDept").value;
-                const year = document.getElementById("editProfileYear").value;
-                const bio = document.getElementById("editProfileBio").value.trim();
-
-                currentUser.name = name;
-                currentUser.dept = dept;
-                currentUser.year = year;
-                currentUser.bio = bio;
-
-                saveUsersToStorage();
-                updateUserUI();
-
-                playSuccessSound();
-                showToast("🎉 Profile updated!");
-            }
-
-            window.addEventListener("DOMContentLoaded", () => {
-                initUserSystem();
-                const activeSection = document.querySelector(".section.active");
-                if (activeSection && activeSection.id === "tab-auth") {
-                    const bottomNavEl = document.querySelector(".bottom-nav");
-                    if (bottomNavEl) bottomNavEl.style.display = "none";
-                }
+            btns.forEach((b, idx) => {
+                b.disabled = true;
+                if (idx === currentQ.correct) b.classList.add("correct");
+                else if (idx === selectedIdx) b.classList.add("wrong");
             });
 
-            /* Game Modes */
-            function switchGameMode(mode, btn) {
-                btn.parentElement.querySelectorAll(".chip-btn").forEach(c => c.classList.remove("active"));
-                btn.classList.add("active");
-                document.getElementById("game-quiz-view").style.display = mode === 'quiz' ? 'block' : 'none';
-                document.getElementById("game-sort-view").style.display = mode === 'sort' ? 'block' : 'none';
-                document.getElementById("game-scramble-view").style.display = mode === 'scramble' ? 'block' : 'none';
-                document.getElementById("game-reflex-view").style.display = mode === 'reflex' ? 'block' : 'none';
+            if (selectedIdx === currentQ.correct) {
+                msg.style.color = "#2e7d32";
+                msg.innerText = "🎉 Correct! +20 Eco-Coins & +20 XP";
+                teddy.classList.add("dancing");
+                seedling.classList.add("dancing");
+                playCoinSound();
+                triggerConfetti();
+                updateCoins(20);
+                addXP(20, "Eco Quiz Correct");
+            } else {
+                msg.style.color = "#e53935";
+                msg.innerText = "❌ Incorrect! Try next question.";
+                playErrorSound();
             }
 
-            /* Quiz Logic */
-            const quizQuestions = [
-                { q: "Q1: How much energy does recycling a single aluminum soda can save compared to manufacturing a new one?", options: ["A) Around 25%", "B) Around 50%", "C) Around 75%", "D) Around 95%"], correct: 3 },
-                { q: "Q2: Which campus waste item goes into the organic compost bin?", options: ["A) Plastic wrapper", "B) Banana peel", "C) Soda can", "D) Styrofoam cup"], correct: 1 },
-                { q: "Q3: What percentage of greenhouse emissions can be reduced by solar/wind energy?", options: ["A) Over 60%", "B) 10%", "C) 25%", "D) 5%"], correct: 0 }
-            ];
-            let currentQuizIdx = 0;
-
-            function loadQuestion() {
-                const q = quizQuestions[currentQuizIdx];
-                document.getElementById("quizCounterText").innerText = `Question ${currentQuizIdx + 1} of ${quizQuestions.length}`;
-                document.getElementById("quizQuestionText").innerText = q.q;
-                document.getElementById("quizStatusMessage").innerText = "";
-                const grid = document.getElementById("quizOptionsGrid");
-                grid.innerHTML = "";
-                q.options.forEach((opt, idx) => {
-                    const btn = document.createElement("button");
-                    btn.className = "option-btn";
-                    btn.onclick = () => checkAnswer(idx);
-                    btn.innerHTML = `<span class="option-key">${["A", "B", "C", "D"][idx]}</span> <span>${opt}</span>`;
-                    grid.appendChild(btn);
-                });
-            }
-            loadQuestion();
-
-            function checkAnswer(selectedIdx) {
-                const currentQ = quizQuestions[currentQuizIdx];
-                const btns = document.querySelectorAll("#quizOptionsGrid .option-btn");
-                const teddy = document.getElementById("teddyChar");
-                const seedling = document.getElementById("seedlingChar");
-                const msg = document.getElementById("quizStatusMessage");
-
-                btns.forEach((b, idx) => {
-                    b.disabled = true;
-                    if (idx === currentQ.correct) b.classList.add("correct");
-                    else if (idx === selectedIdx) b.classList.add("wrong");
-                });
-
-                if (selectedIdx === currentQ.correct) {
-                    msg.style.color = "#2e7d32";
-                    msg.innerText = "🎉 Correct! +20 Eco-Coins & +20 XP";
-                    teddy.classList.add("dancing");
-                    seedling.classList.add("dancing");
-                    playCoinSound();
-                    triggerConfetti();
-                    updateCoins(20);
-                    addXP(20, "Eco Quiz Correct");
-                } else {
-                    msg.style.color = "#e53935";
-                    msg.innerText = "❌ Incorrect! Try next question.";
-                    playErrorSound();
-                }
-
-                setTimeout(() => {
-                    teddy.classList.remove("dancing");
-                    seedling.classList.remove("dancing");
-                    currentQuizIdx = (currentQuizIdx + 1) % quizQuestions.length;
-                    loadQuestion();
-                }, 2000);
-            }
-
-            function generateAIQuestion() {
-                document.getElementById("quizQuestionText").innerText = "🤖 AI Generated Q: What is the primary benefit of planting native trees on college campuses?";
-                const grid = document.getElementById("quizOptionsGrid");
-                grid.innerHTML = "";
-                ["A) Prevents soil erosion & supports native birds", "B) Increases noise pollution", "C) Requires plastic soil", "D) No benefit"].forEach((opt, idx) => {
-                    const btn = document.createElement("button");
-                    btn.className = "option-btn";
-                    btn.onclick = () => checkAnswer(idx === 0 ? 0 : 1);
-                    btn.innerHTML = `<span class="option-key">${["A", "B", "C", "D"][idx]}</span> <span>${opt}</span>`;
-                    grid.appendChild(btn);
-                });
-            }
-
-            function filterQuizTopic(topic, btn) {
-                btn.parentElement.querySelectorAll(".chip-btn").forEach(c => c.classList.remove("active"));
-                btn.classList.add("active");
+            setTimeout(() => {
+                teddy.classList.remove("dancing");
+                seedling.classList.remove("dancing");
+                currentQuizIdx = (currentQuizIdx + 1) % quizQuestions.length;
                 loadQuestion();
-            }
+            }, 2000);
+        }
 
-            /* Waste Sort Rush */
-            const sortItems = [
-                { name: "📦 Plastic Water Bottle", type: "recycle" },
-                { name: "🍌 Banana Peel & Fruit Scrap", type: "organic" },
-                { name: "🔋 Used Laptop Battery", type: "ewaste" }
-            ];
-            let currentSortIdx = 0;
-            function handleSortChoice(type) {
-                const cur = sortItems[currentSortIdx];
-                const fb = document.getElementById("sortGameFeedback");
-                if (type === cur.type) {
-                    fb.style.color = "#2e7d32"; fb.innerText = "✅ Correct Bin! +10 Coins & +15 XP";
-                    playCoinSound(); updateCoins(10); addXP(15, "Waste Sort Rush");
-                } else {
-                    fb.style.color = "#e53935"; fb.innerText = "❌ Wrong Bin!";
-                    playErrorSound();
+        function generateAIQuestion() {
+            document.getElementById("quizQuestionText").innerText = "🤖 AI Generated Q: What is the primary benefit of planting native trees on college campuses?";
+            const grid = document.getElementById("quizOptionsGrid");
+            grid.innerHTML = "";
+            ["A) Prevents soil erosion & supports native birds", "B) Increases noise pollution", "C) Requires plastic soil", "D) No benefit"].forEach((opt, idx) => {
+                const btn = document.createElement("button");
+                btn.className = "option-btn";
+                btn.onclick = () => checkAnswer(idx === 0 ? 0 : 1);
+                btn.innerHTML = `<span class="option-key">${["A", "B", "C", "D"][idx]}</span> <span>${opt}</span>`;
+                grid.appendChild(btn);
+            });
+        }
+
+        function filterQuizTopic(topic, btn) {
+            btn.parentElement.querySelectorAll(".chip-btn").forEach(c => c.classList.remove("active"));
+            btn.classList.add("active");
+            loadQuestion();
+        }
+
+        /* Waste Sort Rush */
+        const sortItems = [
+            { name: "📦 Plastic Water Bottle", type: "recycle" },
+            { name: "🍌 Banana Peel & Fruit Scrap", type: "organic" },
+            { name: "🔋 Used Laptop Battery", type: "ewaste" }
+        ];
+        let currentSortIdx = 0;
+        function handleSortChoice(type) {
+            const cur = sortItems[currentSortIdx];
+            const fb = document.getElementById("sortGameFeedback");
+            if (type === cur.type) {
+                fb.style.color = "#2e7d32"; fb.innerText = "✅ Correct Bin! +10 Coins & +15 XP";
+                playCoinSound(); updateCoins(10); addXP(15, "Waste Sort Rush");
+            } else {
+                fb.style.color = "#e53935"; fb.innerText = "❌ Wrong Bin!";
+                playErrorSound();
+            }
+            setTimeout(() => {
+                currentSortIdx = (currentSortIdx + 1) % sortItems.length;
+                document.getElementById("sortItemDisplay").innerText = sortItems[currentSortIdx].name;
+                fb.innerText = "";
+            }, 1200);
+        }
+
+        /* Word Scramble */
+        function checkScrambleAnswer() {
+            const val = document.getElementById("scrambleInput").value.trim().toUpperCase();
+            const fb = document.getElementById("scrambleFeedback");
+            if (val === "ECOSYSTEM") {
+                fb.style.color = "#2e7d32"; fb.innerText = "🎉 Correct! +15 Coins & +15 XP";
+                playCoinSound(); updateCoins(15); addXP(15, "Word Scramble");
+            } else {
+                fb.style.color = "#e53935"; fb.innerText = "❌ Try again!";
+                playErrorSound();
+            }
+        }
+
+        /* Reflex Rush */
+        function startReflexGame() {
+            const arena = document.getElementById("reflexArena");
+            arena.innerHTML = "";
+            let score = 0;
+            const timer = setInterval(() => {
+                if (score >= 5) {
+                    clearInterval(timer);
+                    arena.innerHTML = `<div style="font-weight:800; color:#2e7d32;">🎉 Challenge Passed! +20 Coins & +20 XP</div>`;
+                    playSuccessSound(); updateCoins(20); addXP(20, "Reflex Rush");
+                    return;
                 }
-                setTimeout(() => {
-                    currentSortIdx = (currentSortIdx + 1) % sortItems.length;
-                    document.getElementById("sortItemDisplay").innerText = sortItems[currentSortIdx].name;
-                    fb.innerText = "";
-                }, 1200);
-            }
+                const target = document.createElement("div");
+                target.innerText = ["🌱", "♻️", "🍀"][Math.floor(Math.random() * 3)];
+                target.style.cssText = `position:absolute; font-size:32px; cursor:pointer; left:${Math.random() * 80}%; top:${Math.random() * 70}%;`;
+                target.onclick = () => {
+                    score++;
+                    playCoinSound();
+                    document.getElementById("reflexScore").innerText = `Score: ${score}`;
+                    target.remove();
+                };
+                arena.appendChild(target);
+                setTimeout(() => target.remove(), 1000);
+            }, 900);
+        }
 
-            /* Word Scramble */
-            function checkScrambleAnswer() {
-                const val = document.getElementById("scrambleInput").value.trim().toUpperCase();
-                const fb = document.getElementById("scrambleFeedback");
-                if (val === "ECOSYSTEM") {
-                    fb.style.color = "#2e7d32"; fb.innerText = "🎉 Correct! +15 Coins & +15 XP";
-                    playCoinSound(); updateCoins(15); addXP(15, "Word Scramble");
-                } else {
-                    fb.style.color = "#e53935"; fb.innerText = "❌ Try again!";
-                    playErrorSound();
-                }
-            }
+        /* LIVE CAMERA CONTROLS */
+        async function openLiveCamera() {
+            const video = document.getElementById("webcamVideo");
+            const img = document.getElementById("imagePreview");
+            const placeholder = document.getElementById("viewfinderPlaceholder");
+            const reselectBar = document.getElementById("reselectToolbar");
+            const hudBadge = document.getElementById("hudStatusBadge");
 
-            /* Reflex Rush */
-            function startReflexGame() {
-                const arena = document.getElementById("reflexArena");
-                arena.innerHTML = "";
-                let score = 0;
-                const timer = setInterval(() => {
-                    if (score >= 5) {
-                        clearInterval(timer);
-                        arena.innerHTML = `<div style="font-weight:800; color:#2e7d32;">🎉 Challenge Passed! +20 Coins & +20 XP</div>`;
-                        playSuccessSound(); updateCoins(20); addXP(20, "Reflex Rush");
-                        return;
-                    }
-                    const target = document.createElement("div");
-                    target.innerText = ["🌱", "♻️", "🍀"][Math.floor(Math.random() * 3)];
-                    target.style.cssText = `position:absolute; font-size:32px; cursor:pointer; left:${Math.random() * 80}%; top:${Math.random() * 70}%;`;
-                    target.onclick = () => {
-                        score++;
-                        playCoinSound();
-                        document.getElementById("reflexScore").innerText = `Score: ${score}`;
-                        target.remove();
-                    };
-                    arena.appendChild(target);
-                    setTimeout(() => target.remove(), 1000);
-                }, 900);
-            }
-
-            /* LIVE CAMERA CONTROLS */
-            async function openLiveCamera() {
-                const video = document.getElementById("webcamVideo");
-                const img = document.getElementById("imagePreview");
-                const placeholder = document.getElementById("viewfinderPlaceholder");
-                const reselectBar = document.getElementById("reselectToolbar");
-                const hudBadge = document.getElementById("hudStatusBadge");
-
-                try {
-                    if (webcamStream) webcamStream.getTracks().forEach(t => t.stop());
-                    webcamStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
-                    video.srcObject = webcamStream;
-                    video.style.display = "block";
-                    img.style.display = "none";
-                    placeholder.style.display = "none";
-                    reselectBar.style.display = "none";
-                    hudBadge.innerText = "CAMERA STREAMING";
-                    hudBadge.style.background = "rgba(16,185,129,0.3)";
-
-                    video.onclick = () => {
-                        const canvas = document.createElement("canvas");
-                        canvas.width = video.videoWidth || 400;
-                        canvas.height = video.videoHeight || 400;
-                        const ctx = canvas.getContext("2d");
-                        ctx.drawImage(video, 0, 0);
-                        displayPreviewImage(canvas.toDataURL(), "user");
-                        if (webcamStream) webcamStream.getTracks().forEach(t => t.stop());
-                    };
-                } catch (e) {
-                    showAppAlert("Camera Access", "Camera access denied or unavailable. Please click 'Select Image' button!", "📷");
-                }
-            }
-
-            function resetViewfinderToCamera() {
+            try {
                 if (webcamStream) webcamStream.getTracks().forEach(t => t.stop());
-                document.getElementById("imagePreview").style.display = "none";
-                document.getElementById("webcamVideo").style.display = "none";
-                document.getElementById("reselectToolbar").style.display = "none";
-                document.getElementById("verifyButton").disabled = true;
-                document.getElementById("verifyButton").innerText = "Upload a Photo First";
-                document.getElementById("aiStatusBox").style.display = "none";
-                currentImageElement = null;
-                openLiveCamera();
-            }
-
-            function triggerFileInput() {
-                document.getElementById("taskFileInput").click();
-            }
-
-            function handleImageSelection(e) {
-                const file = e.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = (evt) => displayPreviewImage(evt.target.result, "user");
-                    reader.readAsDataURL(file);
-                }
-            }
-
-            function displayPreviewImage(src, sampleType) {
-                const img = document.getElementById("imagePreview");
-                const video = document.getElementById("webcamVideo");
-                const placeholder = document.getElementById("viewfinderPlaceholder");
-                const btn = document.getElementById("verifyButton");
-                const reselectBar = document.getElementById("reselectToolbar");
-                const hudBadge = document.getElementById("hudStatusBadge");
-
-                img.src = src;
-                img.setAttribute("data-sample", sampleType);
-                img.style.display = "block";
-                video.style.display = "none";
+                webcamStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
+                video.srcObject = webcamStream;
+                video.style.display = "block";
+                img.style.display = "none";
                 placeholder.style.display = "none";
-                reselectBar.style.display = "flex";
+                reselectBar.style.display = "none";
+                hudBadge.innerText = "CAMERA STREAMING";
+                hudBadge.style.background = "rgba(16,185,129,0.3)";
 
-                hudBadge.innerText = "IMAGE READY FOR AI";
-                hudBadge.style.background = "rgba(52,211,153,0.3)";
-
-                btn.disabled = false;
-                btn.innerText = "🤖 Verify With Offline AI";
-                currentImageElement = img;
-            }
-
-            function loadSampleProof(type) {
-                if (type === 'sapling') {
-                    displayPreviewImage("https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=400&q=80", "pass");
-                } else if (type === 'laptop') {
-                    displayPreviewImage("https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400&q=80", "fail");
-                } else if (type === 'food') {
-                    displayPreviewImage("https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&q=80", "fail");
-                }
-            }
-
-            /* SMART AI ANALYSIS */
-            function analyzeImagePixels(imgEl) {
-                return new Promise((resolve) => {
-                    const canvas = document.getElementById("analysisCanvas");
+                video.onclick = () => {
+                    const canvas = document.createElement("canvas");
+                    canvas.width = video.videoWidth || 400;
+                    canvas.height = video.videoHeight || 400;
                     const ctx = canvas.getContext("2d");
-                    const tempImg = new Image();
-                    tempImg.crossOrigin = "Anonymous";
-                    tempImg.onload = () => {
-                        ctx.drawImage(tempImg, 0, 0, 224, 224);
-                        const imgData = ctx.getImageData(0, 0, 224, 224);
-                        const data = imgData.data;
+                    ctx.drawImage(video, 0, 0);
+                    displayPreviewImage(canvas.toDataURL(), "user");
+                    if (webcamStream) webcamStream.getTracks().forEach(t => t.stop());
+                };
+            } catch (e) {
+                showAppAlert("Camera Access", "Camera access denied or unavailable. Please click 'Select Image' button!", "📷");
+            }
+        }
 
-                        let plantGreenPixels = 0;
-                        let nonPlantBluePixels = 0;
-                        let nonPlantRedBrownPixels = 0;
-                        let totalPixels = 224 * 224;
+        function resetViewfinderToCamera() {
+            if (webcamStream) webcamStream.getTracks().forEach(t => t.stop());
+            document.getElementById("imagePreview").style.display = "none";
+            document.getElementById("webcamVideo").style.display = "none";
+            document.getElementById("reselectToolbar").style.display = "none";
+            document.getElementById("verifyButton").disabled = true;
+            document.getElementById("verifyButton").innerText = "Upload a Photo First";
+            document.getElementById("aiStatusBox").style.display = "none";
+            currentImageElement = null;
+            openLiveCamera();
+        }
 
-                        for (let i = 0; i < data.length; i += 4) {
-                            const r = data[i];
-                            const g = data[i + 1];
-                            const b = data[i + 2];
+        function triggerFileInput() {
+            document.getElementById("taskFileInput").click();
+        }
 
-                            if (g > r + 15 && g > b + 15 && g > 40) {
-                                plantGreenPixels++;
-                            } else if (b > g && b > r + 20 && b > 80) {
-                                nonPlantBluePixels++;
-                            } else if (r > g + 30 && r > b + 20 && r > 100) {
-                                nonPlantRedBrownPixels++;
-                            }
+        function handleImageSelection(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (evt) => displayPreviewImage(evt.target.result, "user");
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function displayPreviewImage(src, sampleType) {
+            const img = document.getElementById("imagePreview");
+            const video = document.getElementById("webcamVideo");
+            const placeholder = document.getElementById("viewfinderPlaceholder");
+            const btn = document.getElementById("verifyButton");
+            const reselectBar = document.getElementById("reselectToolbar");
+            const hudBadge = document.getElementById("hudStatusBadge");
+
+            img.src = src;
+            img.setAttribute("data-sample", sampleType);
+            img.style.display = "block";
+            video.style.display = "none";
+            placeholder.style.display = "none";
+            reselectBar.style.display = "flex";
+
+            hudBadge.innerText = "IMAGE READY FOR AI";
+            hudBadge.style.background = "rgba(52,211,153,0.3)";
+
+            btn.disabled = false;
+            btn.innerText = "🤖 Verify With Offline AI";
+            currentImageElement = img;
+        }
+
+        function loadSampleProof(type) {
+            if (type === 'sapling') {
+                displayPreviewImage("https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=400&q=80", "pass");
+            } else if (type === 'laptop') {
+                displayPreviewImage("https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400&q=80", "fail");
+            } else if (type === 'food') {
+                displayPreviewImage("https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&q=80", "fail");
+            }
+        }
+
+        /* SMART AI ANALYSIS */
+        function analyzeImagePixels(imgEl) {
+            return new Promise((resolve) => {
+                const canvas = document.getElementById("analysisCanvas");
+                const ctx = canvas.getContext("2d");
+                const tempImg = new Image();
+                tempImg.crossOrigin = "Anonymous";
+                tempImg.onload = () => {
+                    ctx.drawImage(tempImg, 0, 0, 224, 224);
+                    const imgData = ctx.getImageData(0, 0, 224, 224);
+                    const data = imgData.data;
+
+                    let plantGreenPixels = 0;
+                    let nonPlantBluePixels = 0;
+                    let nonPlantRedBrownPixels = 0;
+                    let totalPixels = 224 * 224;
+
+                    for (let i = 0; i < data.length; i += 4) {
+                        const r = data[i];
+                        const g = data[i + 1];
+                        const b = data[i + 2];
+
+                        if (g > r + 15 && g > b + 15 && g > 40) {
+                            plantGreenPixels++;
+                        } else if (b > g && b > r + 20 && b > 80) {
+                            nonPlantBluePixels++;
+                        } else if (r > g + 30 && r > b + 20 && r > 100) {
+                            nonPlantRedBrownPixels++;
                         }
+                    }
 
-                        const greenRatio = plantGreenPixels / totalPixels;
-                        const blueRatio = nonPlantBluePixels / totalPixels;
-                        const redBrownRatio = nonPlantRedBrownPixels / totalPixels;
+                    const greenRatio = plantGreenPixels / totalPixels;
+                    const blueRatio = nonPlantBluePixels / totalPixels;
+                    const redBrownRatio = nonPlantRedBrownPixels / totalPixels;
 
-                        resolve({ greenRatio, blueRatio, redBrownRatio });
-                    };
-                    tempImg.onerror = () => {
-                        resolve({ greenRatio: 0.5, blueRatio: 0.1, redBrownRatio: 0.1 });
-                    };
-                    tempImg.src = imgEl.src;
-                });
+                    resolve({ greenRatio, blueRatio, redBrownRatio });
+                };
+                tempImg.onerror = () => {
+                    resolve({ greenRatio: 0.5, blueRatio: 0.1, redBrownRatio: 0.1 });
+                };
+                tempImg.src = imgEl.src;
+            });
+        }
+
+        async function runAIVerification() {
+            const btn = document.getElementById("verifyButton");
+            const statusBox = document.getElementById("aiStatusBox");
+            const hudBadge = document.getElementById("hudStatusBadge");
+            if (!currentImageElement) return;
+
+            btn.disabled = true;
+            btn.innerText = "🤖 AI Analyzing Chlorophyll & Features...";
+            hudBadge.innerText = "ANALYZING SPECTRUM...";
+            hudBadge.style.background = "rgba(59,130,246,0.3)";
+
+            statusBox.className = "ai-status-box loading";
+            statusBox.innerHTML = "🤖 Scanning image for plant/tree features...";
+
+            const sampleType = currentImageElement.getAttribute("data-sample");
+            const visualAnalysis = await analyzeImagePixels(currentImageElement);
+
+            let isPlantConfirmed = false;
+            let confidenceScore = 0;
+            let detectedTag = "Plant / Tree Sapling";
+
+            if (sampleType === 'pass') {
+                isPlantConfirmed = true;
+                confidenceScore = 96;
+                detectedTag = "Living Sapling & Flora";
+            } else if (sampleType === 'fail') {
+                isPlantConfirmed = false;
+                confidenceScore = 93;
+                detectedTag = "Laptop Screen / Food Item";
+            } else {
+                if (visualAnalysis.greenRatio > 0.18 && visualAnalysis.blueRatio < 0.25 && visualAnalysis.redBrownRatio < 0.35) {
+                    isPlantConfirmed = true;
+                    confidenceScore = Math.min(98, Math.round(visualAnalysis.greenRatio * 180 + 50));
+                    detectedTag = "Plant / Tree Sapling";
+                } else if (visualAnalysis.blueRatio > 0.20) {
+                    isPlantConfirmed = false;
+                    confidenceScore = Math.round(visualAnalysis.blueRatio * 150 + 50);
+                    detectedTag = "Laptop Screen / Electronic Display";
+                } else {
+                    isPlantConfirmed = false;
+                    confidenceScore = 88;
+                    detectedTag = "Non-Plant Item / Food / Building";
+                }
             }
 
-            async function runAIVerification() {
-                const btn = document.getElementById("verifyButton");
-                const statusBox = document.getElementById("aiStatusBox");
-                const hudBadge = document.getElementById("hudStatusBadge");
-                if (!currentImageElement) return;
+            setTimeout(() => {
+                if (isPlantConfirmed && confidenceScore >= 70) {
+                    hudBadge.innerText = "VERIFIED MATCH";
+                    hudBadge.style.background = "rgba(16,185,129,0.4)";
 
-                btn.disabled = true;
-                btn.innerText = "🤖 AI Analyzing Chlorophyll & Features...";
-                hudBadge.innerText = "ANALYZING SPECTRUM...";
-                hudBadge.style.background = "rgba(59,130,246,0.3)";
-
-                statusBox.className = "ai-status-box loading";
-                statusBox.innerHTML = "🤖 Scanning image for plant/tree features...";
-
-                const sampleType = currentImageElement.getAttribute("data-sample");
-                const visualAnalysis = await analyzeImagePixels(currentImageElement);
-
-                let isPlantConfirmed = false;
-                let confidenceScore = 0;
-                let detectedTag = "Plant / Tree Sapling";
-
-                if (sampleType === 'pass') {
-                    isPlantConfirmed = true;
-                    confidenceScore = 96;
-                    detectedTag = "Living Sapling & Flora";
-                } else if (sampleType === 'fail') {
-                    isPlantConfirmed = false;
-                    confidenceScore = 93;
-                    detectedTag = "Laptop Screen / Food Item";
-                } else {
-                    if (visualAnalysis.greenRatio > 0.18 && visualAnalysis.blueRatio < 0.25 && visualAnalysis.redBrownRatio < 0.35) {
-                        isPlantConfirmed = true;
-                        confidenceScore = Math.min(98, Math.round(visualAnalysis.greenRatio * 180 + 50));
-                        detectedTag = "Plant / Tree Sapling";
-                    } else if (visualAnalysis.blueRatio > 0.20) {
-                        isPlantConfirmed = false;
-                        confidenceScore = Math.round(visualAnalysis.blueRatio * 150 + 50);
-                        detectedTag = "Laptop Screen / Electronic Display";
-                    } else {
-                        isPlantConfirmed = false;
-                        confidenceScore = 88;
-                        detectedTag = "Non-Plant Item / Food / Building";
-                    }
-                }
-
-                setTimeout(() => {
-                    if (isPlantConfirmed && confidenceScore >= 70) {
-                        hudBadge.innerText = "VERIFIED MATCH";
-                        hudBadge.style.background = "rgba(16,185,129,0.4)";
-
-                        statusBox.className = "ai-status-box success";
-                        statusBox.innerHTML = `
+                    statusBox.className = "ai-status-box success";
+                    statusBox.innerHTML = `
                         <div>✅ <strong>Mission Approved!</strong></div>
                         <div style="margin-top:4px;">🌱 AI Detected: <strong>${detectedTag}</strong> (${confidenceScore}% Match)</div>
                         <div class="confidence-bar-outer"><div class="confidence-bar-inner" style="width:${confidenceScore}%;"></div></div>
                         <div style="margin-top:6px; color:#1b5e20;">🪙 <strong>+50 Eco-Coins Added to Wallet!</strong></div>
                     `;
-                        playSuccessSound();
-                        triggerConfetti();
-                        updateCoins(50);
-                        addXP(50, "Plant AI Verification");
-                        missionsCompleted++;
-                        if (!currentUser.saplingsPlanted) currentUser.saplingsPlanted = 0;
-                        currentUser.saplingsPlanted++;
-                        if (!currentUser.history) currentUser.history = [];
-                        currentUser.history.unshift({
-                            title: "Plant a sapling in campus",
-                            time: "Just now",
-                            score: `AI Plant Match ${confidenceScore}%`,
-                            coins: 50
-                        });
-                        saveUsersToStorage();
+                    playSuccessSound();
+                    triggerConfetti();
+                    updateCoins(50);
+                    addXP(50, "Plant AI Verification");
+                    missionsCompleted++;
+                    if (!currentUser.saplingsPlanted) currentUser.saplingsPlanted = 0;
+                    currentUser.saplingsPlanted++;
+                    if (!currentUser.history) currentUser.history = [];
+                    currentUser.history.unshift({
+                        title: "Plant a sapling in campus",
+                        time: "Just now",
+                        score: `AI Plant Match ${confidenceScore}%`,
+                        coins: 50
+                    });
+                    saveUsersToStorage();
 
-                        document.getElementById("profileMissionProgress").innerText = `${missionsCompleted}/5 Missions Done`;
-                        document.getElementById("statMissionsDone").innerText = missionsCompleted;
-                        if (document.getElementById("statSaplingsPlanted")) document.getElementById("statSaplingsPlanted").innerText = currentUser.saplingsPlanted;
-                        btn.innerText = "✅ Verified!";
-                        renderMissionHistory();
+                    document.getElementById("profileMissionProgress").innerText = `${missionsCompleted}/5 Missions Done`;
+                    document.getElementById("statMissionsDone").innerText = missionsCompleted;
+                    if (document.getElementById("statSaplingsPlanted")) document.getElementById("statSaplingsPlanted").innerText = currentUser.saplingsPlanted;
+                    btn.innerText = "✅ Verified!";
+                    renderMissionHistory();
 
-                    } else {
-                        hudBadge.innerText = "REJECTED NON-PLANT";
-                        hudBadge.style.background = "rgba(239,68,68,0.4)";
+                } else {
+                    hudBadge.innerText = "REJECTED NON-PLANT";
+                    hudBadge.style.background = "rgba(239,68,68,0.4)";
 
-                        statusBox.className = "ai-status-box error";
-                        statusBox.innerHTML = `
+                    statusBox.className = "ai-status-box error";
+                    statusBox.innerHTML = `
                         <div>❌ <strong>Mission Rejected</strong></div>
                         <div style="margin-top:4px;">🤖 AI Detected: <strong>${detectedTag}</strong></div>
                         <div style="font-size:11px; margin-top:4px;">This image was identified as a non-plant item. AI verification strictly accepts clear photos of living plants, saplings, or trees.</div>
                     `;
-                        playErrorSound();
-                        btn.disabled = false;
-                        btn.innerText = "🔄 Try Another Photo";
-                    }
-                }, 1000);
-            }
-
-            function switchMissionTab(tab, btn) {
-                btn.parentElement.querySelectorAll(".chip-btn").forEach(c => c.classList.remove("active"));
-                btn.classList.add("active");
-            }
-
-            function selectMission(type, btn) {
-                btn.parentElement.querySelectorAll(".chip-btn").forEach(c => c.classList.remove("active"));
-                btn.classList.add("active");
-                if (type === 'sapling') {
-                    document.getElementById("missionTitle").innerText = "Mission: Plant a sapling in campus";
-                    document.getElementById("missionDesc").innerText = "Plant an indigenous sapling or care for native flora in the college botanical garden.";
-                } else if (type === 'hydration') {
-                    document.getElementById("missionTitle").innerText = "Mission: Campus Hydration Refill";
-                    document.getElementById("missionDesc").innerText = "Use your reusable water bottle at any campus eco-refill station.";
-                } else if (type === 'canteen') {
-                    document.getElementById("missionTitle").innerText = "Mission: Zero-Waste Canteen Meal";
-                    document.getElementById("missionDesc").innerText = "Bring reusable container and cutlery to the main campus cafeteria.";
-                }
-            }
-
-            /* Rewards */
-            function redeemReward(title, cost, prefix) {
-                if (coins >= cost) {
-                    updateCoins(-cost);
-                    playSuccessSound();
-                    triggerConfetti();
-                    const code = `${prefix}-${Math.floor(1000 + Math.random() * 9000)}`;
-                    activeVouchers.push({ title, code });
-                    renderVouchers();
-                    showVoucherQR(title, code);
-                } else {
                     playErrorSound();
-                    showAppAlert("Not Enough Eco-Coins", "Play games or complete plant missions to earn more Eco-Coins!", "🪙");
+                    btn.disabled = false;
+                    btn.innerText = "🔄 Try Another Photo";
                 }
+            }, 1000);
+        }
+
+        function switchMissionTab(tab, btn) {
+            btn.parentElement.querySelectorAll(".chip-btn").forEach(c => c.classList.remove("active"));
+            btn.classList.add("active");
+        }
+
+        function selectMission(type, btn) {
+            btn.parentElement.querySelectorAll(".chip-btn").forEach(c => c.classList.remove("active"));
+            btn.classList.add("active");
+            if (type === 'sapling') {
+                document.getElementById("missionTitle").innerText = "Mission: Plant a sapling in campus";
+                document.getElementById("missionDesc").innerText = "Plant an indigenous sapling or care for native flora in the college botanical garden.";
+            } else if (type === 'hydration') {
+                document.getElementById("missionTitle").innerText = "Mission: Campus Hydration Refill";
+                document.getElementById("missionDesc").innerText = "Use your reusable water bottle at any campus eco-refill station.";
+            } else if (type === 'canteen') {
+                document.getElementById("missionTitle").innerText = "Mission: Zero-Waste Canteen Meal";
+                document.getElementById("missionDesc").innerText = "Bring reusable container and cutlery to the main campus cafeteria.";
             }
+        }
 
-            function renderVouchers() {
-                const list = document.getElementById("vouchersList");
-                if (!list) return;
-                list.innerHTML = "";
-                if (document.getElementById("voucherCountText")) document.getElementById("voucherCountText").innerText = activeVouchers.length;
-                if (document.getElementById("rewardsTabBadge")) document.getElementById("rewardsTabBadge").innerText = activeVouchers.length;
+        /* Rewards */
+        function redeemReward(title, cost, prefix) {
+            if (coins >= cost) {
+                updateCoins(-cost);
+                playSuccessSound();
+                triggerConfetti();
+                const code = `${prefix}-${Math.floor(1000 + Math.random() * 9000)}`;
+                activeVouchers.push({ title, code });
+                renderVouchers();
+                showVoucherQR(title, code);
+            } else {
+                playErrorSound();
+                showAppAlert("Not Enough Eco-Coins", "Play games or complete plant missions to earn more Eco-Coins!", "🪙");
+            }
+        }
 
-                if (activeVouchers.length === 0) {
-                    list.innerHTML = `
+        function renderVouchers() {
+            const list = document.getElementById("vouchersList");
+            if (!list) return;
+            list.innerHTML = "";
+            if (document.getElementById("voucherCountText")) document.getElementById("voucherCountText").innerText = activeVouchers.length;
+            if (document.getElementById("rewardsTabBadge")) document.getElementById("rewardsTabBadge").innerText = activeVouchers.length;
+
+            if (activeVouchers.length === 0) {
+                list.innerHTML = `
                     <div style="text-align: center; padding: 18px 12px; background: #ffffff; border-radius: 12px; border: 1.5px dashed #a5d6a7;">
                         <div style="font-size: 28px;">🎟️</div>
                         <div style="font-size: 12px; font-weight: 800; color: var(--primary-dark); margin-top: 4px;">No Active Vouchers Yet</div>
                         <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Redeem your Eco-Coins below to get instant discount vouchers!</div>
                     </div>
                 `;
-                    return;
-                }
+                return;
+            }
 
-                activeVouchers.forEach(v => {
-                    const item = document.createElement("div");
-                    item.className = "voucher-card";
-                    item.innerHTML = `
+            activeVouchers.forEach(v => {
+                const item = document.createElement("div");
+                item.className = "voucher-card";
+                item.innerHTML = `
                     <div class="voucher-info">
                         <h4>🎟️ ${v.title}</h4>
                         <div class="voucher-code-pill">🏷️ ${v.code}</div>
@@ -4950,48 +4965,48 @@
                         <span>📱 View QR</span>
                     </button>
                 `;
-                    list.appendChild(item);
-                });
+                list.appendChild(item);
+            });
+        }
+
+        let currentQrCodeToCopy = "";
+
+        function showVoucherQR(title, code) {
+            currentQrCodeToCopy = code;
+            if (document.getElementById("uiVoucherTitle")) document.getElementById("uiVoucherTitle").innerText = title;
+            if (document.getElementById("uiVoucherCode")) document.getElementById("uiVoucherCode").innerText = code;
+
+            const qrImg = document.getElementById("uiQrImage");
+            if (qrImg) {
+                qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=${encodeURIComponent(code)}&color=1b5e20&bgcolor=ffffff`;
+                qrImg.alt = `Scannable QR Code for ${code}`;
             }
 
-            let currentQrCodeToCopy = "";
+            switchTab('qr');
+            playSuccessSound();
+        }
 
-            function showVoucherQR(title, code) {
-                currentQrCodeToCopy = code;
-                if (document.getElementById("uiVoucherTitle")) document.getElementById("uiVoucherTitle").innerText = title;
-                if (document.getElementById("uiVoucherCode")) document.getElementById("uiVoucherCode").innerText = code;
-
-                const qrImg = document.getElementById("uiQrImage");
-                if (qrImg) {
-                    qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=${encodeURIComponent(code)}&color=1b5e20&bgcolor=ffffff`;
-                    qrImg.alt = `Scannable QR Code for ${code}`;
-                }
-
-                switchTab('qr');
+        function copyVoucherCode() {
+            const code = currentQrCodeToCopy || (document.getElementById("uiVoucherCode") ? document.getElementById("uiVoucherCode").innerText : "");
+            if (code) {
+                navigator.clipboard.writeText(code);
                 playSuccessSound();
+                showToast(`📋 Copied code: ${code}!`, "📋");
             }
+        }
 
-            function copyVoucherCode() {
-                const code = currentQrCodeToCopy || (document.getElementById("uiVoucherCode") ? document.getElementById("uiVoucherCode").innerText : "");
-                if (code) {
-                    navigator.clipboard.writeText(code);
-                    playSuccessSound();
-                    showToast(`📋 Copied code: ${code}!`, "📋");
-                }
-            }
+        function closeModal() {
+            switchTab('rewards');
+        }
 
-            function closeModal() {
-                switchTab('rewards');
-            }
-
-            /* Certificate Generator */
-            function generateCertificate() {
-                const name = document.getElementById("editProfileName") ? (document.getElementById("editProfileName").value.trim() || "Anwesh") : "Anwesh";
-                playSuccessSound();
-                triggerConfetti();
-                showAppAlert("Official Certificate Issued!", `This certifies that ${name} has been awarded the Campus Eco Champion Award for completing plant missions and sustainability challenges.\n\nCertificate ID: ECO-CERT-2026-X99`, "🏆");
-            }
-        </script>
+        /* Certificate Generator */
+        function generateCertificate() {
+            const name = document.getElementById("editProfileName") ? (document.getElementById("editProfileName").value.trim() || "Anwesh") : "Anwesh";
+            playSuccessSound();
+            triggerConfetti();
+            showAppAlert("Official Certificate Issued!", `This certifies that ${name} has been awarded the Campus Eco Champion Award for completing plant missions and sustainability challenges.\n\nCertificate ID: ECO-CERT-2026-X99`, "🏆");
+        }
+    </script>
 </body>
 
 </html>
