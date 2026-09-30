@@ -3364,18 +3364,6 @@
                     vouchers: [],
                     history: []
                 }
-            };t: "Mechanical Dept",
-                    year: "1st Year",
-                    avatar: "🌱",
-                    bio: "Just joined ECO Quest! Ready to plant my first tree 🌳",
-                    xp: 0, // Fresh ID starts at 0% Progress!
-                    coins: 0,
-                    missionsCompleted: 0,
-                    zeroWasteMeals: 0,
-                    saplingsPlanted: 0,
-                    vouchers: [],
-                    history: []
-                }
             };
 
             let users = {};
@@ -4145,15 +4133,9 @@
                 const topBarEl = document.querySelector(".top-status-bar");
                 const bottomNavEl = document.querySelector(".bottom-nav");
 
-                if (tabId === 'auth') {
-                    if (headerEl) headerEl.style.display = "none";
-                    if (topBarEl) topBarEl.style.display = "none";
-                    if (bottomNavEl) bottomNavEl.style.display = "none";
-                } else {
-                    if (headerEl) headerEl.style.display = "flex";
-                    if (topBarEl) topBarEl.style.display = "flex";
-                    if (bottomNavEl) bottomNavEl.style.display = "flex";
-                }
+                if (headerEl) headerEl.style.display = "flex";
+                if (topBarEl) topBarEl.style.display = "flex";
+                if (bottomNavEl) bottomNavEl.style.display = "flex";
 
                 document.querySelectorAll(".nav-tab-btn").forEach(b => b.classList.remove("active"));
                 if (navBtn) navBtn.classList.add("active");
