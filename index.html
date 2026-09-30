@@ -1515,6 +1515,30 @@
             box-shadow: 0 4px 18px rgba(46, 125, 50, 0.2);
         }
 
+        .pass-toggle-btn {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+            z-index: 10;
+            opacity: 0.75;
+            transition: opacity 0.2s ease, transform 0.15s ease;
+        }
+
+        .pass-toggle-btn:hover {
+            opacity: 1;
+            transform: translateY(-50%) scale(1.1);
+        }
+
         .ss-btn-submit {
             background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
             color: white;
@@ -2024,19 +2048,20 @@
                             <div class="ss-circle-small"></div>
                         </div>
 
-                        <div class="ss-auth-body">
+                        <form onsubmit="performNewAuthLogin(event); return false;" class="ss-auth-body">
                             <h1 class="ss-auth-heading">Login</h1>
 
                             <div class="ss-pill-group">
                                 <input type="text" class="ss-pill-input" id="authLoginUsername"
-                                    placeholder="User Name" />
+                                    placeholder="User Name" required />
                             </div>
-                            <div class="ss-pill-group">
+                            <div class="ss-pill-group" style="position: relative;">
                                 <input type="password" class="ss-pill-input" id="authLoginPassword"
-                                    placeholder="Password" />
+                                    placeholder="Password" style="padding-right: 44px;" />
+                                <button type="button" class="pass-toggle-btn" onclick="togglePasswordVisibility('authLoginPassword', this)" title="Show/Hide Password">👁️</button>
                             </div>
 
-                            <button type="button" class="ss-btn-submit" onclick="performNewAuthLogin()">Sign In</button>
+                            <button type="submit" class="ss-btn-submit">Sign In</button>
 
                             <!-- Or Divider -->
                             <div class="ss-or-divider">
@@ -2085,7 +2110,7 @@
                                     style="color: #64748b; text-decoration: underline; cursor: pointer;">Continue as
                                     Guest</a>
                             </p>
-                        </div>
+                        </form>
                     </div>
 
                     <!-- VIEW 2: REGISTER / SIGN UP SCREEN (MATCHING RIGHT SCREENSHOT) -->
@@ -2094,11 +2119,11 @@
                         <div class="ss-signup-top-accent"></div>
                         <div class="ss-side-wave-line"></div>
 
-                        <div class="ss-auth-body" style="padding-top: 36px;">
+                        <form onsubmit="performNewAuthRegister(event); return false;" class="ss-auth-body" style="padding-top: 36px;">
                             <h1 class="ss-auth-heading-signup">Sign Up</h1>
 
                             <div class="ss-pill-group">
-                                <input type="text" class="ss-pill-input" id="authRegUsername" placeholder="Name" />
+                                <input type="text" class="ss-pill-input" id="authRegUsername" placeholder="Name" required />
                             </div>
                             <div class="ss-pill-group">
                                 <input type="email" class="ss-pill-input" id="authRegEmail" placeholder="Email Id" />
@@ -2106,9 +2131,10 @@
                             <div class="ss-pill-group">
                                 <input type="text" class="ss-pill-input" id="authRegId" placeholder="Create Username" />
                             </div>
-                            <div class="ss-pill-group">
+                            <div class="ss-pill-group" style="position: relative;">
                                 <input type="password" class="ss-pill-input" id="authRegPassword"
-                                    placeholder="Create Password" />
+                                    placeholder="Create Password" style="padding-right: 44px;" />
+                                <button type="button" class="pass-toggle-btn" onclick="togglePasswordVisibility('authRegPassword', this)" title="Show/Hide Password">👁️</button>
                             </div>
 
                             <!-- Year and Dept Pill Selectors -->
@@ -2160,13 +2186,12 @@
                                         Condition</u></span>
                             </label>
 
-                            <button type="button" class="ss-btn-submit" onclick="performNewAuthRegister()">Sign
-                                Up</button>
+                            <button type="submit" class="ss-btn-submit">Sign Up</button>
 
                             <p class="ss-footer-text">
                                 Already have an account ? <strong onclick="switchAuthView('login')">Login</strong>
                             </p>
-                        </div>
+                        </form>
 
                         <!-- Bottom Wave Footer (exact matching right screenshot) -->
                         <div class="ss-bottom-wave-footer">
@@ -3868,14 +3893,27 @@
                 showToast("👋 Welcome to Eco Quest Guest Mode!");
             }
 
-            function performNewAuthLogin() {
+            function togglePasswordVisibility(inputId, toggleBtn) {
+                const input = document.getElementById(inputId);
+                if (!input) return;
+                if (input.type === "password") {
+                    input.type = "text";
+                    if (toggleBtn) toggleBtn.innerText = "🙈";
+                } else {
+                    input.type = "password";
+                    if (toggleBtn) toggleBtn.innerText = "👁️";
+                }
+            }
+
+            function performNewAuthLogin(e) {
+                if (e && e.preventDefault) e.preventDefault();
                 const usernameInput = (document.getElementById("authLoginUsername") ? document.getElementById("authLoginUsername").value : "").trim();
                 const passwordInput = (document.getElementById("authLoginPassword") ? document.getElementById("authLoginPassword").value : "").trim();
 
                 if (!usernameInput) {
                     playErrorSound();
                     showToast("⚠️ Please enter your User Name, ID, or Email to sign in.");
-                    return;
+                    return false;
                 }
 
                 const searchKey = usernameInput.toLowerCase();
@@ -3887,27 +3925,38 @@
 
                 if (!foundUser) {
                     playErrorSound();
-                    alert("❌ Invalid Account Credentials or Password!\n\nAccount does not exist. Please click 'Create' to register an account first.");
-                    showToast("❌ Account not found! Please create an ID first.");
+                    alert("❌ Account Not Found!\n\nNo account exists for '" + usernameInput + "'. Please click 'Create' to register an account first.");
+                    showToast("❌ Account not found! Switch to Sign Up.");
                     switchAuthView('register');
-                    return;
+                    if (document.getElementById("authRegUsername")) document.getElementById("authRegUsername").value = usernameInput;
+                    return false;
                 }
 
-                // Verify password if account has a password set
+                // Verify password
+                if (foundUser.password && !passwordInput) {
+                    playErrorSound();
+                    alert("❌ Password Required!\n\nPlease enter the password for account " + foundUser.name + " (" + foundUser.id + ").\n\nDefault password for demo accounts is 'eco123'.");
+                    showToast("❌ Password required to sign in.");
+                    return false;
+                }
+
                 if (foundUser.password && passwordInput && foundUser.password !== passwordInput) {
                     playErrorSound();
-                    alert("❌ Invalid Account Credentials or Password!\n\nThe password you entered is incorrect. Please check your credentials and try again.");
-                    showToast("❌ Invalid password! Please try again.");
-                    return;
+                    alert("❌ Incorrect Password!\n\nThe password you entered for " + foundUser.name + " (" + foundUser.id + ") is incorrect.\n\nDefault password for demo accounts is 'eco123'.");
+                    showToast("❌ Incorrect password! Please try again.");
+                    return false;
                 }
 
                 // Log in existing account
                 loadUser(foundUser.id);
                 switchTab('home');
                 playSuccessSound();
+                showToast(`🎉 Welcome back, ${foundUser.name}!`);
+                return false;
             }
 
-            function performNewAuthRegister() {
+            function performNewAuthRegister(e) {
+                if (e && e.preventDefault) e.preventDefault();
                 const username = (document.getElementById("authRegUsername") ? document.getElementById("authRegUsername").value : "").trim();
                 const email = (document.getElementById("authRegEmail") ? document.getElementById("authRegEmail").value : "").trim();
                 const customId = (document.getElementById("authRegId") ? document.getElementById("authRegId").value : "").trim();
@@ -3916,7 +3965,7 @@
                 if (!username) {
                     playErrorSound();
                     showToast("⚠️ Please enter your Name to create an account.");
-                    return;
+                    return false;
                 }
 
                 // Check if user already exists
@@ -3929,14 +3978,14 @@
 
                 if (existing) {
                     playErrorSound();
-                    alert(`⚠️ Account already exists for "${username}" (${existing.id})!\n\nPlease sign in with your credentials.`);
-                    showToast("⚠️ Account already exists! Switch to Sign In.");
+                    alert(`⚠️ Account Already Exists!\n\nAn account already exists for "${existing.name}" (ID: ${existing.id}).\n\nPlease sign in with your credentials.`);
+                    showToast("⚠️ Account already exists! Switched to Sign In.");
                     switchAuthView('login');
                     if (document.getElementById("authLoginUsername")) document.getElementById("authLoginUsername").value = existing.name;
-                    return;
+                    return false;
                 }
 
-                const freshId = customId ? customId.toUpperCase() : ("STU-2026-" + Math.floor(1000 + Math.random() * 9000));
+                const freshId = customId ? (customId.toUpperCase().startsWith("STU-") ? customId.toUpperCase() : "STU-2026-" + customId.toUpperCase()) : ("STU-2026-" + Math.floor(1000 + Math.random() * 9000));
                 const userEmail = email || `${username.toLowerCase().replace(/\s+/g, '')}@eco.edu`;
 
                 users[freshId] = {
@@ -3944,8 +3993,8 @@
                     name: username,
                     email: userEmail,
                     password: password || "eco123",
-                    dept: "CSE Dept",
-                    year: "1st Year",
+                    dept: (document.getElementById("regDeptInput") ? document.getElementById("regDeptInput").value : "CSE Dept"),
+                    year: (document.getElementById("regYearInput") ? document.getElementById("regYearInput").value : "1st Year"),
                     avatar: selectedRegAvatar || "🌱",
                     bio: "Fresh Eco Student! Ready for campus sustainability.",
                     xp: 0, // Fresh 0% Progress guaranteed!
@@ -3964,6 +4013,7 @@
                 playSuccessSound();
                 triggerConfetti();
                 showToast(`✨ Account Created! Fresh ID: ${freshId} (0% Progress)`, "✨");
+                return false;
             }
 
             function quickLoginDemo(id) {
