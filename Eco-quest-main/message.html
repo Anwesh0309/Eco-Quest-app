@@ -2300,7 +2300,7 @@
                                     <button type="button" class="avatar-mini-btn"
                                         onclick="selectRegAvatar('🐝', this)">🐝</button>
                                     <button type="button" class="avatar-mini-btn"
-                                        onclick="selectRegAvatar('🐼', this)">🐼</button>
+                                        onclick="selectRegAvatar('🐈', this)">🐈</button>
                                 </div>
                             </div>
 
@@ -3221,7 +3221,7 @@
                             style="background: #ffffff; padding: 10px 14px; border-radius: 10px; margin-top: 10px; text-align: center;">
                             <div
                                 style="font-family: 'Space Grotesk', monospace; font-size: 20px; font-weight: 900; letter-spacing: 4px; color: #1b5e20;">
-                                ||| | |||| | || ||| | ||| |||| | |</div>
+                                ||||||||||||||||||||||||||||||| |</div>
                             <div
                                 style="font-size: 9px; font-weight: 800; color: #555; letter-spacing: 1px; margin-top: 2px;">
                                 VERIFIED CAMPUS SUSTAINABILITY PASSPORT BARCODE</div>
@@ -3687,8 +3687,13 @@
                 users = JSON.parse(JSON.stringify(DEFAULT_USERS));
             }
 
-            // Whenever user enters the app, always start with the Login page only!
-            openAuthModal();
+            const activeId = localStorage.getItem("eco_quest_active_user_v3");
+            if (activeId && users[activeId]) {
+                loadUser(activeId);
+                switchTab('home');
+            } else {
+                openAuthModal();
+            }
         }
 
         let isLoggedOut = false;

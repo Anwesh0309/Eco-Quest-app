@@ -3672,8 +3672,13 @@
                     users = JSON.parse(JSON.stringify(DEFAULT_USERS));
                 }
 
-                // Whenever user enters the app, always start with the Login page only!
-                openAuthModal();
+                const activeId = localStorage.getItem("eco_quest_active_user_v3");
+                if (activeId && users[activeId]) {
+                    loadUser(activeId);
+                    switchTab('home');
+                } else {
+                    openAuthModal();
+                }
             }
 
             let isLoggedOut = false;
