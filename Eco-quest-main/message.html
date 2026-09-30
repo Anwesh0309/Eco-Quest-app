@@ -1120,6 +1120,103 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
 
+        /* App Layout Container In-App Overlay Modal */
+        .app-modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(15, 30, 20, 0.65);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            z-index: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeInAppModal 0.2s ease-out;
+        }
+
+        @keyframes fadeInAppModal {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .app-modal-card {
+            background: #ffffff;
+            border-radius: 22px;
+            padding: 22px 18px;
+            width: 100%;
+            max-width: 320px;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+            border: 2px solid #c8e6c9;
+            text-align: center;
+        }
+
+        .app-modal-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+
+        .app-modal-icon {
+            font-size: 36px;
+            line-height: 1;
+        }
+
+        .app-modal-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 17px;
+            font-weight: 800;
+            color: #1b5e20;
+            margin: 0;
+        }
+
+        .app-modal-body {
+            font-size: 13px;
+            color: #37474f;
+            line-height: 1.5;
+            margin-bottom: 18px;
+            white-space: pre-line;
+            word-break: break-word;
+        }
+
+        .app-modal-footer {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .app-modal-btn {
+            flex: 1;
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 13px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+        }
+
+        .app-modal-btn.primary {
+            background: linear-gradient(135deg, #2e7d32, #1b5e20);
+            color: white;
+            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
+        }
+
+        .app-modal-btn.primary:active {
+            transform: scale(0.97);
+        }
+
+        .app-modal-btn.secondary {
+            background: #f1f8f3;
+            color: #557261;
+            border: 1px solid #c8e6c9;
+        }
+
         /* MY ACTIVE VOUCHERS CARD & TICKET PASS STYLING */
         .vouchers-container-card {
             background: linear-gradient(135deg, #ffffff 0%, #f4faf5 100%);
@@ -1513,6 +1610,30 @@
         .ss-pill-input:focus {
             border-color: #2e7d32;
             box-shadow: 0 4px 18px rgba(46, 125, 50, 0.2);
+        }
+
+        .pass-toggle-btn {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+            z-index: 10;
+            opacity: 0.75;
+            transition: opacity 0.2s ease, transform 0.15s ease;
+        }
+
+        .pass-toggle-btn:hover {
+            opacity: 1;
+            transform: translateY(-50%) scale(1.1);
         }
 
         .ss-btn-submit {
@@ -2024,19 +2145,20 @@
                             <div class="ss-circle-small"></div>
                         </div>
 
-                        <div class="ss-auth-body">
+                        <form onsubmit="performNewAuthLogin(event); return false;" class="ss-auth-body">
                             <h1 class="ss-auth-heading">Login</h1>
 
                             <div class="ss-pill-group">
                                 <input type="text" class="ss-pill-input" id="authLoginUsername"
-                                    placeholder="User Name" />
+                                    placeholder="User Name, Email, or ID" />
                             </div>
-                            <div class="ss-pill-group">
+                            <div class="ss-pill-group" style="position: relative;">
                                 <input type="password" class="ss-pill-input" id="authLoginPassword"
-                                    placeholder="Password" />
+                                    placeholder="Password" style="padding-right: 44px;" />
+                                <button type="button" class="pass-toggle-btn" onclick="togglePasswordVisibility('authLoginPassword', this)" title="Show/Hide Password">👁️</button>
                             </div>
 
-                            <button type="button" class="ss-btn-submit" onclick="performNewAuthLogin()">Sign In</button>
+                            <button type="submit" class="ss-btn-submit">Sign In</button>
 
                             <!-- Or Divider -->
                             <div class="ss-or-divider">
@@ -2080,12 +2202,13 @@
                             <p class="ss-footer-text">
                                 Don't have an account ? <strong onclick="switchAuthView('register')">Create</strong>
                             </p>
-                            <p style="text-align: center; margin-top: 12px; font-size: 11px;">
-                                <a onclick="continueAsGuest()"
-                                    style="color: #64748b; text-decoration: underline; cursor: pointer;">Continue as
-                                    Guest</a>
+                            <p style="text-align: center; margin-top: 14px;">
+                                <button type="button" onclick="continueAsGuest(event)"
+                                    style="background: transparent; border: none; color: #1b5e20; font-weight: 800; font-size: 13px; text-decoration: underline; cursor: pointer; padding: 6px 12px;">
+                                    🚀 Continue as Guest
+                                </button>
                             </p>
-                        </div>
+                        </form>
                     </div>
 
                     <!-- VIEW 2: REGISTER / SIGN UP SCREEN (MATCHING RIGHT SCREENSHOT) -->
@@ -2094,21 +2217,22 @@
                         <div class="ss-signup-top-accent"></div>
                         <div class="ss-side-wave-line"></div>
 
-                        <div class="ss-auth-body" style="padding-top: 36px;">
+                        <form onsubmit="performNewAuthRegister(event); return false;" class="ss-auth-body" style="padding-top: 36px;">
                             <h1 class="ss-auth-heading-signup">Sign Up</h1>
 
                             <div class="ss-pill-group">
-                                <input type="text" class="ss-pill-input" id="authRegUsername" placeholder="Name" />
+                                <input type="text" class="ss-pill-input" id="authRegUsername" placeholder="Name / Display Name" />
                             </div>
                             <div class="ss-pill-group">
-                                <input type="email" class="ss-pill-input" id="authRegEmail" placeholder="Email Id" />
+                                <input type="email" class="ss-pill-input" id="authRegEmail" placeholder="Email Address (any email)" />
                             </div>
                             <div class="ss-pill-group">
-                                <input type="text" class="ss-pill-input" id="authRegId" placeholder="Create Username" />
+                                <input type="text" class="ss-pill-input" id="authRegId" placeholder="Create Username / ID" />
                             </div>
-                            <div class="ss-pill-group">
+                            <div class="ss-pill-group" style="position: relative;">
                                 <input type="password" class="ss-pill-input" id="authRegPassword"
-                                    placeholder="Create Password" />
+                                    placeholder="Create Password" style="padding-right: 44px;" />
+                                <button type="button" class="pass-toggle-btn" onclick="togglePasswordVisibility('authRegPassword', this)" title="Show/Hide Password">👁️</button>
                             </div>
 
                             <!-- Year and Dept Pill Selectors -->
@@ -2160,13 +2284,12 @@
                                         Condition</u></span>
                             </label>
 
-                            <button type="button" class="ss-btn-submit" onclick="performNewAuthRegister()">Sign
-                                Up</button>
+                            <button type="submit" class="ss-btn-submit">Sign Up</button>
 
                             <p class="ss-footer-text">
                                 Already have an account ? <strong onclick="switchAuthView('login')">Login</strong>
                             </p>
-                        </div>
+                        </form>
 
                         <!-- Bottom Wave Footer (exact matching right screenshot) -->
                         <div class="ss-bottom-wave-footer">
@@ -3161,14 +3284,67 @@
 
         </main>
 
+        <!-- Bottom Fixed Navigation Bar -->
+        <nav class="bottom-nav">
+            <button class="nav-tab-btn active" onclick="switchTab('home', this)">
+                <span class="nav-tab-icon">🏠</span>
+                <span>Home</span>
+                <span class="nav-indicator-dot"></span>
+            </button>
+            <button class="nav-tab-btn" onclick="switchTab('games', this)">
+                <span class="nav-tab-icon">🎮</span>
+                <span>Games</span>
+                <span class="nav-indicator-dot"></span>
+            </button>
+            <button class="nav-tab-btn" onclick="switchTab('missions', this)">
+                <span class="nav-badge-count" id="navMissionBadge">5</span>
+                <span class="nav-tab-icon">🎯</span>
+                <span>Missions</span>
+                <span class="nav-indicator-dot"></span>
+            </button>
+            <button class="nav-tab-btn" onclick="switchTab('rewards', this)">
+                <span class="nav-badge-count" id="navRewardBadge">4</span>
+                <span class="nav-tab-icon">🎁</span>
+                <span>Rewards</span>
+                <span class="nav-indicator-dot"></span>
+            </button>
+            <button class="nav-tab-btn" onclick="switchTab('ranks', this)">
+                <span class="nav-tab-icon">🏆</span>
+                <span>Ranks</span>
+                <span class="nav-indicator-dot"></span>
+            </button>
+            <button class="nav-tab-btn" onclick="switchTab('profile', this)">
+                <span class="nav-tab-icon">👤</span>
+                <span>Profile</span>
+                <span class="nav-indicator-dot"></span>
+            </button>
+        </nav>
+
         <!-- Toast Notification Overlay -->
         <div class="toast-notification" id="toastNotif">
             <span id="toastIcon">⚡</span>
             <span id="toastMessage">Welcome to ECO Quest!</span>
         </div>
 
+        <!-- App Layout Custom Modal Overlay (Replaces Browser Alerts) -->
+        <div id="appCustomModalOverlay" class="app-modal-overlay" style="display: none;">
+            <div class="app-modal-card">
+                <div class="app-modal-header">
+                    <span class="app-modal-icon" id="appModalIcon">⚠️</span>
+                    <h3 class="app-modal-title" id="appModalTitle">Notice</h3>
+                </div>
+                <div class="app-modal-body" id="appModalMessage">
+                    Notice text...
+                </div>
+                <div class="app-modal-footer" id="appModalFooter">
+                    <button class="app-modal-btn primary" onclick="closeAppModal(true)">Got it</button>
+                </div>
+            </div>
+        </div>
+
         <!-- Hidden Canvas for Image Analysis -->
         <canvas id="analysisCanvas" width="224" height="224" style="display: none;"></canvas>
+    </div>
 
         <!-- Application Logic -->
         <script>
@@ -3190,6 +3366,77 @@
             function playCoinSound() { playTone(880, 0.1); setTimeout(() => playTone(1760, 0.2), 100); }
             function playSuccessSound() { playTone(523, 0.1); setTimeout(() => playTone(659, 0.1), 100); setTimeout(() => playTone(784, 0.2), 200); }
             function playErrorSound() { playTone(180, 0.25, 'sawtooth'); }
+
+            /* App Layout Custom Dialog System (Replaces Browser Alerts & Confirms) */
+            function showAppAlert(title, message, icon = "⚠️", onConfirm = null) {
+                const overlay = document.getElementById("appCustomModalOverlay");
+                const titleEl = document.getElementById("appModalTitle");
+                const msgEl = document.getElementById("appModalMessage");
+                const iconEl = document.getElementById("appModalIcon");
+                const footerEl = document.getElementById("appModalFooter");
+
+                if (!overlay) {
+                    showToast(`${icon} ${title}: ${message}`);
+                    if (onConfirm) onConfirm();
+                    return;
+                }
+
+                if (titleEl) titleEl.innerText = title;
+                if (msgEl) msgEl.innerText = message;
+                if (iconEl) iconEl.innerText = icon;
+
+                if (footerEl) {
+                    footerEl.innerHTML = `
+                        <button class="app-modal-btn primary" onclick="closeAppModal(true)">Got it</button>
+                    `;
+                }
+
+                overlay.onConfirmCallback = onConfirm;
+                overlay.onCancelCallback = null;
+                overlay.style.display = "flex";
+            }
+
+            function showAppConfirm(title, message, onConfirm, onCancel = null) {
+                const overlay = document.getElementById("appCustomModalOverlay");
+                const titleEl = document.getElementById("appModalTitle");
+                const msgEl = document.getElementById("appModalMessage");
+                const iconEl = document.getElementById("appModalIcon");
+                const footerEl = document.getElementById("appModalFooter");
+
+                if (!overlay) {
+                    if (confirm(`${title}\n\n${message}`)) {
+                        if (onConfirm) onConfirm();
+                    } else {
+                        if (onCancel) onCancel();
+                    }
+                    return;
+                }
+
+                if (titleEl) titleEl.innerText = title;
+                if (msgEl) msgEl.innerText = message;
+                if (iconEl) iconEl.innerText = "❓";
+
+                if (footerEl) {
+                    footerEl.innerHTML = `
+                        <button class="app-modal-btn secondary" onclick="closeAppModal(false)">Cancel</button>
+                        <button class="app-modal-btn primary" onclick="closeAppModal(true)">Confirm</button>
+                    `;
+                }
+
+                overlay.onConfirmCallback = onConfirm;
+                overlay.onCancelCallback = onCancel;
+                overlay.style.display = "flex";
+            }
+
+            function closeAppModal(isConfirmed = false) {
+                const overlay = document.getElementById("appCustomModalOverlay");
+                if (!overlay) return;
+                overlay.style.display = "none";
+                const cb = isConfirmed ? overlay.onConfirmCallback : overlay.onCancelCallback;
+                if (typeof cb === 'function') {
+                    cb();
+                }
+            }
 
             /* Confetti System */
             function triggerConfetti() {
@@ -3328,18 +3575,6 @@
                     name: "Alex Green (New Student)",
                     password: "eco123",
                     dept: "Mechanical Dept",
-                    year: "1st Year",
-                    avatar: "🌱",
-                    bio: "Just joined ECO Quest! Ready to plant my first tree 🌳",
-                    xp: 0, // Fresh ID starts at 0% Progress!
-                    coins: 0,
-                    missionsCompleted: 0,
-                    zeroWasteMeals: 0,
-                    saplingsPlanted: 0,
-                    vouchers: [],
-                    history: []
-                }
-            };t: "Mechanical Dept",
                     year: "1st Year",
                     avatar: "🌱",
                     bio: "Just joined ECO Quest! Ready to plant my first tree 🌳",
@@ -3493,30 +3728,32 @@
                     return;
                 }
 
-                const confirmReset = confirm(`⚠️ Are you sure you want to RESET all progress for ${currentUser.name} (${currentUser.id})?\n\nThis will reset your XP to 0 (Level 1 Novice), Eco-Coins to 0, cleared missions to 0, active vouchers to 0, and clear your mission history for this account.`);
+                showAppConfirm(
+                    "Reset Account Progress",
+                    `Are you sure you want to RESET all progress for ${currentUser.name} (${currentUser.id})?\n\nThis will reset your XP to 0 (Level 1 Novice), Eco-Coins to 0, cleared missions to 0, active vouchers to 0, and clear your mission history.`,
+                    () => {
+                        currentUser.xp = 0;
+                        currentUser.coins = 0;
+                        currentUser.missionsCompleted = 0;
+                        currentUser.zeroWasteMeals = 0;
+                        currentUser.saplingsPlanted = 0;
+                        currentUser.vouchers = [];
+                        currentUser.history = [];
 
-                if (!confirmReset) return;
+                        coins = 0;
+                        missionsCompleted = 0;
+                        activeVouchers = [];
 
-                currentUser.xp = 0;
-                currentUser.coins = 0;
-                currentUser.missionsCompleted = 0;
-                currentUser.zeroWasteMeals = 0;
-                currentUser.saplingsPlanted = 0;
-                currentUser.vouchers = [];
-                currentUser.history = [];
+                        saveUsersToStorage();
+                        updateUserUI();
+                        renderVouchers();
+                        renderLeaderboard();
+                        renderMissionHistory();
 
-                coins = 0;
-                missionsCompleted = 0;
-                activeVouchers = [];
-
-                saveUsersToStorage();
-                updateUserUI();
-                renderVouchers();
-                renderLeaderboard();
-                renderMissionHistory();
-
-                playTone(300, 0.3, 'triangle');
-                showToast(`🔄 Progress reset for ${currentUser.name}! Level 1 (0% Progress)`, "🔄");
+                        playTone(300, 0.3, 'triangle');
+                        showToast(`🔄 Progress reset for ${currentUser.name}! Level 1 (0% Progress)`, "🔄");
+                    }
+                );
             }
 
             function getLevelInfo(xp) {
@@ -3706,7 +3943,7 @@
                     listContainer.appendChild(item);
 
                     if (isCurrent) {
-                        document.getElementById("idModalRank").innerText = `#${rankNum} Rank`;
+                        setElText("idModalRank", `#${rankNum} Rank`);
                     }
                 });
             }
@@ -3855,6 +4092,8 @@
                 if (landing) landing.style.display = viewName === 'landing' ? 'block' : 'none';
                 if (login) login.style.display = viewName === 'login' ? 'block' : 'none';
                 if (reg) reg.style.display = viewName === 'register' ? 'block' : 'none';
+                const bottomNavEl = document.querySelector(".bottom-nav");
+                if (bottomNavEl) bottomNavEl.style.display = "none";
             }
 
             function openAuthScreen(viewName = 'landing') {
@@ -3862,93 +4101,136 @@
                 switchAuthView(viewName);
             }
 
-            function continueAsGuest() {
-                loadUser("STU-2026-01");
+            function continueAsGuest(e) {
+                if (e && e.preventDefault) e.preventDefault();
+                if (e && e.stopPropagation) e.stopPropagation();
+
+                const demoIds = ["STU-2026-01", "STU-2026-02", "STU-2026-03", "STU-2026-04"];
+                const randomId = demoIds[Math.floor(Math.random() * demoIds.length)];
+
+                if (!users[randomId] && DEFAULT_USERS[randomId]) {
+                    users[randomId] = JSON.parse(JSON.stringify(DEFAULT_USERS[randomId]));
+                }
+
+                const chosenUser = users[randomId] || DEFAULT_USERS["STU-2026-01"];
+                saveUsersToStorage();
+                loadUser(chosenUser.id);
                 switchTab('home');
-                showToast("👋 Welcome to Eco Quest Guest Mode!");
+                playSuccessSound();
+                showToast(`🚀 Guest Mode: Logged in as ${chosenUser.name} (${chosenUser.id})`, "🚀");
             }
 
-            function performNewAuthLogin() {
+            function togglePasswordVisibility(inputId, toggleBtn) {
+                const input = document.getElementById(inputId);
+                if (!input) return;
+                if (input.type === "password") {
+                    input.type = "text";
+                    if (toggleBtn) toggleBtn.innerText = "🙈";
+                } else {
+                    input.type = "password";
+                    if (toggleBtn) toggleBtn.innerText = "👁️";
+                }
+            }
+
+            function performNewAuthLogin(e) {
+                if (e && e.preventDefault) e.preventDefault();
                 const usernameInput = (document.getElementById("authLoginUsername") ? document.getElementById("authLoginUsername").value : "").trim();
                 const passwordInput = (document.getElementById("authLoginPassword") ? document.getElementById("authLoginPassword").value : "").trim();
 
                 if (!usernameInput) {
-                    playErrorSound();
-                    showToast("⚠️ Please enter your User Name, ID, or Email to sign in.");
-                    return;
+                    continueAsGuest(e);
+                    return false;
                 }
 
                 const searchKey = usernameInput.toLowerCase();
-                const foundUser = Object.values(users).find(u =>
-                    u.id.toLowerCase() === searchKey ||
-                    u.name.toLowerCase() === searchKey ||
-                    (u.email && u.email.toLowerCase() === searchKey)
-                );
+                const foundUser = Object.values(users).find(u => {
+                    const uId = (u.id || "").toLowerCase();
+                    const uCustomId = (u.customId || "").toLowerCase();
+                    const uName = (u.name || "").toLowerCase();
+                    const uEmail = (u.email || "").toLowerCase();
+                    const uIdNoPrefix = uId.replace(/^stu-2026-/, "");
 
-                if (!foundUser) {
-                    playErrorSound();
-                    alert("❌ Invalid Account Credentials or Password!\n\nAccount does not exist. Please click 'Create' to register an account first.");
-                    showToast("❌ Account not found! Please create an ID first.");
-                    switchAuthView('register');
-                    return;
+                    return (
+                        uId === searchKey ||
+                        uCustomId === searchKey ||
+                        uIdNoPrefix === searchKey ||
+                        uName === searchKey ||
+                        uEmail === searchKey
+                    );
+                });
+
+                if (foundUser) {
+                    if (passwordInput) {
+                        foundUser.password = passwordInput;
+                    }
+                    saveUsersToStorage();
+                    loadUser(foundUser.id);
+                    switchTab('home');
+                    playSuccessSound();
+                    showToast(`🎉 Welcome back, ${foundUser.name}!`);
+                    return false;
                 }
 
-                // Verify password if account has a password set
-                if (foundUser.password && passwordInput && foundUser.password !== passwordInput) {
-                    playErrorSound();
-                    alert("❌ Invalid Account Credentials or Password!\n\nThe password you entered is incorrect. Please check your credentials and try again.");
-                    showToast("❌ Invalid password! Please try again.");
-                    return;
-                }
+                // Create account instantly with entered username and password!
+                const isEmail = usernameInput.includes("@");
+                const name = isEmail ? usernameInput.split('@')[0] : usernameInput;
+                const freshId = usernameInput.toUpperCase().startsWith("STU-") ? usernameInput.toUpperCase() : ("STU-2026-" + Math.floor(1000 + Math.random() * 9000));
 
-                // Log in existing account
-                loadUser(foundUser.id);
+                users[freshId] = {
+                    id: freshId,
+                    customId: usernameInput,
+                    name: name,
+                    email: isEmail ? usernameInput : `${name.toLowerCase().replace(/[^a-z0-9]/g, '')}@eco.edu`,
+                    password: passwordInput || "1234",
+                    dept: "CSE Dept",
+                    year: "1st Year",
+                    avatar: "🌱",
+                    bio: "Fresh Eco Student! Ready for campus sustainability.",
+                    xp: 0,
+                    coins: 0,
+                    missionsCompleted: 0,
+                    zeroWasteMeals: 0,
+                    saplingsPlanted: 0,
+                    vouchers: [],
+                    history: []
+                };
+
+                saveUsersToStorage();
+                loadUser(freshId);
                 switchTab('home');
                 playSuccessSound();
+                showToast(`✨ Welcome ${name}! Logged in as ${freshId}`);
+                return false;
             }
 
-            function performNewAuthRegister() {
+            function performNewAuthRegister(e) {
+                if (e && e.preventDefault) e.preventDefault();
                 const username = (document.getElementById("authRegUsername") ? document.getElementById("authRegUsername").value : "").trim();
                 const email = (document.getElementById("authRegEmail") ? document.getElementById("authRegEmail").value : "").trim();
                 const customId = (document.getElementById("authRegId") ? document.getElementById("authRegId").value : "").trim();
                 const password = (document.getElementById("authRegPassword") ? document.getElementById("authRegPassword").value : "").trim();
 
-                if (!username) {
-                    playErrorSound();
-                    showToast("⚠️ Please enter your Name to create an account.");
-                    return;
+                const inputName = username || customId || (email ? email.split('@')[0] : "");
+                if (!inputName) {
+                    createFreshAccountQuick();
+                    return false;
                 }
 
-                // Check if user already exists
-                const searchName = username.toLowerCase();
-                const existing = Object.values(users).find(u =>
-                    u.name.toLowerCase() === searchName ||
-                    (customId && u.id.toLowerCase() === customId.toLowerCase()) ||
-                    (email && u.email && u.email.toLowerCase() === email.toLowerCase())
-                );
-
-                if (existing) {
-                    playErrorSound();
-                    alert(`⚠️ Account already exists for "${username}" (${existing.id})!\n\nPlease sign in with your credentials.`);
-                    showToast("⚠️ Account already exists! Switch to Sign In.");
-                    switchAuthView('login');
-                    if (document.getElementById("authLoginUsername")) document.getElementById("authLoginUsername").value = existing.name;
-                    return;
-                }
-
+                const effectiveName = inputName;
                 const freshId = customId ? customId.toUpperCase() : ("STU-2026-" + Math.floor(1000 + Math.random() * 9000));
-                const userEmail = email || `${username.toLowerCase().replace(/\s+/g, '')}@eco.edu`;
+                const userEmail = email || `${effectiveName.toLowerCase().replace(/[^a-z0-9]/g, '')}@eco.edu`;
 
                 users[freshId] = {
                     id: freshId,
-                    name: username,
+                    customId: customId || freshId,
+                    name: effectiveName,
                     email: userEmail,
-                    password: password || "eco123",
-                    dept: "CSE Dept",
-                    year: "1st Year",
+                    password: password || "1234",
+                    dept: (document.getElementById("regDeptInput") ? document.getElementById("regDeptInput").value : "CSE Dept"),
+                    year: (document.getElementById("regYearInput") ? document.getElementById("regYearInput").value : "1st Year"),
                     avatar: selectedRegAvatar || "🌱",
                     bio: "Fresh Eco Student! Ready for campus sustainability.",
-                    xp: 0, // Fresh 0% Progress guaranteed!
+                    xp: 0,
                     coins: 0,
                     missionsCompleted: 0,
                     zeroWasteMeals: 0,
@@ -3963,7 +4245,8 @@
 
                 playSuccessSound();
                 triggerConfetti();
-                showToast(`✨ Account Created! Fresh ID: ${freshId} (0% Progress)`, "✨");
+                showToast(`✨ Account Created! Welcome ${effectiveName} (${freshId})`, "✨");
+                return false;
             }
 
             function quickLoginDemo(id) {
@@ -4164,6 +4447,11 @@
 
             window.addEventListener("DOMContentLoaded", () => {
                 initUserSystem();
+                const activeSection = document.querySelector(".section.active");
+                if (activeSection && activeSection.id === "tab-auth") {
+                    const bottomNavEl = document.querySelector(".bottom-nav");
+                    if (bottomNavEl) bottomNavEl.style.display = "none";
+                }
             });
 
             /* Game Modes */
@@ -4348,7 +4636,7 @@
                         if (webcamStream) webcamStream.getTracks().forEach(t => t.stop());
                     };
                 } catch (e) {
-                    alert("📷 Camera access denied or unavailable. Please click 'Select Image' button!");
+                    showAppAlert("Camera Access", "Camera access denied or unavailable. Please click 'Select Image' button!", "📷");
                 }
             }
 
@@ -4582,7 +4870,7 @@
                     showVoucherQR(title, code);
                 } else {
                     playErrorSound();
-                    alert("❌ Not enough Eco-Coins! Play games or complete plant missions to earn more!");
+                    showAppAlert("Not Enough Eco-Coins", "Play games or complete plant missions to earn more Eco-Coins!", "🪙");
                 }
             }
 
@@ -4652,10 +4940,10 @@
 
             /* Certificate Generator */
             function generateCertificate() {
-                const name = document.getElementById("editProfileName").value.trim() || "Anwesh";
+                const name = document.getElementById("editProfileName") ? (document.getElementById("editProfileName").value.trim() || "Anwesh") : "Anwesh";
                 playSuccessSound();
                 triggerConfetti();
-                alert(`🎉 Official Certificate Issued!\n\nThis certifies that ${name} has been awarded the Campus Eco Champion Award for completing plant missions and sustainability challenges.\n\nCertificate ID: ECO-CERT-2026-X99`);
+                showAppAlert("Official Certificate Issued!", `This certifies that ${name} has been awarded the Campus Eco Champion Award for completing plant missions and sustainability challenges.\n\nCertificate ID: ECO-CERT-2026-X99`, "🏆");
             }
         </script>
 </body>

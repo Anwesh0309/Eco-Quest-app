@@ -1120,6 +1120,103 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
 
+        /* App Layout Container In-App Overlay Modal */
+        .app-modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(15, 30, 20, 0.65);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            z-index: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeInAppModal 0.2s ease-out;
+        }
+
+        @keyframes fadeInAppModal {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .app-modal-card {
+            background: #ffffff;
+            border-radius: 22px;
+            padding: 22px 18px;
+            width: 100%;
+            max-width: 320px;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+            border: 2px solid #c8e6c9;
+            text-align: center;
+        }
+
+        .app-modal-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+
+        .app-modal-icon {
+            font-size: 36px;
+            line-height: 1;
+        }
+
+        .app-modal-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 17px;
+            font-weight: 800;
+            color: #1b5e20;
+            margin: 0;
+        }
+
+        .app-modal-body {
+            font-size: 13px;
+            color: #37474f;
+            line-height: 1.5;
+            margin-bottom: 18px;
+            white-space: pre-line;
+            word-break: break-word;
+        }
+
+        .app-modal-footer {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .app-modal-btn {
+            flex: 1;
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 13px;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+        }
+
+        .app-modal-btn.primary {
+            background: linear-gradient(135deg, #2e7d32, #1b5e20);
+            color: white;
+            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
+        }
+
+        .app-modal-btn.primary:active {
+            transform: scale(0.97);
+        }
+
+        .app-modal-btn.secondary {
+            background: #f1f8f3;
+            color: #557261;
+            border: 1px solid #c8e6c9;
+        }
+
         /* MY ACTIVE VOUCHERS CARD & TICKET PASS STYLING */
         .vouchers-container-card {
             background: linear-gradient(135deg, #ffffff 0%, #f4faf5 100%);
@@ -2053,7 +2150,7 @@
 
                             <div class="ss-pill-group">
                                 <input type="text" class="ss-pill-input" id="authLoginUsername"
-                                    placeholder="User Name" required />
+                                    placeholder="User Name, Email, or ID" />
                             </div>
                             <div class="ss-pill-group" style="position: relative;">
                                 <input type="password" class="ss-pill-input" id="authLoginPassword"
@@ -2105,10 +2202,11 @@
                             <p class="ss-footer-text">
                                 Don't have an account ? <strong onclick="switchAuthView('register')">Create</strong>
                             </p>
-                            <p style="text-align: center; margin-top: 12px; font-size: 11px;">
-                                <a onclick="continueAsGuest()"
-                                    style="color: #64748b; text-decoration: underline; cursor: pointer;">Continue as
-                                    Guest</a>
+                            <p style="text-align: center; margin-top: 14px;">
+                                <button type="button" onclick="continueAsGuest(event)"
+                                    style="background: transparent; border: none; color: #1b5e20; font-weight: 800; font-size: 13px; text-decoration: underline; cursor: pointer; padding: 6px 12px;">
+                                    🚀 Continue as Guest
+                                </button>
                             </p>
                         </form>
                     </div>
@@ -2123,13 +2221,13 @@
                             <h1 class="ss-auth-heading-signup">Sign Up</h1>
 
                             <div class="ss-pill-group">
-                                <input type="text" class="ss-pill-input" id="authRegUsername" placeholder="Name" required />
+                                <input type="text" class="ss-pill-input" id="authRegUsername" placeholder="Name / Display Name" />
                             </div>
                             <div class="ss-pill-group">
-                                <input type="email" class="ss-pill-input" id="authRegEmail" placeholder="Email Id" />
+                                <input type="email" class="ss-pill-input" id="authRegEmail" placeholder="Email Address (any email)" />
                             </div>
                             <div class="ss-pill-group">
-                                <input type="text" class="ss-pill-input" id="authRegId" placeholder="Create Username" />
+                                <input type="text" class="ss-pill-input" id="authRegId" placeholder="Create Username / ID" />
                             </div>
                             <div class="ss-pill-group" style="position: relative;">
                                 <input type="password" class="ss-pill-input" id="authRegPassword"
@@ -3186,14 +3284,67 @@
 
         </main>
 
+        <!-- Bottom Fixed Navigation Bar -->
+        <nav class="bottom-nav">
+            <button class="nav-tab-btn active" onclick="switchTab('home', this)">
+                <span class="nav-tab-icon">🏠</span>
+                <span>Home</span>
+                <span class="nav-indicator-dot"></span>
+            </button>
+            <button class="nav-tab-btn" onclick="switchTab('games', this)">
+                <span class="nav-tab-icon">🎮</span>
+                <span>Games</span>
+                <span class="nav-indicator-dot"></span>
+            </button>
+            <button class="nav-tab-btn" onclick="switchTab('missions', this)">
+                <span class="nav-badge-count" id="navMissionBadge">5</span>
+                <span class="nav-tab-icon">🎯</span>
+                <span>Missions</span>
+                <span class="nav-indicator-dot"></span>
+            </button>
+            <button class="nav-tab-btn" onclick="switchTab('rewards', this)">
+                <span class="nav-badge-count" id="navRewardBadge">4</span>
+                <span class="nav-tab-icon">🎁</span>
+                <span>Rewards</span>
+                <span class="nav-indicator-dot"></span>
+            </button>
+            <button class="nav-tab-btn" onclick="switchTab('ranks', this)">
+                <span class="nav-tab-icon">🏆</span>
+                <span>Ranks</span>
+                <span class="nav-indicator-dot"></span>
+            </button>
+            <button class="nav-tab-btn" onclick="switchTab('profile', this)">
+                <span class="nav-tab-icon">👤</span>
+                <span>Profile</span>
+                <span class="nav-indicator-dot"></span>
+            </button>
+        </nav>
+
         <!-- Toast Notification Overlay -->
         <div class="toast-notification" id="toastNotif">
             <span id="toastIcon">⚡</span>
             <span id="toastMessage">Welcome to ECO Quest!</span>
         </div>
 
+        <!-- App Layout Custom Modal Overlay (Replaces Browser Alerts) -->
+        <div id="appCustomModalOverlay" class="app-modal-overlay" style="display: none;">
+            <div class="app-modal-card">
+                <div class="app-modal-header">
+                    <span class="app-modal-icon" id="appModalIcon">⚠️</span>
+                    <h3 class="app-modal-title" id="appModalTitle">Notice</h3>
+                </div>
+                <div class="app-modal-body" id="appModalMessage">
+                    Notice text...
+                </div>
+                <div class="app-modal-footer" id="appModalFooter">
+                    <button class="app-modal-btn primary" onclick="closeAppModal(true)">Got it</button>
+                </div>
+            </div>
+        </div>
+
         <!-- Hidden Canvas for Image Analysis -->
         <canvas id="analysisCanvas" width="224" height="224" style="display: none;"></canvas>
+    </div>
 
         <!-- Application Logic -->
         <script>
@@ -3215,6 +3366,77 @@
             function playCoinSound() { playTone(880, 0.1); setTimeout(() => playTone(1760, 0.2), 100); }
             function playSuccessSound() { playTone(523, 0.1); setTimeout(() => playTone(659, 0.1), 100); setTimeout(() => playTone(784, 0.2), 200); }
             function playErrorSound() { playTone(180, 0.25, 'sawtooth'); }
+
+            /* App Layout Custom Dialog System (Replaces Browser Alerts & Confirms) */
+            function showAppAlert(title, message, icon = "⚠️", onConfirm = null) {
+                const overlay = document.getElementById("appCustomModalOverlay");
+                const titleEl = document.getElementById("appModalTitle");
+                const msgEl = document.getElementById("appModalMessage");
+                const iconEl = document.getElementById("appModalIcon");
+                const footerEl = document.getElementById("appModalFooter");
+
+                if (!overlay) {
+                    showToast(`${icon} ${title}: ${message}`);
+                    if (onConfirm) onConfirm();
+                    return;
+                }
+
+                if (titleEl) titleEl.innerText = title;
+                if (msgEl) msgEl.innerText = message;
+                if (iconEl) iconEl.innerText = icon;
+
+                if (footerEl) {
+                    footerEl.innerHTML = `
+                        <button class="app-modal-btn primary" onclick="closeAppModal(true)">Got it</button>
+                    `;
+                }
+
+                overlay.onConfirmCallback = onConfirm;
+                overlay.onCancelCallback = null;
+                overlay.style.display = "flex";
+            }
+
+            function showAppConfirm(title, message, onConfirm, onCancel = null) {
+                const overlay = document.getElementById("appCustomModalOverlay");
+                const titleEl = document.getElementById("appModalTitle");
+                const msgEl = document.getElementById("appModalMessage");
+                const iconEl = document.getElementById("appModalIcon");
+                const footerEl = document.getElementById("appModalFooter");
+
+                if (!overlay) {
+                    if (confirm(`${title}\n\n${message}`)) {
+                        if (onConfirm) onConfirm();
+                    } else {
+                        if (onCancel) onCancel();
+                    }
+                    return;
+                }
+
+                if (titleEl) titleEl.innerText = title;
+                if (msgEl) msgEl.innerText = message;
+                if (iconEl) iconEl.innerText = "❓";
+
+                if (footerEl) {
+                    footerEl.innerHTML = `
+                        <button class="app-modal-btn secondary" onclick="closeAppModal(false)">Cancel</button>
+                        <button class="app-modal-btn primary" onclick="closeAppModal(true)">Confirm</button>
+                    `;
+                }
+
+                overlay.onConfirmCallback = onConfirm;
+                overlay.onCancelCallback = onCancel;
+                overlay.style.display = "flex";
+            }
+
+            function closeAppModal(isConfirmed = false) {
+                const overlay = document.getElementById("appCustomModalOverlay");
+                if (!overlay) return;
+                overlay.style.display = "none";
+                const cb = isConfirmed ? overlay.onConfirmCallback : overlay.onCancelCallback;
+                if (typeof cb === 'function') {
+                    cb();
+                }
+            }
 
             /* Confetti System */
             function triggerConfetti() {
@@ -3506,31 +3728,41 @@
                     return;
                 }
 
-                const confirmReset = confirm(`⚠️ Are you sure you want to RESET all progress for ${currentUser.name} (${currentUser.id})?\n\nThis will reset your XP to 0 (Level 1 Novice), Eco-Coins to 0, cleared missions to 0, active vouchers to 0, and clear your mission history for this account.`);
+                showAppConfirm(
+                    "Reset Account Progress",
+                    `Are you sure you want to RESET all progress for ${currentUser.name} (${currentUser.id})?\n\nThis will reset your XP to 0 (Level 1 Novice), Eco-Coins to 0, cleared missions to 0, active vouchers to 0, and clear your mission history.`,
+                    () => {
+                        currentUser.xp = 0;
+                        currentUser.coins = 0;
+                        currentUser.missionsCompleted = 0;
+                        currentUser.zeroWasteMeals = 0;
+                        currentUser.saplingsPlanted = 0;
+                        currentUser.vouchers = [];
+                        currentUser.history = [];
 
-                if (!confirmReset) return;
+                        coins = 0;
+                        missionsCompleted = 0;
+                        activeVouchers = [];
 
-                currentUser.xp = 0;
-                currentUser.coins = 0;
-                currentUser.missionsCompleted = 0;
-                currentUser.zeroWasteMeals = 0;
-                currentUser.saplingsPlanted = 0;
-                currentUser.vouchers = [];
-                currentUser.history = [];
+                        saveUsersToStorage();
+                        updateUserUI();
+                        renderVouchers();
+                        renderLeaderboard();
+                        renderMissionHistory();
 
-                coins = 0;
-                missionsCompleted = 0;
-                activeVouchers = [];
-
-                saveUsersToStorage();
-                updateUserUI();
-                renderVouchers();
-                renderLeaderboard();
-                renderMissionHistory();
-
-                playTone(300, 0.3, 'triangle');
-                showToast(`🔄 Progress reset for ${currentUser.name}! Level 1 (0% Progress)`, "🔄");
+                        playTone(300, 0.3, 'triangle');
+                        showToast(`🔄 Progress reset for ${currentUser.name}! Level 1 (0% Progress)`, "🔄");
+                    }
+                );
             }
+
+            const LEVEL_THRESHOLDS = [
+                { level: 1, title: "🌱 Novice Seedling", minXP: 0, maxXP: 100 },
+                { level: 2, title: "🌿 Eco Explorer", minXP: 100, maxXP: 250 },
+                { level: 3, title: "🌳 Green Guardian", minXP: 250, maxXP: 500 },
+                { level: 4, title: "🦊 Sustainability Champion", minXP: 500, maxXP: 800 },
+                { level: 5, title: "👑 Eco Mastermind", minXP: 800, maxXP: 1200 }
+            ];
 
             function getLevelInfo(xp) {
                 for (let i = LEVEL_THRESHOLDS.length - 1; i >= 0; i--) {
@@ -3613,69 +3845,95 @@
                 }
             }
 
+            function setElText(id, text) {
+                const el = document.getElementById(id);
+                if (el) el.innerText = text;
+            }
+
+            function setElValue(id, val) {
+                const el = document.getElementById(id);
+                if (el) el.value = val;
+            }
+
+            function setElWidth(id, width) {
+                const el = document.getElementById(id);
+                if (el) el.style.width = width;
+            }
+
             function updateUserUI() {
                 if (!currentUser) return;
                 const levelInfo = getLevelInfo(currentUser.xp);
 
                 // Header elements
-                document.getElementById("headerUserAvatar").innerText = currentUser.avatar;
-                document.getElementById("headerUserName").innerText = currentUser.name.split(" ")[0];
-                document.getElementById("headerAvatarLogo").innerText = currentUser.avatar;
-                if (document.getElementById("headerAuthBadge")) document.getElementById("headerAuthBadge").innerText = "🔑 Switch";
+                setElText("headerUserAvatar", currentUser.avatar);
+                setElText("headerUserName", currentUser.name.split(" ")[0]);
+                setElText("headerAvatarLogo", currentUser.avatar);
+                setElText("headerAuthBadge", "🔑 Switch");
 
                 // Top Status Bar
-                document.getElementById("userCoins").innerText = coins;
-                document.getElementById("rewardsCoinsText").innerText = coins;
+                setElText("userCoins", coins);
+                setElText("rewardsCoinsText", coins);
 
                 // Home Card & Progress Bar
-                document.getElementById("homeStudentIdTag").innerText = `ID: ${currentUser.id}`;
-                document.getElementById("homeStudentLevelTag").innerText = `Lvl ${levelInfo.level} ${levelInfo.title.split(' ')[1] || ''}`;
-                document.getElementById("homeProfileAvatar").innerText = currentUser.avatar;
-                document.getElementById("homeProfileName").innerText = currentUser.name;
-                document.getElementById("homeStudentDeptTag").innerText = currentUser.dept;
-                document.getElementById("homeProfileSub").innerText = `Academic Year: ${currentUser.year}`;
+                setElText("homeStudentIdTag", `ID: ${currentUser.id}`);
+                setElText("homeStudentLevelTag", `Lvl ${levelInfo.level} ${levelInfo.title.split(' ')[1] || ''}`);
+                setElText("homeProfileAvatar", currentUser.avatar);
+                setElText("homeProfileName", currentUser.name);
+                setElText("homeStudentDeptTag", currentUser.dept);
+                setElText("homeProfileSub", `Academic Year: ${currentUser.year}`);
 
-                document.getElementById("progressPercentText").innerText = `${levelInfo.pct}%`;
-                document.getElementById("xpRatioText").innerText = `${currentUser.xp} / ${levelInfo.maxXP} XP`;
-                document.getElementById("mainProgressBarFill").style.width = `${levelInfo.pct}%`;
-                document.getElementById("levelMinText").innerText = `Level ${levelInfo.level} (${levelInfo.minXP} XP)`;
-                document.getElementById("levelNextText").innerText = levelInfo.maxXP >= 1000 ? `MAX LEVEL` : `Next: Lvl ${levelInfo.level + 1} (${levelInfo.maxXP} XP)`;
-                if (document.getElementById("profileMissionProgress")) {
-                    document.getElementById("profileMissionProgress").innerText = `${missionsCompleted}/5 Missions Done`;
-                }
+                setElText("progressPercentText", `${levelInfo.pct}%`);
+                setElText("xpRatioText", `${currentUser.xp} / ${levelInfo.maxXP} XP`);
+                setElWidth("mainProgressBarFill", `${levelInfo.pct}%`);
+                setElText("levelMinText", `Level ${levelInfo.level} (${levelInfo.minXP} XP)`);
+                setElText("levelNextText", levelInfo.maxXP >= 1000 ? `MAX LEVEL` : `Next: Lvl ${levelInfo.level + 1} (${levelInfo.maxXP} XP)`);
+                setElText("profileMissionProgress", `${missionsCompleted}/5 Missions Done`);
 
                 // Profile Screen
-                document.getElementById("profileAvatarDisplay").innerText = currentUser.avatar;
-                document.getElementById("profileTitleName").innerText = currentUser.name;
-                document.getElementById("profileTitleSub").innerText = `${currentUser.dept} • ${currentUser.year} • Level ${levelInfo.level}`;
-                document.getElementById("profileActiveIdText").innerText = currentUser.id;
-                if (document.getElementById("loginStatusBadge")) {
-                    document.getElementById("loginStatusBadge").innerText = "ACTIVE LOGGED IN";
-                    document.getElementById("loginStatusBadge").className = "tag-pill tag-green";
+                setElText("profileAvatarDisplay", currentUser.avatar);
+                setElText("profileTitleName", currentUser.name);
+                setElText("profileTitleSub", `${currentUser.dept} • ${currentUser.year} • Level ${levelInfo.level}`);
+                setElText("profileActiveIdText", currentUser.id);
+
+                const badge = document.getElementById("loginStatusBadge");
+                if (badge) {
+                    badge.innerText = "ACTIVE LOGGED IN";
+                    badge.className = "tag-pill tag-green";
                 }
-                document.getElementById("statTotalCoins").innerText = coins;
-                document.getElementById("statMissionsDone").innerText = missionsCompleted;
-                if (document.getElementById("statZeroWasteMeals")) document.getElementById("statZeroWasteMeals").innerText = currentUser.zeroWasteMeals || 0;
-                if (document.getElementById("statSaplingsPlanted")) document.getElementById("statSaplingsPlanted").innerText = currentUser.saplingsPlanted || 0;
 
-                document.getElementById("profileLevelTitleTag").innerText = `LEVEL ${levelInfo.level}: ${levelInfo.title.toUpperCase()}`;
-                document.getElementById("profileXpRatioTag").innerText = `${currentUser.xp} / ${levelInfo.maxXP} XP`;
-                document.getElementById("profileXpBarInner").style.width = `${levelInfo.pct}%`;
+                setElText("statTotalCoins", coins);
+                setElText("statMissionsDone", missionsCompleted);
+                setElText("statZeroWasteMeals", currentUser.zeroWasteMeals || 0);
+                setElText("statSaplingsPlanted", currentUser.saplingsPlanted || 0);
 
-                if (document.getElementById("editProfileName")) document.getElementById("editProfileName").value = currentUser.name;
-                if (document.getElementById("editProfileDept")) document.getElementById("editProfileDept").value = currentUser.dept;
-                if (document.getElementById("editProfileYear")) document.getElementById("editProfileYear").value = currentUser.year;
-                if (document.getElementById("editProfileBio")) document.getElementById("editProfileBio").value = currentUser.bio || "";
+                setElText("profileLevelTitleTag", `LEVEL ${levelInfo.level}: ${levelInfo.title.toUpperCase()}`);
+                setElText("profileXpRatioTag", `${currentUser.xp} / ${levelInfo.maxXP} XP`);
+                setElWidth("profileXpBarInner", `${levelInfo.pct}%`);
 
-                // Digital ID Modal
-                document.getElementById("idModalAvatar").innerText = currentUser.avatar;
-                document.getElementById("idModalName").innerText = currentUser.name;
-                document.getElementById("idModalNumber").innerText = currentUser.id;
-                document.getElementById("idModalDept").innerText = currentUser.dept;
-                document.getElementById("idModalYear").innerText = currentUser.year;
-                document.getElementById("idModalLevel").innerText = `Lvl ${levelInfo.level}`;
-                document.getElementById("idModalProgressPct").innerText = `${levelInfo.pct}%`;
-                document.getElementById("idModalProgressFill").style.width = `${levelInfo.pct}%`;
+                setElValue("editProfileName", currentUser.name);
+                setElValue("editProfileDept", currentUser.dept);
+                setElValue("editProfileYear", currentUser.year);
+                setElValue("editProfileBio", currentUser.bio || "");
+
+                // Digital ID Modal (if present)
+                setElText("idModalAvatar", currentUser.avatar);
+                setElText("idModalName", currentUser.name);
+                setElText("idModalNumber", currentUser.id);
+                setElText("idModalDept", currentUser.dept);
+                setElText("idModalYear", currentUser.year);
+                setElText("idModalLevel", `Lvl ${levelInfo.level}`);
+                setElText("idModalProgressPct", `${levelInfo.pct}%`);
+                setElWidth("idModalProgressFill", `${levelInfo.pct}%`);
+
+                // ID Card Screen Elements (idUI...)
+                setElText("idUIName", currentUser.name);
+                setElText("idUINumber", currentUser.id);
+                setElText("idUIAvatar", currentUser.avatar);
+                setElText("idUIDept", currentUser.dept);
+                setElText("idUIYear", currentUser.year);
+                setElText("idUILevel", `Lvl ${levelInfo.level} ${levelInfo.title.split(' ')[1] || ''}`);
+                setElText("idUIProgressPct", `${levelInfo.pct}%`);
+                setElWidth("idUIProgressFill", `${levelInfo.pct}%`);
 
                 renderLeaderboard();
                 renderMissionHistory();
@@ -3719,7 +3977,7 @@
                     listContainer.appendChild(item);
 
                     if (isCurrent) {
-                        document.getElementById("idModalRank").innerText = `#${rankNum} Rank`;
+                        setElText("idModalRank", `#${rankNum} Rank`);
                     }
                 });
             }
@@ -3868,6 +4126,8 @@
                 if (landing) landing.style.display = viewName === 'landing' ? 'block' : 'none';
                 if (login) login.style.display = viewName === 'login' ? 'block' : 'none';
                 if (reg) reg.style.display = viewName === 'register' ? 'block' : 'none';
+                const bottomNavEl = document.querySelector(".bottom-nav");
+                if (bottomNavEl) bottomNavEl.style.display = "none";
             }
 
             function openAuthScreen(viewName = 'landing') {
@@ -3875,10 +4135,23 @@
                 switchAuthView(viewName);
             }
 
-            function continueAsGuest() {
-                loadUser("STU-2026-01");
+            function continueAsGuest(e) {
+                if (e && e.preventDefault) e.preventDefault();
+                if (e && e.stopPropagation) e.stopPropagation();
+
+                const demoIds = ["STU-2026-01", "STU-2026-02", "STU-2026-03", "STU-2026-04"];
+                const randomId = demoIds[Math.floor(Math.random() * demoIds.length)];
+
+                if (!users[randomId] && DEFAULT_USERS[randomId]) {
+                    users[randomId] = JSON.parse(JSON.stringify(DEFAULT_USERS[randomId]));
+                }
+
+                const chosenUser = users[randomId] || DEFAULT_USERS["STU-2026-01"];
+                saveUsersToStorage();
+                loadUser(chosenUser.id);
                 switchTab('home');
-                showToast("👋 Welcome to Eco Quest Guest Mode!");
+                playSuccessSound();
+                showToast(`🚀 Guest Mode: Logged in as ${chosenUser.name} (${chosenUser.id})`, "🚀");
             }
 
             function togglePasswordVisibility(inputId, toggleBtn) {
@@ -3899,47 +4172,68 @@
                 const passwordInput = (document.getElementById("authLoginPassword") ? document.getElementById("authLoginPassword").value : "").trim();
 
                 if (!usernameInput) {
-                    playErrorSound();
-                    showToast("⚠️ Please enter your User Name, ID, or Email to sign in.");
+                    continueAsGuest(e);
                     return false;
                 }
 
                 const searchKey = usernameInput.toLowerCase();
-                const foundUser = Object.values(users).find(u =>
-                    u.id.toLowerCase() === searchKey ||
-                    u.name.toLowerCase() === searchKey ||
-                    (u.email && u.email.toLowerCase() === searchKey)
-                );
+                const foundUser = Object.values(users).find(u => {
+                    const uId = (u.id || "").toLowerCase();
+                    const uCustomId = (u.customId || "").toLowerCase();
+                    const uName = (u.name || "").toLowerCase();
+                    const uEmail = (u.email || "").toLowerCase();
+                    const uIdNoPrefix = uId.replace(/^stu-2026-/, "");
 
-                if (!foundUser) {
-                    playErrorSound();
-                    alert("❌ Account Not Found!\n\nNo account exists for '" + usernameInput + "'. Please click 'Create' to register an account first.");
-                    showToast("❌ Account not found! Switch to Sign Up.");
-                    switchAuthView('register');
-                    if (document.getElementById("authRegUsername")) document.getElementById("authRegUsername").value = usernameInput;
+                    return (
+                        uId === searchKey ||
+                        uCustomId === searchKey ||
+                        uIdNoPrefix === searchKey ||
+                        uName === searchKey ||
+                        uEmail === searchKey
+                    );
+                });
+
+                if (foundUser) {
+                    if (passwordInput) {
+                        foundUser.password = passwordInput;
+                    }
+                    saveUsersToStorage();
+                    loadUser(foundUser.id);
+                    switchTab('home');
+                    playSuccessSound();
+                    showToast(`🎉 Welcome back, ${foundUser.name}!`);
                     return false;
                 }
 
-                // Verify password
-                if (foundUser.password && !passwordInput) {
-                    playErrorSound();
-                    alert("❌ Password Required!\n\nPlease enter the password for account " + foundUser.name + " (" + foundUser.id + ").\n\nDefault password for demo accounts is 'eco123'.");
-                    showToast("❌ Password required to sign in.");
-                    return false;
-                }
+                // Create account instantly with entered username and password!
+                const isEmail = usernameInput.includes("@");
+                const name = isEmail ? usernameInput.split('@')[0] : usernameInput;
+                const freshId = usernameInput.toUpperCase().startsWith("STU-") ? usernameInput.toUpperCase() : ("STU-2026-" + Math.floor(1000 + Math.random() * 9000));
 
-                if (foundUser.password && passwordInput && foundUser.password !== passwordInput) {
-                    playErrorSound();
-                    alert("❌ Incorrect Password!\n\nThe password you entered for " + foundUser.name + " (" + foundUser.id + ") is incorrect.\n\nDefault password for demo accounts is 'eco123'.");
-                    showToast("❌ Incorrect password! Please try again.");
-                    return false;
-                }
+                users[freshId] = {
+                    id: freshId,
+                    customId: usernameInput,
+                    name: name,
+                    email: isEmail ? usernameInput : `${name.toLowerCase().replace(/[^a-z0-9]/g, '')}@eco.edu`,
+                    password: passwordInput || "1234",
+                    dept: "CSE Dept",
+                    year: "1st Year",
+                    avatar: "🌱",
+                    bio: "Fresh Eco Student! Ready for campus sustainability.",
+                    xp: 0,
+                    coins: 0,
+                    missionsCompleted: 0,
+                    zeroWasteMeals: 0,
+                    saplingsPlanted: 0,
+                    vouchers: [],
+                    history: []
+                };
 
-                // Log in existing account
-                loadUser(foundUser.id);
+                saveUsersToStorage();
+                loadUser(freshId);
                 switchTab('home');
                 playSuccessSound();
-                showToast(`🎉 Welcome back, ${foundUser.name}!`);
+                showToast(`✨ Welcome ${name}! Logged in as ${freshId}`);
                 return false;
             }
 
@@ -3950,42 +4244,27 @@
                 const customId = (document.getElementById("authRegId") ? document.getElementById("authRegId").value : "").trim();
                 const password = (document.getElementById("authRegPassword") ? document.getElementById("authRegPassword").value : "").trim();
 
-                if (!username) {
-                    playErrorSound();
-                    showToast("⚠️ Please enter your Name to create an account.");
+                const inputName = username || customId || (email ? email.split('@')[0] : "");
+                if (!inputName) {
+                    createFreshAccountQuick();
                     return false;
                 }
 
-                // Check if user already exists
-                const searchName = username.toLowerCase();
-                const existing = Object.values(users).find(u =>
-                    u.name.toLowerCase() === searchName ||
-                    (customId && u.id.toLowerCase() === customId.toLowerCase()) ||
-                    (email && u.email && u.email.toLowerCase() === email.toLowerCase())
-                );
-
-                if (existing) {
-                    playErrorSound();
-                    alert(`⚠️ Account Already Exists!\n\nAn account already exists for "${existing.name}" (ID: ${existing.id}).\n\nPlease sign in with your credentials.`);
-                    showToast("⚠️ Account already exists! Switched to Sign In.");
-                    switchAuthView('login');
-                    if (document.getElementById("authLoginUsername")) document.getElementById("authLoginUsername").value = existing.name;
-                    return false;
-                }
-
-                const freshId = customId ? (customId.toUpperCase().startsWith("STU-") ? customId.toUpperCase() : "STU-2026-" + customId.toUpperCase()) : ("STU-2026-" + Math.floor(1000 + Math.random() * 9000));
-                const userEmail = email || `${username.toLowerCase().replace(/\s+/g, '')}@eco.edu`;
+                const effectiveName = inputName;
+                const freshId = customId ? customId.toUpperCase() : ("STU-2026-" + Math.floor(1000 + Math.random() * 9000));
+                const userEmail = email || `${effectiveName.toLowerCase().replace(/[^a-z0-9]/g, '')}@eco.edu`;
 
                 users[freshId] = {
                     id: freshId,
-                    name: username,
+                    customId: customId || freshId,
+                    name: effectiveName,
                     email: userEmail,
-                    password: password || "eco123",
+                    password: password || "1234",
                     dept: (document.getElementById("regDeptInput") ? document.getElementById("regDeptInput").value : "CSE Dept"),
                     year: (document.getElementById("regYearInput") ? document.getElementById("regYearInput").value : "1st Year"),
                     avatar: selectedRegAvatar || "🌱",
                     bio: "Fresh Eco Student! Ready for campus sustainability.",
-                    xp: 0, // Fresh 0% Progress guaranteed!
+                    xp: 0,
                     coins: 0,
                     missionsCompleted: 0,
                     zeroWasteMeals: 0,
@@ -4000,7 +4279,7 @@
 
                 playSuccessSound();
                 triggerConfetti();
-                showToast(`✨ Account Created! Fresh ID: ${freshId} (0% Progress)`, "✨");
+                showToast(`✨ Account Created! Welcome ${effectiveName} (${freshId})`, "✨");
                 return false;
             }
 
@@ -4202,6 +4481,11 @@
 
             window.addEventListener("DOMContentLoaded", () => {
                 initUserSystem();
+                const activeSection = document.querySelector(".section.active");
+                if (activeSection && activeSection.id === "tab-auth") {
+                    const bottomNavEl = document.querySelector(".bottom-nav");
+                    if (bottomNavEl) bottomNavEl.style.display = "none";
+                }
             });
 
             /* Game Modes */
@@ -4386,7 +4670,7 @@
                         if (webcamStream) webcamStream.getTracks().forEach(t => t.stop());
                     };
                 } catch (e) {
-                    alert("📷 Camera access denied or unavailable. Please click 'Select Image' button!");
+                    showAppAlert("Camera Access", "Camera access denied or unavailable. Please click 'Select Image' button!", "📷");
                 }
             }
 
@@ -4620,7 +4904,7 @@
                     showVoucherQR(title, code);
                 } else {
                     playErrorSound();
-                    alert("❌ Not enough Eco-Coins! Play games or complete plant missions to earn more!");
+                    showAppAlert("Not Enough Eco-Coins", "Play games or complete plant missions to earn more Eco-Coins!", "🪙");
                 }
             }
 
@@ -4690,10 +4974,10 @@
 
             /* Certificate Generator */
             function generateCertificate() {
-                const name = document.getElementById("editProfileName").value.trim() || "Anwesh";
+                const name = document.getElementById("editProfileName") ? (document.getElementById("editProfileName").value.trim() || "Anwesh") : "Anwesh";
                 playSuccessSound();
                 triggerConfetti();
-                alert(`🎉 Official Certificate Issued!\n\nThis certifies that ${name} has been awarded the Campus Eco Champion Award for completing plant missions and sustainability challenges.\n\nCertificate ID: ECO-CERT-2026-X99`);
+                showAppAlert("Official Certificate Issued!", `This certifies that ${name} has been awarded the Campus Eco Champion Award for completing plant missions and sustainability challenges.\n\nCertificate ID: ECO-CERT-2026-X99`, "🏆");
             }
         </script>
 </body>
