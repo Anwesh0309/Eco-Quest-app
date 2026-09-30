@@ -3622,14 +3622,8 @@
                     users = JSON.parse(JSON.stringify(DEFAULT_USERS));
                 }
 
-                const activeId = localStorage.getItem("eco_quest_active_user_v3");
-                if (activeId && users[activeId]) {
-                    currentUserId = activeId;
-                } else {
-                    currentUserId = "STU-2026-01";
-                }
-
-                loadUser(currentUserId);
+                // Whenever user enters the app, always start with the Login page only!
+                openAuthModal();
             }
 
             let isLoggedOut = false;
