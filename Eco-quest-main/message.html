@@ -812,11 +812,14 @@
 
         /* Modal Overlay */
         .modal-overlay {
-            position: absolute;
+            position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.65);
-            backdrop-filter: blur(4px);
-            z-index: 999;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.82);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 99999;
             display: none;
             justify-content: center;
             align-items: center;
@@ -2215,7 +2218,11 @@
         let isLoggedOut = false;
 
         function loadUser(id) {
-            if (!users[id]) return;
+            if (!users[id]) {
+                if (DEFAULT_USERS[id]) {
+                    users[id] = JSON.parse(JSON.stringify(DEFAULT_USERS[id]));
+                } else return;
+            }
             isLoggedOut = false;
             currentUserId = id;
             currentUser = users[id];
@@ -2234,30 +2241,47 @@
         function handleLogout() {
             isLoggedOut = true;
             localStorage.removeItem("eco_quest_active_user_v3");
+            currentUser = null;
+            currentUserId = null;
+            coins = 0;
+            missionsCompleted = 0;
+            activeVouchers = [];
 
             // Header UI update
             if (document.getElementById("headerUserName")) document.getElementById("headerUserName").innerText = "Login";
             if (document.getElementById("headerUserAvatar")) document.getElementById("headerUserAvatar").innerText = "🔑";
             if (document.getElementById("headerAuthBadge")) document.getElementById("headerAuthBadge").innerText = "🔑 Login";
 
+            // Top Status Bar
+            if (document.getElementById("userCoins")) document.getElementById("userCoins").innerText = "0";
+
+            // Home Card UI update
+            if (document.getElementById("homeProfileName")) document.getElementById("homeProfileName").innerText = "Logged Out (Guest)";
+            if (document.getElementById("homeStudentIdTag")) document.getElementById("homeStudentIdTag").innerText = "ID: Guest";
+            if (document.getElementById("homeStudentLevelTag")) document.getElementById("homeStudentLevelTag").innerText = "Lvl 0 Guest";
+            if (document.getElementById("progressPercentText")) document.getElementById("progressPercentText").innerText = "0%";
+            if (document.getElementById("xpRatioText")) document.getElementById("xpRatioText").innerText = "0 / 100 XP";
+            if (document.getElementById("mainProgressBarFill")) document.getElementById("mainProgressBarFill").style.width = "0%";
+
             // Profile UI update
             if (document.getElementById("loginStatusBadge")) {
                 document.getElementById("loginStatusBadge").innerText = "LOGGED OUT";
                 document.getElementById("loginStatusBadge").className = "tag-pill tag-yellow";
             }
-            if (document.getElementById("profileActiveIdText")) document.getElementById("profileActiveIdText").innerText = "None (Guest Mode)";
+            if (document.getElementById("profileActiveIdText")) document.getElementById("profileActiveIdText").innerText = "None (Logged Out)";
+            if (document.getElementById("profileTitleName")) document.getElementById("profileTitleName").innerText = "Logged Out";
+            if (document.getElementById("profileTitleSub")) document.getElementById("profileTitleSub").innerText = "Guest Mode • Please Login";
+            if (document.getElementById("profileAvatarDisplay")) document.getElementById("profileAvatarDisplay").innerText = "🔑";
+
+            renderMissionHistory();
 
             playTone(200, 0.2, 'sawtooth');
-            showToast("🚪 Logged out successfully! Click Login to track progress.", "🚪");
+            showToast("🚪 Logged out successfully!", "🚪");
             openAuthModal();
         }
 
         function toggleAuthAction() {
-            if (isLoggedOut) {
-                openAuthModal();
-            } else {
-                openAuthModal();
-            }
+            openAuthModal();
         }
 
         function saveUsersToStorage() {
@@ -2314,7 +2338,19 @@
             const list = document.getElementById("missionHistoryList");
             if (!list) return;
             list.innerHTML = "";
-            const history = (currentUser && currentUser.history) ? currentUser.history : [];
+
+            if (isLoggedOut || !currentUser) {
+                list.innerHTML = `
+                    <div style="text-align: center; padding: 16px; background: #fffde7; border-radius: 10px; border: 1.5px dashed #ffe082;">
+                        <div style="font-size: 24px;">🔑</div>
+                        <div style="font-size: 12px; font-weight: 800; color: #d84315; margin-top: 4px;">Currently Logged Out</div>
+                        <div style="font-size: 11px; color: var(--text-muted); margin-top: 2px;">Click Login in the top header or profile tab to track your student progress!</div>
+                    </div>
+                `;
+                return;
+            }
+
+            const history = currentUser.history ? currentUser.history : [];
             
             if (history.length === 0) {
                 list.innerHTML = `
@@ -2348,7 +2384,7 @@
             document.getElementById("headerUserAvatar").innerText = currentUser.avatar;
             document.getElementById("headerUserName").innerText = currentUser.name.split(" ")[0];
             document.getElementById("headerAvatarLogo").innerText = currentUser.avatar;
-            if (document.getElementById("headerAuthBadge")) document.getElementById("headerAuthBadge").innerText = "🚪 Logout";
+            if (document.getElementById("headerAuthBadge")) document.getElementById("headerAuthBadge").innerText = "🔑 Switch";
 
             // Top Status Bar
             document.getElementById("userCoins").innerText = coins;
@@ -2469,7 +2505,11 @@
         }
 
         function quickLoginDemo(id) {
+            if (!users[id] && DEFAULT_USERS[id]) {
+                users[id] = JSON.parse(JSON.stringify(DEFAULT_USERS[id]));
+            }
             if (users[id]) {
+                saveUsersToStorage();
                 loadUser(id);
                 closeAuthModal();
                 playSuccessSound();
@@ -2478,20 +2518,21 @@
 
         function handleLoginSubmit(e) {
             if (e) e.preventDefault();
-            const idInput = (document.getElementById("loginIdInput").value || "").trim().toUpperCase();
-            let targetId = idInput;
+            const idInput = (document.getElementById("loginIdInput").value || "").trim();
+            let targetId = idInput.toUpperCase();
 
             if (!idInput) {
-                createFreshAccountQuick();
+                const active = localStorage.getItem("eco_quest_active_user_v3") || "STU-2026-01";
+                quickLoginDemo(active);
                 return;
             }
 
-            const foundUser = Object.values(users).find(u => u.id.toUpperCase() === idInput || u.name.toLowerCase() === idInput.toLowerCase());
+            const foundUser = Object.values(users).find(u => u.id.toUpperCase() === targetId || u.name.toLowerCase() === idInput.toLowerCase());
             
             if (foundUser) {
                 targetId = foundUser.id;
             } else {
-                targetId = idInput.startsWith("STU-") ? idInput : "STU-" + idInput;
+                if (!targetId.startsWith("STU-")) targetId = "STU-" + targetId;
                 users[targetId] = {
                     id: targetId,
                     name: idInput,
@@ -2694,7 +2735,6 @@
 
         window.addEventListener("DOMContentLoaded", () => {
             initUserSystem();
-            openAuthModal();
         });
 
         /* Game Modes */
