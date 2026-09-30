@@ -1313,6 +1313,45 @@
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
 
+        .demo-chip-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            height: 38px;
+            width: auto;
+            border-radius: 20px;
+            background: #ffffff;
+            border: 1.5px solid #a5d6a7;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+            font-family: 'Space Grotesk', 'Outfit', sans-serif;
+            font-size: 12px;
+            font-weight: 800;
+            color: #1e293b;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .demo-chip-btn:hover {
+            transform: translateY(-2px);
+            border-color: #1b5e20;
+            background: #f4faf5;
+            color: #1b5e20;
+            box-shadow: 0 6px 16px rgba(27, 94, 32, 0.15);
+        }
+
+        .demo-chip-btn.fresh {
+            background: #e8f5e9;
+            border-color: #a5d6a7;
+            color: #1b5e20;
+        }
+
+        .demo-chip-btn .chip-emoji {
+            font-size: 16px;
+            line-height: 1;
+        }
+
         .ss-terms-row {
             display: flex;
             align-items: center;
@@ -1646,22 +1685,29 @@
                             </div>
 
                             <!-- Quick Demo Student Login Buttons -->
-                            <div style="font-size: 11px; font-weight: 700; color: #64748b; text-align: center; margin-bottom: 6px;">⚡ Quick 1-Click Demo Accounts:</div>
-                            <div class="ss-social-row" style="display: flex; gap: 6px; flex-wrap: wrap; justify-content: center;">
-                                <button type="button" class="ss-social-btn" onclick="quickLoginDemo('STU-2026-01')" title="Demo: Anwesh (CSE)" style="padding: 6px 12px; height: 36px; border-radius: 18px; font-size: 11px; font-weight: 800;">
-                                    👑 Anwesh
+                            <div style="font-size: 11px; font-weight: 800; color: #64748b; text-align: center; margin-bottom: 8px; letter-spacing: 0.3px;">
+                                ⚡ 1-Click Quick Demo Sign In:
+                            </div>
+                            <div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; align-items: center;">
+                                <button type="button" class="demo-chip-btn" onclick="quickLoginDemo('STU-2026-01')" title="Demo Account: Anwesh (CSE Dept)">
+                                    <span class="chip-emoji">👑</span>
+                                    <span>Anwesh</span>
                                 </button>
-                                <button type="button" class="ss-social-btn" onclick="quickLoginDemo('STU-2026-02')" title="Demo: Rahul (ECE)" style="padding: 6px 12px; height: 36px; border-radius: 18px; font-size: 11px; font-weight: 800;">
-                                    🌳 Rahul
+                                <button type="button" class="demo-chip-btn" onclick="quickLoginDemo('STU-2026-02')" title="Demo Account: Rahul (ECE Dept)">
+                                    <span class="chip-emoji">🌳</span>
+                                    <span>Rahul</span>
                                 </button>
-                                <button type="button" class="ss-social-btn" onclick="quickLoginDemo('STU-2026-03')" title="Demo: Karan (Mech)" style="padding: 6px 12px; height: 36px; border-radius: 18px; font-size: 11px; font-weight: 800;">
-                                    ☘️ Karan
+                                <button type="button" class="demo-chip-btn" onclick="quickLoginDemo('STU-2026-03')" title="Demo Account: Karan (Mechanical)">
+                                    <span class="chip-emoji">☘️</span>
+                                    <span>Karan</span>
                                 </button>
-                                <button type="button" class="ss-social-btn" onclick="quickLoginDemo('STU-2026-04')" title="Demo: Shivam (Civil)" style="padding: 6px 12px; height: 36px; border-radius: 18px; font-size: 11px; font-weight: 800;">
-                                    🦊 Shivam
+                                <button type="button" class="demo-chip-btn" onclick="quickLoginDemo('STU-2026-04')" title="Demo Account: Shivam (Civil Dept)">
+                                    <span class="chip-emoji">🦊</span>
+                                    <span>Shivam</span>
                                 </button>
-                                <button type="button" class="ss-social-btn" onclick="createFreshAccountQuick()" title="Instant Fresh Account (0% Progress)" style="padding: 6px 12px; height: 36px; border-radius: 18px; font-size: 11px; font-weight: 800; background: #e8f5e9; border-color: #a5d6a7;">
-                                    🌱 Fresh ID
+                                <button type="button" class="demo-chip-btn fresh" onclick="createFreshAccountQuick()" title="Instant Fresh Student (0% Progress)">
+                                    <span class="chip-emoji">🌱</span>
+                                    <span>Fresh ID</span>
                                 </button>
                             </div>
 
