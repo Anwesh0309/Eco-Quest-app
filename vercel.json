@@ -1,8 +1,17 @@
 {
   "version": 2,
-  "cleanUrls": true,
-  "rewrites": [
-    { "source": "/", "destination": "/index.html" },
-    { "source": "/message", "destination": "/message.html" }
+  "builds": [
+    { "src": "index.html", "use": "@vercel/static" },
+    { "src": "message.html", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/", "dest": "/index.html" },
+    { "src": "/message.html", "dest": "/message.html" },
+    {
+      "src": "/(.*)",
+      "headers": {
+        "cache-control": "no-cache, no-store, must-revalidate"
+      }
+    }
   ]
 }
