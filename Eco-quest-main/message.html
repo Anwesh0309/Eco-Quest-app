@@ -2199,6 +2199,11 @@
                                     <span class="chip-emoji">🐝</span>
                                     <span>Arun</span>
                                 </button>
+                                <button type="button" class="demo-chip-btn" onclick="quickLoginDemo('STU-2026-06')"
+                                    title="Demo Account: Manisha (Biotech Dept)">
+                                    <span class="chip-emoji">🐼</span>
+                                    <span>Manisha</span>
+                                </button>
                                 <button type="button" class="demo-chip-btn fresh" onclick="createFreshAccountQuick()"
                                     title="Instant Fresh Student (0% Progress)">
                                     <span class="chip-emoji">🌱</span>
@@ -3597,6 +3602,26 @@
                         { title: "Campus Bio-Compost Setup", time: "2 days ago", score: "AI Verified", coins: 50 }
                     ]
                 },
+                "STU-2026-06": {
+                    id: "STU-2026-06",
+                    name: "Manisha",
+                    password: "eco123",
+                    dept: "Biotech Dept",
+                    year: "3rd Year",
+                    avatar: "🐼",
+                    bio: "Wildlife conservation & zero-single-use plastic advocate! 🐼",
+                    xp: 410,
+                    coins: 210,
+                    missionsCompleted: 4,
+                    zeroWasteMeals: 7,
+                    saplingsPlanted: 2,
+                    vouchers: [
+                        { title: "Organic Bamboo Toothbrush", code: "ECO-BAMB-3912" }
+                    ],
+                    history: [
+                        { title: "Single-Use Plastic Audit", time: "1 day ago", score: "AI Verified", coins: 60 }
+                    ]
+                },
                 "STU-2026-NEW": {
                     id: "STU-2026-NEW",
                     name: "Alex Green (New Student)",
@@ -4126,7 +4151,7 @@
                 if (e && e.preventDefault) e.preventDefault();
                 if (e && e.stopPropagation) e.stopPropagation();
 
-                const demoIds = ["STU-2026-01", "STU-2026-02", "STU-2026-03", "STU-2026-04", "STU-2026-05"];
+                const demoIds = ["STU-2026-01", "STU-2026-02", "STU-2026-03", "STU-2026-04", "STU-2026-05", "STU-2026-06"];
                 const randomId = demoIds[Math.floor(Math.random() * demoIds.length)];
 
                 if (!users[randomId] && DEFAULT_USERS[randomId]) {
